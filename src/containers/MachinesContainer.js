@@ -11,7 +11,7 @@ export default class MachinesContainer extends Component {
     }
   }
 
-  componentDisMount(){
+  componentDidMount(){
     this.getAllMachines()
   }
 
