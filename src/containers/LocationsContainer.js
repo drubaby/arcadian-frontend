@@ -2,36 +2,36 @@ import React, { Component } from "react";
 
 const BACKEND_URL = "http://localhost:3000";
 
-export default class MachinesContainer extends Component {
+export default class LocationsContainer extends Component {
   constructor() {
     super();
     this.state = {
-      allMachines: []
+      allLocations: []
     };
   }
 
   componentDidMount() {
-    this.getAllMachines();
+    this.getAllLocations();
   }
 
-  getAllMachines = () => {
-    fetch(BACKEND_URL + "/machines")
+  getAllLocations = () => {
+    fetch(BACKEND_URL + "/locations")
       .then(resp => resp.json())
       .then(json => {
-        this.setState({ allMachines: json });
+        this.setState({ allLocations: json });
       });
   };
 
   render() {
     return (
       <div>
-        Here are the first ten machines:
-        {this.state.allMachines.slice(0, 11).map(machine => {
+        Here are all Locations:
+        {this.state.allLocations.map(location => {
           return (
             <li>
               {" "}
-              {machine.name}
-              <ul>{machine.manufacture_date}</ul>{" "}
+              {location.name}
+              <ul>{location.street}{location.city}{location.state}</ul>{" "}
             </li>
           );
         })}
