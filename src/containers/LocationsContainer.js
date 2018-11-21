@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Location from '../components/Location'
 
 const BACKEND_URL = "http://localhost:3000";
 
@@ -28,11 +29,7 @@ export default class LocationsContainer extends Component {
         Here are all Locations:
         {this.state.allLocations.map(location => {
           return (
-            <li>
-              {" "}
-              {location.name}
-              <ul>{location.street}{location.city}{location.state}</ul>{" "}
-            </li>
+            <Location location={location} />
           );
         })}
       </div>
