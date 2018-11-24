@@ -17,6 +17,8 @@ function machineReducer(state = [], action) {
 
 function locationReducer(state = [], action) {
   switch (action.type) {
+    case "FETCHED_LOCATIONS":
+    return action.locations
     default:
     return state
   }
