@@ -1,25 +1,29 @@
 import { combineReducers } from "redux";
 
-//placeholders
-const rootReducer = combineReducers({
-  machines: machineReducer,
-  locations: locationReducer
-});
 
-export default rootReducer;
-
-function machineReducer(state = [], action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
-
-function locationReducer(state = [], action) {
+const locationReducer = (oldState = [], action) => {
   switch (action.type) {
     case "FETCHED_LOCATIONS":
-    return action.locations
+      return action.locations;
     default:
-    return state
+      return oldState;
   }
-}
+};
+
+const loadingReducer = (oldState = false, action) => {
+  switch (action.type) {
+    case "LOADING_LOCATIONS":
+    return true;
+    case "FETCHED_LOCATIONS":
+    return false
+    default:
+    return oldState;
+  }
+};
+
+
+const rootReducer = combineReducers({
+  allLocations: locationReducer,
+  loading: loadingReducer,
+});
+export default rootReducer;

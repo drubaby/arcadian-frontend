@@ -1,35 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 import { List } from "semantic-ui-react";
 import Location from "../components/Location";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   fetchingLocations,
-  fetchedLocations
+  loadingLocations,
+  testingComponent
 } from "../redux/actions/locationActions";
 
-const BACKEND_URL = "http://localhost:3000";
-
-class LocationsContainer extends Component {
+class LocationsContainer extends React.Component {
   componentDidMount() {
+    console.log("comp mounted");
     this.props.fetchingLocations();
   }
 
-  // getAllLocations = () => {
-  //   fetch(BACKEND_URL + "/locations")
-  //     .then(resp => resp.json())
-  //     .then(json => {
-  //       this.setState({ allLocations: json });
-  //     });
-  // };
-
   //wrap each location in a Link to that location's show page
+  //conditionally render list by this.props.loading
 
   render() {
+    if (this.props.loadingStatus) {
+      console.log(this.props.loadingStatus, "null");
+      return <div>null</div>;
+    }
+    console.log(this.props.loadingstatus, "else if");
     return (
       <List className="ui relaxed items">
-        Here are all Locations:
-        {this.state.allLocations.map(location => {
+        {this.props.allLocations.map(location => {
           return (
             <div className="item" key={location.id}>
               <Location location={location} />
@@ -40,16 +37,22 @@ class LocationsContainer extends Component {
     );
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
     fetchingLocations: () => {
-      dispatch(fetchingLocations);
+      dispatch(fetchingLocations());
     }
   };
 };
 
+function mapStateToProps(state) {
+  return {
+    loadingStatus: state.loading,
+    allLocations: state.allLocations
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LocationsContainer);
