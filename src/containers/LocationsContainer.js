@@ -1,7 +1,7 @@
 import React from "react";
 import { List } from "semantic-ui-react";
 import Location from "../components/Location";
-// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   fetchingLocations,
@@ -25,6 +25,7 @@ class LocationsContainer extends React.Component {
     }
     console.log(this.props.loadingstatus, "else if");
     return (
+
       <List className="ui relaxed items">
         {this.props.allLocations.map(location => {
           return (
