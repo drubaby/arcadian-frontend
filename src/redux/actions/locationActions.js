@@ -6,6 +6,13 @@ function fetchedLocations(locations) {
   return { type: "FETCHED_LOCATIONS", locations };
 }
 
+//Make show location action
+
+function showLocation(location) {
+  return { type: "SHOW_LOCATION", location}
+}
+
+
 const URL = "http://localhost:3000/locations";
 
 function fetchingLocations() {
@@ -14,13 +21,14 @@ function fetchingLocations() {
     fetch(URL)
       .then(res => res.json())
       .then(locations => {
-        console.log("Displaying fetched locations...");
+        console.log("Displaying fetched locations...")
+
         dispatch(fetchedLocations(locations));
       });
   };
 }
 
-export { fetchedLocations, fetchingLocations, loadingLocations}
+export { fetchedLocations, fetchingLocations, loadingLocations, showLocation}
 
 // function fetchingPaintings(){
 //   return (dispatch) => {

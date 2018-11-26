@@ -1,26 +1,27 @@
 import React from "react";
 import { List } from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import Location from './Location'
 import { connect } from "react-redux";
 import {
   fetchingLocations,
   loadingLocations,
-  testingComponent
+  testingComponent,
+  showLocation
 } from "../redux/actions/locationActions";
 
 class LocationsContainer extends React.Component {
   componentDidMount() {
-    console.log("LocationsContainer mounted");
-    this.props.fetchingLocations();
+    console.log("Locations Container mounted");
+
   }
 
 
 
   showLocation = () => {
     console.log('clicked it')
-    debugger
+    this.props.showLocation()
   }
 
 
@@ -36,20 +37,17 @@ class LocationsContainer extends React.Component {
     }
 
     return (
-      <Router>
+
       <List className="ui relaxed items">
         {this.props.allLocations.map(location => {
           return (
             <div className="item" key={location.id}>
-
-            <Route exact path="/location/:id" component={() => (<Location />)} />
-              <LocationListItem location={location} onClick={console.log('flcicsklsk')} as={Link}/>
-
+              <LocationListItem location={location} as={Link}/>
             </div>
           );
         })}
       </List>
-      </Router>
+
     );
   }
 }
@@ -57,6 +55,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchingLocations: () => {
       dispatch(fetchingLocations());
+    },
+    showLocation: () => {
+      dispatch(showLocation())
     }
   };
 };

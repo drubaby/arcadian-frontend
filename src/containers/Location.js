@@ -7,16 +7,23 @@ class Location extends Component {
   // right column display card grid with location machines
 
   render() {
-    return <div> I am a Location</div>;
+    return <div>{this.props.location ? "I am a location" : null}</div>;
   }
 }
 
-function mapStateToProps(state) {
+// dispatch action to fetch location machines on location render
+
+
+const mapStateToProps = (state, propsFromParent) => {
+
   return {
-    allLocations: state.allLocations
+    location: state.allLocations.find(
+      loc => loc.id === parseInt(propsFromParent.locationId)
+    )
   };
-}
+};
 
 export default connect(
-mapStateToProps, null
+  mapStateToProps,
+  null
 )(Location);
