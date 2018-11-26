@@ -1,7 +1,8 @@
 import React from "react";
 import { List } from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
-// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Location from './Location'
 import { connect } from "react-redux";
 import {
   fetchingLocations,
@@ -24,25 +25,31 @@ class LocationsContainer extends React.Component {
 
 
   //wrap each location in a Link to that location's show page
-  //conditionally render list by this.props.loading
+
 
   render() {
+    // shows 'Loading' while async call is made
     if (this.props.loadingStatus) {
-      console.log(this.props.loadingStatus, "null");
+      // log to console
+      console.log("Loading status: ", this.props.loadingStatus, "display 'Loading'");
       return <div>Loading...</div>;
     }
-    console.log(this.props.loadingstatus, "else if");
-    return (
 
+    return (
+      <Router>
       <List className="ui relaxed items">
         {this.props.allLocations.map(location => {
           return (
             <div className="item" key={location.id}>
-              <LocationListItem location={location} onClick={this.showLocation}/>
+
+            <Route exact path="/location/:id" component={() => (<Location />)} />
+              <LocationListItem location={location} onClick={console.log('flcicsklsk')} as={Link}/>
+
             </div>
           );
         })}
       </List>
+      </Router>
     );
   }
 }

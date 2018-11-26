@@ -9,12 +9,12 @@ import LocationsContainer from '../containers/LocationsContainer'
 const SidebarExample = () => (
   <Router>
   <Sidebar.Pushable as={Segment}>
-    <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin'>
-      <Menu.Item as='a'>
+    <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible width='thin'>
+      <Menu.Item as={Link} to ='/'>
         <Icon name='home' />
         Home
       </Menu.Item>
-      <Menu.Item as={Link} to='/location'>
+      <Menu.Item as={Link} to='/location/:id'>
         <Icon name='gamepad' />
         Games [Test Location Link]
       </Menu.Item>
@@ -29,7 +29,7 @@ const SidebarExample = () => (
         <Header as='h3'>Arcadian :]</Header>
         <Switch>
           <Route exact path="/location/:id" component={() => (<Location />)} />
-          <Route exact path="/locations" component={()=> (<LocationsContainer/>)} />
+          <Route exact path="/locations" component={()=> (<LocationsContainer />)} />
         </Switch>
 
       </Segment>

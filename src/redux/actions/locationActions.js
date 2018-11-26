@@ -14,7 +14,7 @@ function fetchingLocations() {
     fetch(URL)
       .then(res => res.json())
       .then(locations => {
-        console.log("inside fetching locations async call");
+        console.log("Displaying fetched locations...");
         dispatch(fetchedLocations(locations));
       });
   };

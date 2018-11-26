@@ -8,8 +8,8 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <SidebarExample className="ui left sidebar inverted vertical menu visible scale down"/>
+      <div className="App ">
+        <SidebarExample className="ui left sidebar inverted vertical menu overlay visible scale down"/>
       </div>
     );
   }
