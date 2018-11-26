@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Item } from "semantic-ui-react";
 
-export default class Location extends Component {
-  // fetch all location_machines
-  //fetch all machine_issues for this location
+export default class LocationListItem extends Component {
 
   render() {
     return (

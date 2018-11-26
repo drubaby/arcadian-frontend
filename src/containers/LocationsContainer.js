@@ -1,6 +1,6 @@
 import React from "react";
 import { List } from "semantic-ui-react";
-import Location from "../components/Location";
+import LocationListItem from "../components/LocationListItem";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -11,7 +11,7 @@ import {
 
 class LocationsContainer extends React.Component {
   componentDidMount() {
-    console.log("comp mounted");
+    console.log("LocationsContainer mounted");
     this.props.fetchingLocations();
   }
 
@@ -30,7 +30,7 @@ class LocationsContainer extends React.Component {
         {this.props.allLocations.map(location => {
           return (
             <div className="item" key={location.id}>
-              <Location location={location} />
+              <LocationListItem location={location} />
             </div>
           );
         })}
