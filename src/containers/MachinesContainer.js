@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 
 const BACKEND_URL = "http://localhost:3000";
-
+///////////////////
+//////////////
+// Legacy component, unused due to redux!
+///////////////
+///////////////
 export default class MachinesContainer extends Component {
   constructor() {
     super();

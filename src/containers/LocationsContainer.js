@@ -10,41 +10,32 @@ import {
 
 class LocationsContainer extends React.Component {
   componentDidMount() {
-    console.log("Locations Container mounted");
-
+    // console.log("Locations Container mounted");
   }
-
-
-
-  showLocation = () => {
-    console.log('clicked it')
-    this.props.showLocation()
-  }
-
-
-  //wrap each location in a Link to that location's show page
-
 
   render() {
     // shows 'Loading' while async call is made
     if (this.props.loadingStatus) {
       // log to console
-      console.log("Loading status: ", this.props.loadingStatus, "display 'Loading'");
+      console.log(
+        "Loading status: ",
+        this.props.loadingStatus,
+        "display 'Loading'"
+      );
       return <div>Loading...</div>;
     }
 
+    // wrap each location in a Link to that location's show page
     return (
-
       <List className="ui relaxed items">
         {this.props.allLocations.map(location => {
           return (
             <div className="item" key={location.id}>
-              <LocationListItem location={location} as={Link}/>
+              <LocationListItem location={location} as={Link} />
             </div>
           );
         })}
       </List>
-
     );
   }
 }
@@ -54,7 +45,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchingLocations());
     },
     showLocation: () => {
-      dispatch(showLocation())
+      dispatch(showLocation());
     }
   };
 };

@@ -1,3 +1,6 @@
+const LOCATIONS_URL = "http://localhost:3000/locations";
+const LOC_MAC_URL = "http://localhost:3000/location_machines"
+
 function loadingLocations() {
   return { type: "LOADING_LOCATIONS" };
 }
@@ -7,28 +10,48 @@ function fetchedLocations(locations) {
 }
 
 //Make show location action
-
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location}
 }
 
-
-const URL = "http://localhost:3000/locations";
-
 function fetchingLocations() {
   return dispatch => {
     dispatch(loadingLocations());
-    fetch(URL)
+    fetch(LOCATIONS_URL)
       .then(res => res.json())
       .then(locations => {
         console.log("Displaying fetched locations...")
-
         dispatch(fetchedLocations(locations));
       });
   };
 }
 
-export { fetchedLocations, fetchingLocations, loadingLocations, showLocation}
+function loadingLocationMachines() {
+  return {type: "LOADING_LOCATION_MACHINES"}
+}
+
+function fetchedLocationMachines(machines) {
+  return { type: "FETCHED_LOCATION_MACHINES", machines}
+}
+
+function fetchingLocationMachines(locationID) {
+  return dispatch => {
+    dispatch(loadingLocationMachines())
+    fetch(LOC_MAC_URL)
+    .then( res => res.json())
+    .then( allMachines => {
+      //filter machines for this location
+      let locMacs = allMachines.filter(mac => mac.location_id === locationID)
+      dispatch(fetchedLocationMachines(locMacs))
+    })
+  }
+}
+
+
+
+
+
+export { fetchedLocations, fetchingLocations, loadingLocations, showLocation, fetchingLocationMachines}
 
 // function fetchingPaintings(){
 //   return (dispatch) => {

@@ -1,37 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationCard from '../components/LocationCard'
+import {
+  fetchingLocationMachines
+} from "../redux/actions/locationActions";
 
-// const CardExampleCard = (props) => (
-//   <Card>
-//   <Image src={location_pic} />
-//   <Card.Content>
-//   <Card.Header>{props.location.name}</Card.Header>
-//   <Card.Meta>
-//   <span className='date'>Joined in 2015</span>
-//   </Card.Meta>
-//   <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
-//   </Card.Content>
-//   <Card.Content extra>
-//   <a>
-//   <Icon name='user' />
-//   22 Friends
-//   </a>
-//   </Card.Content>
-//   </Card>
-// )
+
 
 class Location extends Component {
 
   componentDidMount(){
     console.log('Location Mounted')
+    console.log("In Location, this.props.location: ", this.props.location)
+    this.props.fetchingMachines(this.props.location.id)
   }
 
-
-  //2 columns
+  // style guide:
+  // 2 columns
   // left column display location name, address, and operator
-  // right column display card grid with location machines
-
+  // right column display card grid with location machiness
   render() {
     return <div>
     {this.props.location ? <LocationCard location={this.props.location} /> : null}
@@ -51,7 +38,15 @@ const mapStateToProps = (state, propsFromParent) => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchingMachines: (id) => {
+      dispatch(fetchingLocationMachines(id));
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Location);
