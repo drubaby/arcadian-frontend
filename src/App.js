@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 // import LocationsContainer from "./containers/LocationsContainer";
 import SidebarExample from "./components/SidebarExample.js";
 // import Location from "./containers/Location";
@@ -10,29 +10,27 @@ import { Container } from "semantic-ui-react";
 import {
   fetchingLocations,
   // loadingLocations,
-  showLocation
+  showLocation,
+  fetchAllMachines
 } from "./redux/actions/locationActions";
 
 class App extends Component {
   // consider putting *grid* container in return to lay out sidebar with content
 
   componentDidMount() {
-    console.log("App mounted, now fetching all locations for store");
+    console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
+    console.log("...now fetching all machines from DB");
+    this.props.fetchAllMachines();
   }
 
   render() {
     return (
       <Router>
         <Container className="App ">
+          <SidebarExample />
 
-
-              <SidebarExample />
-
-
-              <Route path="/" exact render={About} />
-
-
+          <Route path="/" exact render={About} />
         </Container>
       </Router>
     );
@@ -52,6 +50,9 @@ const mapDispatchToProps = dispatch => {
     },
     showLocation: () => {
       dispatch(showLocation());
+    },
+    fetchAllMachines: () => {
+      dispatch(fetchAllMachines());
     }
   };
 };

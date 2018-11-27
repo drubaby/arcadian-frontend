@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
+import LocationMachinesContainer from './LocationMachinesContainer'
 import { fetchingLocationMachines } from "../redux/actions/locationActions";
+
 
 class Location extends Component {
   componentDidMount() {
-    console.log("Location Mounted");
-    console.log("In Location, this.props.location: ", this.props.location);
+    console.log("Location mounted; this.props.location: ", this.props.location);
+    // dispatch action to fetch location machines on location render
     this.props.fetchingMachines(this.props.location.id);
   }
 
@@ -23,13 +25,12 @@ class Location extends Component {
             machines={this.props.locationMachines}
           />
         ) : null}
-        {this.props.location ? "I am a location" : null}
+        {this.props.location ? <LocationMachinesContainer /> : null}
       </div>
     );
   }
 }
 
-// dispatch action to fetch location machines on location render
 
 const mapStateToProps = (state, propsFromParent) => {
   return {

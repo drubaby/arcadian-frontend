@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 
-export default class LocationMachinesList extends Component{
+export default class LocationMachinesContainer extends Component{
 
   render(){
     return(
