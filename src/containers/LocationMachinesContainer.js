@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
-import LocationMachineCard from '../components/LocationMachineCard'
+import LocationMachineCard from "../components/LocationMachineCard";
 
 class LocationMachinesContainer extends Component {
   componentDidMount() {
@@ -13,10 +13,14 @@ class LocationMachinesContainer extends Component {
       <Card.Group>
         Here is a list of all Location Machines for this location!
         <ul>
-          {this.props.machines.map(machine => {
+          {this.props.machines.map(loc_machine => {
             return (
-              <LocationMachineCard key={machine.id} machine={machine} />
-
+              <LocationMachineCard
+                key={loc_machine.id}
+                machine_info={loc_machine.machine}
+                machine_issues={loc_machine.machine_issues}
+                is_working={loc_machine.is_working}
+              />
             );
           })}
         </ul>

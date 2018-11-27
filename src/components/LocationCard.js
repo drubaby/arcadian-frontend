@@ -5,6 +5,7 @@ import location_pic from '../img/location.svg'
 
 
 const LocationCard = (props) => (
+
   <Card>
   <Image src={location_pic} />
   <Card.Content>
@@ -18,7 +19,7 @@ const LocationCard = (props) => (
   <Card.Content extra>
 
   <Icon name='gamepad' />
-  {props.machines.length} machines
+  {props.location.location_machines.length} machines
 
   </Card.Content>
   </Card>

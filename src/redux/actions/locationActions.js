@@ -14,8 +14,9 @@ function fetchedMachines(machines) {
   return { type: "FETCHED_MACHINES", machines };
 }
 
-function findMachineName(machine) {
-  return { type: "FIND_MACHINE_NAME", machine }
+// Find a machine object in store by location_machine[machine_id]
+function findMachineName(machine_id) {
+  return { type: "FIND_MACHINE_NAME", machine_id }
 }
 
 //Make show location action
@@ -45,6 +46,7 @@ function fetchedLocationMachines(machines) {
 function fetchingLocationMachines(locationID) {
   return dispatch => {
     dispatch(loadingLocationMachines());
+
     fetch(LOC_MAC_URL)
       .then(res => res.json())
       .then(allMachines => {
@@ -52,6 +54,7 @@ function fetchingLocationMachines(locationID) {
         let locMacs = allMachines.filter(mac => mac.location_id === locationID);
         // add bare bones location_machines to state
         dispatch(fetchedLocationMachines(locMacs));
+        // debugger
         //for each locMac look up details against AllMachines
         //
       });

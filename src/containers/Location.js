@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationMachinesContainer from "./LocationMachinesContainer";
@@ -6,9 +7,11 @@ import { fetchingLocationMachines } from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {
+    // debugger
     console.log("Location mounted; this.props.location: ", this.props.location);
-    // dispatch action to fetch location machines on location render
-    this.props.fetchingMachines(this.props.location.id);
+
+    // consider dispatching action to fetch location details from DB
+
   }
 
   // style guide:
@@ -17,17 +20,21 @@ class Location extends Component {
   // right column display card grid with location machiness
   render() {
     return (
-      <div>
-        {this.props.location ? (
-          <LocationCard
-            location={this.props.location}
-            machines={this.props.locationMachines}
-          />
-        ) : null}
-        {this.props.location ? (
-          <LocationMachinesContainer machines={this.props.locationMachines} />
-        ) : null}
-      </div>
+      <Grid>
+        <Grid.Row>
+          {this.props.location ? (
+            <LocationCard
+              location={this.props.location}
+              machines={this.props.location.location_machines}
+            />
+          ) : null}
+        </Grid.Row>
+        <Grid.Row>
+          {this.props.location ? (
+            <LocationMachinesContainer machines={this.props.location.location_machines} />
+          ) : null}
+        </Grid.Row>
+      </Grid>
     );
   }
 }

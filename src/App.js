@@ -20,14 +20,12 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
-    console.log("...now fetching all machines from DB");
-    this.props.fetchAllMachines();
   }
 
   render() {
     return (
       <Router>
-        <Container className="App ">
+        <Container className="App">
           <SidebarExample />
 
           <Route path="/" exact render={About} />
