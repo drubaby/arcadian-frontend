@@ -18,7 +18,7 @@ const LocationCard = (props) => (
   <Card.Content extra>
 
   <Icon name='gamepad' />
-  x machines
+  {props.machines.length} machines
 
   </Card.Content>
   </Card>
