@@ -45,6 +45,9 @@ const locationMachineReducer = (state = [], action) => {
       return state;
     case "FETCHED_LOCATION_MACHINES":
       return action.machines;
+    case "FIND_MACHINE_NAME":
+      debugger;
+      return action.machines;
     default:
       return state;
   }

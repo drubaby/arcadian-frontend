@@ -14,6 +14,10 @@ function fetchedMachines(machines) {
   return { type: "FETCHED_MACHINES", machines };
 }
 
+function findMachineName(machine) {
+  return { type: "FIND_MACHINE_NAME", machine }
+}
+
 //Make show location action
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
@@ -46,7 +50,10 @@ function fetchingLocationMachines(locationID) {
       .then(allMachines => {
         //filter machines for this location
         let locMacs = allMachines.filter(mac => mac.location_id === locationID);
+        // add bare bones location_machines to state
         dispatch(fetchedLocationMachines(locMacs));
+        //for each locMac look up details against AllMachines
+        //
       });
   };
 }
@@ -69,15 +76,6 @@ export {
   showLocation,
   fetchingLocationMachines,
   fetchAllMachines,
-  fetchedMachines
+  fetchedMachines,
+  findMachineName
 };
-
-// function fetchingPaintings(){
-//   return (dispatch) => {
-//     dispatch(loadingPaintings())
-//     fetch(URL)
-//     .then(res => res.json())
-//     .then(paintings => {
-//       dispatch(fetchedPaintings(paintings)) //but we don't have access to the dispatch func
-//     })
-//   }

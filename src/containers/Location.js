@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
-import LocationMachinesContainer from './LocationMachinesContainer'
+import LocationMachinesContainer from "./LocationMachinesContainer";
 import { fetchingLocationMachines } from "../redux/actions/locationActions";
-
 
 class Location extends Component {
   componentDidMount() {
@@ -25,12 +24,13 @@ class Location extends Component {
             machines={this.props.locationMachines}
           />
         ) : null}
-        {this.props.location ? <LocationMachinesContainer /> : null}
+        {this.props.location ? (
+          <LocationMachinesContainer machines={this.props.locationMachines} />
+        ) : null}
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state, propsFromParent) => {
   return {
