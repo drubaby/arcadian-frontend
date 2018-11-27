@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Icon, Image, Menu, Segment, Sidebar } from "semantic-ui-react";
+import { Header, Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Location from "../containers/Location";
@@ -25,6 +25,7 @@ const SidebarExample = () => (
           <Icon name="building" />
           Locations
         </Menu.Item>
+
       </Sidebar>
 
       <Sidebar.Pusher>

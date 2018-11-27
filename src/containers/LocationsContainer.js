@@ -1,13 +1,10 @@
 import React from "react";
 import { List } from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
-import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
-import Location from './Location'
+import { BrowserRouter as Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   fetchingLocations,
-  loadingLocations,
-  testingComponent,
   showLocation
 } from "../redux/actions/locationActions";
 

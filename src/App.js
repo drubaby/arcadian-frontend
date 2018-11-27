@@ -1,37 +1,39 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import LocationsContainer from "./containers/LocationsContainer";
+import { BrowserRouter as Router, Route} from "react-router-dom";
+// import LocationsContainer from "./containers/LocationsContainer";
 import SidebarExample from "./components/SidebarExample.js";
-import Location from "./containers/Location";
-import {connect} from 'react-redux'
+// import Location from "./containers/Location";
+import { connect } from "react-redux";
 import "./App.css";
-import About from "./components/About"
+import About from "./components/About";
+import { Container } from "semantic-ui-react";
 import {
   fetchingLocations,
-  loadingLocations,
-  testingComponent,
+  // loadingLocations,
   showLocation
 } from "./redux/actions/locationActions";
 
 class App extends Component {
-
   // consider putting *grid* container in return to lay out sidebar with content
 
   componentDidMount() {
-    console.log("App mounted");
+    console.log("App mounted, now fetching all locations for store");
     this.props.fetchingLocations();
   }
 
   render() {
     return (
       <Router>
-        <div className="App ">
-
-          <SidebarExample/>
-          <Route path="/" exact render={About} />
+        <Container className="App ">
 
 
-        </div>
+              <SidebarExample />
+
+
+              <Route path="/" exact render={About} />
+
+
+        </Container>
       </Router>
     );
   }
@@ -43,17 +45,18 @@ class App extends Component {
 
 // does this component need to connect to store for props?
 
-
 const mapDispatchToProps = dispatch => {
   return {
     fetchingLocations: () => {
       dispatch(fetchingLocations());
     },
     showLocation: () => {
-      dispatch(showLocation())
+      dispatch(showLocation());
     }
   };
 };
 
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);
