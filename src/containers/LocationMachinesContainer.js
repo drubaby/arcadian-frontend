@@ -10,9 +10,8 @@ class LocationMachinesContainer extends Component {
 
   render() {
     return (
-      <Card.Group>
-        Here is a list of all Location Machines for this location!
-        <ul>
+      <Card.Group itemsPerRow={3} stackable={true}>
+
           {this.props.machines.map(loc_machine => {
             return (
               <LocationMachineCard
@@ -23,7 +22,7 @@ class LocationMachinesContainer extends Component {
               />
             );
           })}
-        </ul>
+
       </Card.Group>
     );
   }
