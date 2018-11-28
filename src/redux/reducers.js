@@ -53,10 +53,22 @@ const locationMachineReducer = (state = [], action) => {
   }
 };
 
+const issueReducer = (state = [], action) => {
+  switch (action.type) {
+    case "ADD_ISSUE":
+    console.log("Adding issue: ", action.payload)
+    debugger
+    return state;
+    default:
+    return state
+  }
+}
+
 const rootReducer = combineReducers({
   allLocations: locationReducer,
   allMachines: machineReducer,
   loading: loadingReducer,
-  locationMachines: locationMachineReducer
+  locationMachines: locationMachineReducer,
+  issue: issueReducer
 });
 export default rootReducer;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button, Modal, Image, Header } from "semantic-ui-react";
 import MachineIssue from './MachineIssue'
+import IssueForm from './IssueForm'
 const LocationMachineCard = props => (
   <Card>
     <Card.Content>
@@ -23,6 +24,9 @@ const LocationMachineCard = props => (
             })}
 
 
+          </Modal.Description>
+          <Modal.Description>
+          <IssueForm />
           </Modal.Description>
         </Modal.Content>
       </Modal>

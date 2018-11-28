@@ -72,6 +72,10 @@ function fetchAllMachines() {
   };
 }
 
+function addIssue() {
+  return { type: "ADD_ISSUE"}
+}
+
 export {
   fetchedLocations,
   fetchingLocations,
@@ -80,5 +84,6 @@ export {
   fetchingLocationMachines,
   fetchAllMachines,
   fetchedMachines,
-  findMachineName
+  findMachineName,
+  addIssue
 };
