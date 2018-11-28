@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Modal, Image, Header } from "semantic-ui-react";
-
+import MachineIssue from './MachineIssue'
 const LocationMachineCard = props => (
   <Card>
     <Card.Content>
@@ -17,9 +17,12 @@ const LocationMachineCard = props => (
         <Modal.Header>{props.machine_info.name}</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
-            <Header>List Issues Here</Header>
-            <p>Issue 1</p>
-            <p>Issue 2</p>
+            <Header>{props.machine_issues.length === 0 ? "No known issues" : "Known Issues"}</Header>
+            {props.machine_issues.length === 0 ? null : props.machine_issues.map(issue =>{
+              return(<MachineIssue issueObj={issue}/>)
+            })}
+
+
           </Modal.Description>
         </Modal.Content>
       </Modal>
