@@ -3,10 +3,10 @@ import { combineReducers } from "redux";
 // reducer receives action objects that have been dispatched in response
 // to some event (ie. componentDidMount, onSubmit, onClick etc)
 
-const locationReducer = (oldState = [], action) => {
+const allLocationsReducer = (oldState = [], action) => {
   switch (action.type) {
     case "FETCHED_LOCATIONS":
-      console.log("in location reducer");
+      console.log("[allLocationsReducer] returning all Locations");
       return action.locations;
     default:
       return oldState;
@@ -31,44 +31,45 @@ const loadingReducer = (oldState = false, action) => {
     case "LOADING_LOCATIONS":
       return true;
     case "FETCHED_LOCATIONS":
-      console.log("in loading reducer........");
+      console.log("[loading reducer] loading state now false");
       return false;
     default:
       return oldState;
   }
 };
 
-const locationMachineReducer = (state = [], action) => {
+const currentLocationReducer = (oldState = [], action) => {
   switch (action.type) {
-    case "LOADING_LOCATION_MACHINES":
-      console.log("Loading location machines");
-      return state;
-    case "FETCHED_LOCATION_MACHINES":
-      return action.machines;
-    case "FIND_MACHINE_NAME":
-      debugger;
-      return action.machines;
+    case "SHOW_LOCATION":
+      // make DB call to load a specific location show page
+      //Sets currentLocation: [this location]
+      return action.location;
     default:
-      return state;
+      return oldState;
   }
 };
 
 const issueReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ISSUE":
-    console.log("Adding issue: ", action.payload)
-    debugger
-    return state;
+      console.log("Adding issue: ", action.payload);
+      return action.payload;
+    case "POST_ISSUE":
+      console.log("[in issueReducer] dispatch payload: ", action.payload);
+      return action.payload;
+    case "FETCHED_ISSUE":
+    console.log("fetched issue: ", action.issue)
+      return action.issue;
     default:
-    return state
+      return state;
   }
-}
+};
 
 const rootReducer = combineReducers({
-  allLocations: locationReducer,
+  allLocations: allLocationsReducer,
   allMachines: machineReducer,
   loading: loadingReducer,
-  locationMachines: locationMachineReducer,
-  issue: issueReducer
+  issue: issueReducer,
+  currentLocation: currentLocationReducer
 });
 export default rootReducer;

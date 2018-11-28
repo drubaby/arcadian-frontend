@@ -16,7 +16,6 @@ class LocationsContainer extends React.Component {
   render() {
     // shows 'Loading' while async call is made
     if (this.props.loadingStatus) {
-      // log to console
       console.log(
         "Loading status: ",
         this.props.loadingStatus,

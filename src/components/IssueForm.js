@@ -1,26 +1,31 @@
 import React, { Component } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-
+import { postIssue } from "../redux/actions/locationActions";
+// Rendered by LocationMachineCard
 class IssueForm extends Component {
   constructor() {
     super();
     this.state = {
-      issueDescription: ""
+      description: "",
+      location_machine_id: 0
     };
   }
 
   handleChange = event => {
     this.setState({
-      issueDescription: event.target.value
+      description: event.target.value
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addIssue(this.state);
+    this.props.postIssue(this.state);
   };
 
+  componentDidMount() {
+    this.setState({ location_machine_id: this.props.locMacId });
+  }
   render() {
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
@@ -40,8 +45,10 @@ class IssueForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
+  // Payload looks like {issueDescription: "some text, LocMacId: #"}
   return {
-    addIssue: formData => dispatch({ type: "ADD_ISSUE", payload: formData })
+    postIssue: formData => dispatch(postIssue(formData))
+    // dispatch action only, do not specify TYPE: WHATEVER here
   };
 };
 

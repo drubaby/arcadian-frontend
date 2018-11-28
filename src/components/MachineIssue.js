@@ -1,16 +1,16 @@
-import React from 'react'
-import { Button, Image, Item } from 'semantic-ui-react'
+import React from "react";
+import { Button, Item } from "semantic-ui-react";
 
-const MachineIssue = () => (
+const MachineIssue = props => (
   <Item>
-  <Item.Content verticalAlign='middle'>
-    <Item.Header>Content A</Item.Header>
-    <Item.Description>Issue description</Item.Description>
-    <Item.Extra>
-      <Button floated='right'>Resolve</Button>
-    </Item.Extra>
-  </Item.Content>
-</Item>
-)
+    <Item.Content verticalAlign="middle">
 
-export default MachineIssue
+      <Item.Header>{props.issueObj.description}</Item.Header>
+      <Item.Description>{props.issueObj.created_at}</Item.Description>
+      <Button floated="right">Resolve</Button>
+    </Item.Content>
+  
+  </Item>
+);
+
+export default MachineIssue;

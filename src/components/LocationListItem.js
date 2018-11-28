@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Item } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux"
+import { showLocation } from '../redux/actions/locationActions'
 
-export default class LocationListItem extends Component {
+class LocationListItem extends Component {
   render() {
     return (
-      <Item className="item">
+      <Item className="item" location={this.props.location} onClick={() => this.props.showLocation(this.props.location)}>
         <Link to={`/location/${this.props.location.id}`}>
           <Item.Header>{this.props.location.name}</Item.Header>
           <Item.Description>{this.props.location.street}</Item.Description>
@@ -14,3 +16,13 @@ export default class LocationListItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    showLocation: (locationObj) => {
+      dispatch(showLocation(locationObj));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LocationListItem)

@@ -11,7 +11,7 @@ import {
   fetchingLocations,
   // loadingLocations,
   showLocation,
-  fetchAllMachines
+  // fetchAllMachines
 } from "./redux/actions/locationActions";
 
 class App extends Component {
@@ -48,10 +48,11 @@ const mapDispatchToProps = dispatch => {
     },
     showLocation: () => {
       dispatch(showLocation());
-    },
-    fetchAllMachines: () => {
-      dispatch(fetchAllMachines());
     }
+    // ,
+    // fetchAllMachines: () => {
+    //   dispatch(fetchAllMachines());
+    // }
   };
 };
 

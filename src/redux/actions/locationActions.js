@@ -1,27 +1,15 @@
 const LOCATIONS_URL = "http://localhost:3000/locations";
 const LOC_MAC_URL = "http://localhost:3000/location_machines";
 const MACHINES_URL = "http://localhost:3000/machines";
+const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 
 function loadingLocations() {
   return { type: "LOADING_LOCATIONS" };
 }
 
+// Sets allLocations in store
 function fetchedLocations(locations) {
   return { type: "FETCHED_LOCATIONS", locations };
-}
-
-function fetchedMachines(machines) {
-  return { type: "FETCHED_MACHINES", machines };
-}
-
-// Find a machine object in store by location_machine[machine_id]
-function findMachineName(machine_id) {
-  return { type: "FIND_MACHINE_NAME", machine_id }
-}
-
-//Make show location action
-function showLocation(location) {
-  return { type: "SHOW_LOCATION", location };
 }
 
 function fetchingLocations() {
@@ -34,56 +22,88 @@ function fetchingLocations() {
       });
   };
 }
-
+// not currently used
 function loadingLocationMachines() {
   return { type: "LOADING_LOCATION_MACHINES" };
 }
-
-function fetchedLocationMachines(machines) {
-  return { type: "FETCHED_LOCATION_MACHINES", machines };
+// not currently used
+function fetchedLocationMachines(locationID) {
+  return { type: "FETCHED_LOCATION_MACHINES", locationID };
 }
 
-function fetchingLocationMachines(locationID) {
-  return dispatch => {
-    dispatch(loadingLocationMachines());
+// not currently used
+function fetchLocationMachines(locationID) {
+  return { type: "FETCH_LOCATION_MACHINES", locationID };
+}
 
-    fetch(LOC_MAC_URL)
+//Set store status for "Current Location"
+function showLocation(location) {
+  return { type: "SHOW_LOCATION", location };
+}
+// function fetchAllMachines() {
+//   return dispatch => {
+//     fetch(MACHINES_URL)
+//       .then(res => res.json())
+//       .then(machines => {
+//         dispatch(fetchedMachines(machines));
+//       });
+//   };
+// }
+
+function addIssue(payload) {
+  return { type: "ADD_ISSUE", payload };
+}
+
+function postIssue(payload) {
+  return dispatch => {
+    dispatch(addIssue(payload));
+    console.log("posting up");
+    fetch(POST_ISSUE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
       .then(res => res.json())
-      .then(allMachines => {
-        //filter machines for this location
-        let locMacs = allMachines.filter(mac => mac.location_id === locationID);
-        // add bare bones location_machines to state
-        dispatch(fetchedLocationMachines(locMacs));
-        // debugger
-        //for each locMac look up details against AllMachines
-        //
+      .then(issue => {
+        dispatch(fetchedIssue(issue));
       });
   };
 }
 
-function fetchAllMachines() {
-  return dispatch => {
-    fetch(MACHINES_URL)
-      .then(res => res.json())
-      .then(machines => {
-        // console.log(machines);
-        dispatch(fetchedMachines(machines));
-      });
-  };
+function fetchedIssue(issue) {
+  return { type: "FETCHED_ISSUE", issue };
 }
-
-function addIssue() {
-  return { type: "ADD_ISSUE"}
-}
+//POST requires location_machine_id: nil, description: nil
 
 export {
   fetchedLocations,
   fetchingLocations,
   loadingLocations,
   showLocation,
-  fetchingLocationMachines,
-  fetchAllMachines,
-  fetchedMachines,
-  findMachineName,
-  addIssue
+  fetchLocationMachines,
+  // fetchAllMachines,
+  // fetchedMachines,
+  // findMachineName,
+  addIssue,
+  postIssue,
+  fetchedIssue
 };
+
+// //First attempt, ignore
+// function fetchingLocationMachines(locationID) {
+//   return dispatch => {
+//     dispatch(loadingLocationMachines());
+//     fetch(LOC_MAC_URL)
+//       .then(res => res.json())
+//       .then(allMachines => {
+//         //filter machines for this location
+//         let locMacs = allMachines.filter(mac => mac.location_id === locationID);
+//         // add bare bones location_machines to state
+//         dispatch(fetchedLocationMachines(locMacs));
+//         // debugger
+//       });
+//   };
+// }
