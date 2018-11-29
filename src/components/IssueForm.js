@@ -49,6 +49,7 @@ const mapDispatchToProps = dispatch => {
   return {
     postIssue: formData => dispatch(postIssue(formData))
     // dispatch action only, do not specify TYPE: WHATEVER here
+
   };
 };
 

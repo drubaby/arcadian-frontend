@@ -1,10 +1,20 @@
-const LOCATIONS_URL = "http://localhost:3000/locations";
+const All_LOCATIONS_URL = "http://localhost:3000/locations";
 const LOC_MAC_URL = "http://localhost:3000/location_machines";
 const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
+const SINGLE_LOCATION_URL = "http://localhost:3000/locations/"
 
 function loadingLocations() {
   return { type: "LOADING_LOCATIONS" };
+}
+
+function loadingLocation() {
+  return { type: "LOADING_LOCATION"}
+}
+
+// Sets Current Location in store
+function fetchedLocation(locationObj) {
+  return { type: "FETCHED_LOCATIONS", locationObj };
 }
 
 // Sets allLocations in store
@@ -12,16 +22,36 @@ function fetchedLocations(locations) {
   return { type: "FETCHED_LOCATIONS", locations };
 }
 
+// fetch ALL locations
 function fetchingLocations() {
   return dispatch => {
     dispatch(loadingLocations());
-    fetch(LOCATIONS_URL)
+    fetch(All_LOCATIONS_URL)
       .then(res => res.json())
       .then(locations => {
         dispatch(fetchedLocations(locations));
       });
   };
 }
+// fetch SINGLE location
+function fetchingLocation(id){
+  return dispatch => {
+    dispatch(loadingLocation())
+    fetch(SINGLE_LOCATION_URL + `${id}`)
+    .then(res => res.json())
+    .then(locationObj => {
+      dispatch(showLocation(locationObj))
+    })
+  }
+
+}
+//Set store status for "Current Location"
+function showLocation(location) {
+  return { type: "SHOW_LOCATION", location };
+}
+
+
+
 // not currently used
 function loadingLocationMachines() {
   return { type: "LOADING_LOCATION_MACHINES" };
@@ -36,10 +66,6 @@ function fetchLocationMachines(locationID) {
   return { type: "FETCH_LOCATION_MACHINES", locationID };
 }
 
-//Set store status for "Current Location"
-function showLocation(location) {
-  return { type: "SHOW_LOCATION", location };
-}
 // function fetchAllMachines() {
 //   return dispatch => {
 //     fetch(MACHINES_URL)
@@ -68,7 +94,8 @@ function postIssue(payload) {
     })
       .then(res => res.json())
       .then(issue => {
-        dispatch(fetchedIssue(issue));
+        dispatch(fetchedIssue(issue))
+
       });
   };
 }
@@ -82,6 +109,10 @@ export {
   fetchedLocations,
   fetchingLocations,
   loadingLocations,
+  fetchedLocation,
+  fetchingLocation,
+  loadingLocation,
+
   showLocation,
   fetchLocationMachines,
   // fetchAllMachines,

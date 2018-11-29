@@ -8,8 +8,81 @@ const allLocationsReducer = (oldState = [], action) => {
     case "FETCHED_LOCATIONS":
       console.log("[allLocationsReducer] returning all Locations");
       return action.locations;
+    case "FETCHED_ISSUE":
+      let loc_mac_id = action.issue.location_machine_id;
+
+      let target_location = oldState.find(location => {
+        return location.location_machines.find(loc_mac => {
+          return loc_mac.id === action.issue.location_machine_id;
+        });
+      });
+      console.log(target_location.location_machines)
+      let target_machine = target_location.location_machines.find(loc_mac => {
+        if (loc_mac.id === action.issue.location_machine_id) {
+          return loc_mac_id;
+        }
+      });
+      let target_machine_issues = target_machine.machine_issues;
+
+
+      //currently replacting location object with just its machines array
+      let newState = oldState.map(location => {
+        // map over all locations, find target location
+        if (location === target_location) {
+          // Issue has been added to array at this point.
+          console.log(location);
+          location.location_machines = location.location_machines.map(loc_mac => {
+            if (loc_mac === target_machine) {
+              // add new issue to target location machine
+              return {
+                ...loc_mac,
+                machine_issues: [...loc_mac.machine_issues, action.issue]
+              };
+            } else {
+              // return all other location machines unchanged
+              //WORKS
+              console.log("unchanged location machines: ", loc_mac);
+              return loc_mac;
+            }
+          });
+          //this needs to return location
+          console.log(location)
+          debugger
+
+        } else {
+          // WORKS
+          // return all other locations unchanged
+          console.log("unchanged location");
+          return location;
+        }
+      });
+
+
+
+      debugger
+      return newState;
     default:
       return oldState;
+  }
+};
+
+const issueReducer = (state = [], action, allLocations) => {
+  switch (action.type) {
+    case "ADD_ISSUE":
+      console.log("Adding issue: ", action.payload);
+      return action.payload;
+    case "POST_ISSUE":
+      console.log("[in issueReducer] dispatch payload: ", action.payload);
+      return action.payload;
+    // case "FETCHED_ISSUE":
+    // console.log("fetched issue: ", action.issue)
+    // debugger
+    // console.log(state.allLocations.location_machines)
+    //find obj that needs to update ie allLocations.loc_macs.issues
+    //return [...state.locmacs, ]
+    // return action.issue;
+    default:
+      return state;
   }
 };
 
@@ -30,9 +103,13 @@ const loadingReducer = (oldState = false, action) => {
   switch (action.type) {
     case "LOADING_LOCATIONS":
       return true;
+      case "LOADING_LOCATION":
+      return true
     case "FETCHED_LOCATIONS":
-      console.log("[loading reducer] loading state now false");
       return false;
+      case "FETCHED_LOCATION":
+      console.log("[loading reducer] Location has been loaded.")
+      return false
     default:
       return oldState;
   }
@@ -41,35 +118,18 @@ const loadingReducer = (oldState = false, action) => {
 const currentLocationReducer = (oldState = [], action) => {
   switch (action.type) {
     case "SHOW_LOCATION":
-      // make DB call to load a specific location show page
-      //Sets currentLocation: [this location]
+      console.log("[current location reducer] showing: ", action.location)
       return action.location;
     default:
       return oldState;
   }
 };
 
-const issueReducer = (state = [], action) => {
-  switch (action.type) {
-    case "ADD_ISSUE":
-      console.log("Adding issue: ", action.payload);
-      return action.payload;
-    case "POST_ISSUE":
-      console.log("[in issueReducer] dispatch payload: ", action.payload);
-      return action.payload;
-    case "FETCHED_ISSUE":
-    console.log("fetched issue: ", action.issue)
-      return action.issue;
-    default:
-      return state;
-  }
-};
-
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
-  allMachines: machineReducer,
   loading: loadingReducer,
-  issue: issueReducer,
-  currentLocation: currentLocationReducer
+  currentLocation: currentLocationReducer,
+  // allMachines: machineReducer,
+  issue: issueReducer
 });
 export default rootReducer;

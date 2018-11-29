@@ -6,6 +6,7 @@ import LocationMachineCard from "../components/LocationMachineCard";
 class LocationMachinesContainer extends Component {
   componentDidMount() {
     console.log("Mounted location machines container.");
+    //
   }
 
   render() {
@@ -29,7 +30,9 @@ class LocationMachinesContainer extends Component {
 }
 //
 // const mapStateToProps = (state, propsFromParent) => {
-//   return {}
+//   // set current location which fetches location machines
+    
+
 // };
 
 // const mapDispatchToProps = dispatch => {
