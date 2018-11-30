@@ -1,5 +1,5 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
-// const LOC_MAC_URL = "http://localhost:3000/location_machines";
+const LOC_MAC_URL = "http://localhost:3000/location_machines";
 // const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/";
@@ -26,7 +26,6 @@ function fetchingLocations() {
       });
   };
 }
-
 ////////////// SINGLE LOCATION //////////
 function loadingLocation() {
   return { type: "LOADING_LOCATION" };
@@ -47,7 +46,7 @@ function fetchingLocation(id) {
       });
   };
 }
-//Set store status for "Current Location"
+
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
@@ -76,6 +75,25 @@ function showLocMacs(machines) {
 function selectLocationMachine(machine) {
   return { type: "SELECT_LOC_MAC", machine };
 }
+
+function toggleMachineWorking(machine) {
+  // return { type: "TOGGLE_WORKING", machine}
+  // debugger;
+  return dispatch => {
+    fetch(LOC_MAC_URL + `/${machine.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(machine)
+    })
+      .then(res => res.json())
+      .then(obj => console.log(obj));
+  };
+}
+// patch to DB
+//after response, call SHOW LOCATION to rerender
 
 /////////// Machine Issues
 function addIssue(payload) {
@@ -145,19 +163,13 @@ function markResolved(issueObj) {
   return { type: "MARK_RESOLVED", issueObj };
 }
 
-function beginUpdatingLocationByIssue(issue) {
-  return dispatch => {
-    dispatch();
-  };
-}
+// function updateLocationByIssue(issue) {
+//   return { type: "UPDATE_LOCATION_BY_ISSUE", issue };
+// }
 
-function updateLocationByIssue(issue) {
-  return { type: "UPDATE_LOCATION_BY_ISSUE", issue };
-}
-
-function fetchedIssue(issue) {
-  return { type: "FETCHED_ISSUE", issue };
-}
+// function fetchedIssue(issue) {
+//   return { type: "FETCHED_ISSUE", issue };
+// }
 //POST requires location_machine_id: nil, description: nil
 
 export {
@@ -174,26 +186,8 @@ export {
   fetchingLocationMachines,
   loadingLocationMachines,
   selectLocationMachine,
-  // fetchAllMachines,
-  // fetchedMachines,
-  // findMachineName,
+  toggleMachineWorking,
   addIssue,
   postIssue,
   resolveIssue
 };
-
-// //First attempt, ignore
-// function fetchingLocationMachines(locationID) {
-//   return dispatch => {
-//     dispatch(loadingLocationMachines());
-//     fetch(LOC_MAC_URL)
-//       .then(res => res.json())
-//       .then(allMachines => {
-//         //filter machines for this location
-//         let locMacs = allMachines.filter(mac => mac.location_id === locationID);
-//         // add bare bones location_machines to state
-//         dispatch(fetchedLocationMachines(locMacs));
-//         // debugger
-//       });
-//   };
-// }

@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import { Card, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationMachineCard from "../components/LocationMachineCard";
-import {
-  fetchingLocationMachines,
-  loadingLocationMachines
-} from "../redux/actions/locationActions";
 
+// rendered by Location
 class LocationMachinesContainer extends Component {
 
   render() {
@@ -36,13 +33,13 @@ const mapStateToProps = (state, propsFromParent) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchingLocationMachines: id => {
-      dispatch(fetchingLocationMachines(id));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchingLocationMachines: id => {
+//       dispatch(fetchingLocationMachines(id));
+//     }
+//   };
+// };
 
 export default connect(
   mapStateToProps,

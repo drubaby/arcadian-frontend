@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import { Card, Button, Modal, Header } from "semantic-ui-react";
+import { Button, Modal, Header } from "semantic-ui-react";
 import MachineIssue from "./MachineIssue";
 import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
-import { selectLocationMachine } from "../redux/actions/locationActions";
+import { selectLocationMachine, toggleMachineWorking } from "../redux/actions/locationActions";
+
 
 class MachineModal extends Component {
+
+  // componentDidMount(){
+  //   selectLocationMachine(this.props.machineObj.id)
+  // }
+
   render() {
     console.log(this.props);
     if (this.props) {
+      let { machine } = this.props.machineObj;
+      selectLocationMachine(this.props.id)
+
       return (
         <Modal
           trigger={
@@ -22,9 +31,19 @@ class MachineModal extends Component {
           }
         >
           <Modal.Header>
-            {this.props.machineObj.name}
-            <Button floated="right">Mark Broken</Button>
+            {machine.name}
+            <Button
+              floated="right"
+              onClick={() => {
+                this.props.toggleMachineWorking(this.props.machineObj);
+              }}
+            >
+              {this.props.machineObj.is_working
+                ? "Mark Broken"
+                : "Mark Working"}
+            </Button>
           </Modal.Header>
+
           <Modal.Content image>
             <Modal.Description>
               <Header>
@@ -35,7 +54,7 @@ class MachineModal extends Component {
               {this.props.machineObj.machine_issues.length === 0
                 ? null
                 : this.props.machineObj.machine_issues.map(issue => {
-                      return <MachineIssue key={issue.id} issueObj={issue} />;
+                    return <MachineIssue key={issue.id} issueObj={issue} />;
                   })}
             </Modal.Description>
             <Modal.Description>
@@ -49,18 +68,17 @@ class MachineModal extends Component {
     }
   }
 }
-const mapStateToProps = (state, propsFromParent) => {
-  // machineObj is always selected location machine
-  // updates to this state will re-render
-  return {
-    machineObj: state.selectedLocMAc
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
     selectLocationMachine: id => {
       dispatch(selectLocationMachine(id));
+    },
+    toggleMachineWorking: machineObj => {
+      // debugger
+      machineObj.is_working = !machineObj.is_working
+      console.log(machineObj.machine.name, " working status now: ", machineObj.is_working)
+      dispatch(toggleMachineWorking(machineObj));
     }
   };
 };

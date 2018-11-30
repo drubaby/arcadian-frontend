@@ -82,17 +82,17 @@ const issueReducer = (state = [], action) => {
   }
 };
 
-const machineReducer = (state = [], action) => {
-  switch (action.type) {
-    case "FETCH_ALL_MACHINES":
-      console.log("fetching all machines");
-      return action.machines;
-    case "FETCHED_MACHINES":
-      return action.machines;
-    default:
-      return state;
-  }
-};
+// const machineReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case "FETCH_ALL_MACHINES":
+//       console.log("fetching all machines");
+//       return action.machines;
+//     case "FETCHED_MACHINES":
+//       return action.machines;
+//     default:
+//       return state;
+//   }
+// };
 
 // handles conditional rendering for displaying locations
 const loadingReducer = (oldState = false, action) => {
@@ -125,6 +125,9 @@ const currentLocationReducer = (oldState = [], action) => {
       console.log(action.location.name)
       // debugger
       return action.location;
+      case "TOGGLE_WORKING":
+      debugger
+      return oldState
     default:
       return oldState;
   }
@@ -142,20 +145,13 @@ const locMacContainerReducer = (oldState = true, action) => {
   }
 };
 
-const currentLocMacReducer = (oldState = [], action) => {
-  switch (action.type) {
-    case "SHOW_LOC_MACS":
-      console.log("Showing location machines", action.machines);
-      return action.machines;
-    default:
-      return oldState;
-  }
-};
-
+//
 const selectedLocMacReducer = (oldState = [], action) => {
   switch (action.type) {
     case "SELECT_LOC_MAC":
+    debugger
       return action.machine;
+
     default:
       return oldState;
   }
@@ -167,8 +163,7 @@ const rootReducer = combineReducers({
   locationLoading: locationLoadingReducer,
   locMacContainerLoading: locMacContainerReducer,
   currentLocation: currentLocationReducer,
-  currentLocMachines: currentLocMacReducer,
-  selectedLocMac: selectedLocMacReducer,
+  // selectedLocationMachine: selectedLocMacReducer,
   // allMachines: machineReducer,
   issue: issueReducer
 });
