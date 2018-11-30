@@ -8,21 +8,8 @@ import {
 } from "../redux/actions/locationActions";
 
 class LocationMachinesContainer extends Component {
-  componentDidMount() {
-    // this container should fetch location machine data on mount.
-    console.log(
-      "LocationMachinesContainer mounts, content loading?",
-      this.props.locMacContainerLoading
-    );
-    // Location machine card will fetch issues?
-    this.props.fetchingLocationMachines(parseInt(this.props.location.id));
-  }
 
   render() {
-    if (this.props.locMacContainerLoading) {
-      return <div>Loading :) :) :) :) </div>;
-    }
-
     return (
       <Container>
       <Card.Group itemsPerRow={3} stackable={true}>
@@ -30,10 +17,7 @@ class LocationMachinesContainer extends Component {
           return (
             <LocationMachineCard
               key={loc_machine.id}
-              locMacId={loc_machine.id}
               locMacObj={loc_machine}
-              machine_info={loc_machine.machine}
-              machine_issues={loc_machine.machine_issues}
               is_working={loc_machine.is_working}
             />
           );
@@ -47,8 +31,8 @@ class LocationMachinesContainer extends Component {
 const mapStateToProps = (state, propsFromParent) => {
   // set current location which fetches location machines
   return {
-    locMacContainerLoading: state.locMacContainerLoading,
-    locationMachines: state.currentLocMachines
+    // locMacContainerLoading: state.locMacContainerLoading,
+    locationMachines: state.currentLocation.location_machines
   };
 };
 
@@ -62,5 +46,5 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(LocationMachinesContainer);

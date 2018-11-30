@@ -2,8 +2,8 @@ const All_LOCATIONS_URL = "http://localhost:3000/locations";
 // const LOC_MAC_URL = "http://localhost:3000/location_machines";
 // const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
-const SINGLE_LOCATION_URL = "http://localhost:3000/locations/"
-const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/"
+const SINGLE_LOCATION_URL = "http://localhost:3000/locations/";
+const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/";
 
 /////////// ALL LOCATIONS
 function loadingLocations() {
@@ -29,7 +29,7 @@ function fetchingLocations() {
 
 ////////////// SINGLE LOCATION //////////
 function loadingLocation() {
-  return { type: "LOADING_LOCATION"}
+  return { type: "LOADING_LOCATION" };
 }
 
 // Sets Current Location in store
@@ -37,15 +37,15 @@ function fetchedLocation(locationObj) {
   return { type: "FETCHED_LOCATIONS", locationObj };
 }
 // fetch SINGLE location
-function fetchingLocation(id){
+function fetchingLocation(id) {
   return dispatch => {
-    dispatch(loadingLocation())
+    dispatch(loadingLocation());
     fetch(SINGLE_LOCATION_URL + `${id}`)
-    .then(res => res.json())
-    .then(locationObj => {
-      dispatch(showLocation(locationObj))
-    })
-  }
+      .then(res => res.json())
+      .then(locationObj => {
+        dispatch(showLocation(locationObj));
+      });
+  };
 }
 //Set store status for "Current Location"
 function showLocation(location) {
@@ -53,16 +53,16 @@ function showLocation(location) {
 }
 
 ////////// LOCATION MACHINES
-function fetchingLocationMachines(id){
+function fetchingLocationMachines(id) {
   return dispatch => {
-    dispatch(loadingLocationMachines())
+    dispatch(loadingLocationMachines());
     // debugger
     fetch(CURRENT_LOCATION_MACHINES + `${id}`)
-    .then(res => res.json())
-    .then(machineArray => {
-      dispatch(showLocMacs(machineArray))
-    })
-  }
+      .then(res => res.json())
+      .then(machineArray => {
+        dispatch(showLocMacs(machineArray));
+      });
+  };
 }
 
 function loadingLocationMachines() {
@@ -73,21 +73,11 @@ function showLocMacs(machines) {
   return { type: "SHOW_LOC_MACS", machines };
 }
 
-function selectLocationMachine(machine){
-  return { type: "SELECT_LOC_MAC", machine}
+function selectLocationMachine(machine) {
+  return { type: "SELECT_LOC_MAC", machine };
 }
 
-
-// function fetchAllMachines() {
-//   return dispatch => {
-//     fetch(MACHINES_URL)
-//       .then(res => res.json())
-//       .then(machines => {
-//         dispatch(fetchedMachines(machines));
-//       });
-//   };
-// }
-
+/////////// Machine Issues
 function addIssue(payload) {
   return { type: "ADD_ISSUE", payload };
 }
@@ -95,7 +85,8 @@ function addIssue(payload) {
 function postIssue(payload) {
   return dispatch => {
     dispatch(addIssue(payload));
-    console.log("posting up");
+    console.log("posting issue");
+    // debugger
     fetch(POST_ISSUE_URL, {
       method: "POST",
       headers: {
@@ -106,10 +97,31 @@ function postIssue(payload) {
     })
       .then(res => res.json())
       .then(issue => {
-        dispatch(fetchedIssue(issue))
-
+        fetch("http://localhost:3000/update_location_by_issue", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(issue)
+        })
+          .then(res => res.json())
+          .then(locationObj => {
+            dispatch(showLocation(locationObj));
+            //may need to return location_machines for this location instead
+          });
       });
   };
+}
+
+function beginUpdatingLocationByIssue(issue) {
+  return dispatch => {
+    dispatch();
+  };
+}
+
+function updateLocationByIssue(issue) {
+  return { type: "UPDATE_LOCATION_BY_ISSUE", issue };
 }
 
 function fetchedIssue(issue) {

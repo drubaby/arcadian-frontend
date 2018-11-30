@@ -20,7 +20,9 @@ class IssueForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.postIssue(this.state);
+    this.props.postIssue(this.state)
+    // this.props.updateLocationByIssue()
+
   };
 
   componentDidMount() {
@@ -45,11 +47,12 @@ class IssueForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  // Payload looks like {issueDescription: "some text, LocMacId: #"}
+  // Payload looks like {issueDescription: "some text", LocMacId: #"}
   return {
-    postIssue: formData => dispatch(postIssue(formData))
-    // dispatch action only, do not specify TYPE: WHATEVER here
-
+    postIssue: formData => dispatch(postIssue(formData)),
+    // fetchLocation: locationId => {
+    //   dispatch(fetchingLocation)
+    // }
   };
 };
 

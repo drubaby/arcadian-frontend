@@ -8,7 +8,7 @@ const allLocationsReducer = (oldState = [], action) => {
     case "FETCHED_LOCATIONS":
       console.log("[allLocationsReducer] returning all Locations");
       return action.locations;
-    case "FETCHED_ISSUE":
+      // case "FETCHED_ISSUE":
       let loc_mac_id = action.issue.location_machine_id;
 
       let target_location = oldState.find(location => {
@@ -123,43 +123,69 @@ const locationLoadingReducer = (oldState = true, action) => {
 const currentLocationReducer = (oldState = [], action) => {
   switch (action.type) {
     case "SHOW_LOCATION":
-      console.log("[current location reducer] showing: ", action.location);
+      console.log("[current location reducer] showing: ", action.location)
+      console.log(action.location.name)
+      // debugger
       return action.location;
+
+    // case "FETCHED_ISSUE":
+    //   // find machine action was posted to
+    //   let loc_mac_id = action.issue.location_machine_id;
+    //   // find target machine in old state (current location)
+    //   let target_machine = oldState.location_machines.find(loc_mac => {
+    //     return loc_mac.id === action.issue.location_machine_id;
+    //   });
+    //   //find issues array for the target machine????
+    //   let target_issues = target_machine.machine_issues;
+    //
+    //   let newState = oldState
+    //   newState.location_machines = oldState.location_machines.map(loc_mac => {
+    //     if (loc_mac === target_machine) {
+    //       // add new issue to target location machine
+    //       target_issues = [...loc_mac.machine_issues, action.issue];
+    //       return {
+    //         loc_mac
+    //       };
+    //     } else {
+    //       return loc_mac;
+    //     }
+    //   });
+    //   return newState;
     default:
       return oldState;
   }
 };
 
-const locMacContainerReducer = (oldState=true, action) => {
-  switch (action.type){
+const locMacContainerReducer = (oldState = true, action) => {
+  switch (action.type) {
     case "LOADING_LOC_MAC_CONTAINER":
-    return true
+      return true;
     case "SHOW_LOC_MACS":
-    console.log("Loc Mac Container filled.")
-    return false
+      console.log("Loc Mac Container filled.");
+      return false;
     default:
-    return oldState
+      return oldState;
   }
-}
+};
 
 const currentLocMacReducer = (oldState = [], action) => {
   switch (action.type) {
     case "SHOW_LOC_MACS":
-    console.log('Showing location machines', action.machines)
-    return action.machines
+      console.log("Showing location machines", action.machines);
+      return action.machines;
     default:
-    return oldState
+      return oldState;
   }
-}
+};
 
 const selectedLocMacReducer = (oldState = [], action) => {
-  switch (action.type){
+  switch (action.type) {
     case "SELECT_LOC_MAC":
-    return action.machine
+      return action.machine;
     default:
-    return oldState
+      return oldState;
   }
-}
+};
 
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
