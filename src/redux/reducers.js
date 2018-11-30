@@ -8,63 +8,63 @@ const allLocationsReducer = (oldState = [], action) => {
     case "FETCHED_LOCATIONS":
       console.log("[allLocationsReducer] returning all Locations");
       return action.locations;
-      // case "FETCHED_ISSUE":
-      let loc_mac_id = action.issue.location_machine_id;
-
-      let target_location = oldState.find(location => {
-        return location.location_machines.find(loc_mac => {
-          return loc_mac.id === action.issue.location_machine_id;
-        });
-      });
-      console.log(target_location.location_machines);
-      let target_machine = target_location.location_machines.find(loc_mac => {
-        if (loc_mac.id === action.issue.location_machine_id) {
-          return loc_mac_id;
-        }
-      });
-      let target_machine_issues = target_machine.machine_issues;
-
-      //currently replacting location object with just its machines array
-      let newState = oldState.map(location => {
-        // map over all locations, find target location
-        if (location === target_location) {
-          // Issue has been added to array at this point.
-          console.log(location);
-          location.location_machines = location.location_machines.map(
-            loc_mac => {
-              if (loc_mac === target_machine) {
-                // add new issue to target location machine
-                return {
-                  ...loc_mac,
-                  machine_issues: [...loc_mac.machine_issues, action.issue]
-                };
-              } else {
-                // return all other location machines unchanged
-                //WORKS
-                console.log("unchanged location machines: ", loc_mac);
-                return loc_mac;
-              }
-            }
-          );
-          //this needs to return location
-          console.log(location);
-          debugger;
-        } else {
-          // WORKS
-          // return all other locations unchanged
-          console.log("unchanged location");
-          return location;
-        }
-      });
-      //This is a big mess, major refactor to break this down in progress.
-      debugger;
-      return newState;
+      // // case "FETCHED_ISSUE":
+      // let loc_mac_id = action.issue.location_machine_id;
+      //
+      // let target_location = oldState.find(location => {
+      //   return location.location_machines.find(loc_mac => {
+      //     return loc_mac.id === action.issue.location_machine_id;
+      //   });
+      // });
+      // console.log(target_location.location_machines);
+      // let target_machine = target_location.location_machines.find(loc_mac => {
+      //   if (loc_mac.id === action.issue.location_machine_id) {
+      //     return loc_mac_id;
+      //   }
+      // });
+      // let target_machine_issues = target_machine.machine_issues;
+      //
+      // //currently replacting location object with just its machines array
+      // let newState = oldState.map(location => {
+      //   // map over all locations, find target location
+      //   if (location === target_location) {
+      //     // Issue has been added to array at this point.
+      //     console.log(location);
+      //     location.location_machines = location.location_machines.map(
+      //       loc_mac => {
+      //         if (loc_mac === target_machine) {
+      //           // add new issue to target location machine
+      //           return {
+      //             ...loc_mac,
+      //             machine_issues: [...loc_mac.machine_issues, action.issue]
+      //           };
+      //         } else {
+      //           // return all other location machines unchanged
+      //           //WORKS
+      //           console.log("unchanged location machines: ", loc_mac);
+      //           return loc_mac;
+      //         }
+      //       }
+      //     );
+      //     //this needs to return location
+      //     console.log(location);
+      //     debugger;
+      //   } else {
+      //     // WORKS
+      //     // return all other locations unchanged
+      //     console.log("unchanged location");
+      //     return location;
+      //   }
+      // });
+      // //This is a big mess, major refactor to break this down in progress.
+      // debugger;
+      // return newState;
     default:
       return oldState;
   }
 };
 
-const issueReducer = (state = [], action, allLocations) => {
+const issueReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ISSUE":
       console.log("Adding issue: ", action.payload);
@@ -72,13 +72,11 @@ const issueReducer = (state = [], action, allLocations) => {
     case "POST_ISSUE":
       console.log("[in issueReducer] dispatch payload: ", action.payload);
       return action.payload;
-    // case "FETCHED_ISSUE":
-    // console.log("fetched issue: ", action.issue)
-    // debugger
-    // console.log(state.allLocations.location_machines)
-    //find obj that needs to update ie allLocations.loc_macs.issues
-    //return [...state.locmacs, ]
-    // return action.issue;
+      case "MARK_RESOLVED":
+      action.issueObj.resolved = true
+      // debugger
+      return action
+
     default:
       return state;
   }
@@ -127,30 +125,6 @@ const currentLocationReducer = (oldState = [], action) => {
       console.log(action.location.name)
       // debugger
       return action.location;
-
-    // case "FETCHED_ISSUE":
-    //   // find machine action was posted to
-    //   let loc_mac_id = action.issue.location_machine_id;
-    //   // find target machine in old state (current location)
-    //   let target_machine = oldState.location_machines.find(loc_mac => {
-    //     return loc_mac.id === action.issue.location_machine_id;
-    //   });
-    //   //find issues array for the target machine????
-    //   let target_issues = target_machine.machine_issues;
-    //
-    //   let newState = oldState
-    //   newState.location_machines = oldState.location_machines.map(loc_mac => {
-    //     if (loc_mac === target_machine) {
-    //       // add new issue to target location machine
-    //       target_issues = [...loc_mac.machine_issues, action.issue];
-    //       return {
-    //         loc_mac
-    //       };
-    //     } else {
-    //       return loc_mac;
-    //     }
-    //   });
-    //   return newState;
     default:
       return oldState;
   }

@@ -7,7 +7,7 @@ import { selectLocationMachine } from "../redux/actions/locationActions";
 
 class MachineModal extends Component {
   render() {
-    console.log(this.props)
+    console.log(this.props);
     if (this.props) {
       return (
         <Modal
@@ -35,7 +35,7 @@ class MachineModal extends Component {
               {this.props.machineObj.machine_issues.length === 0
                 ? null
                 : this.props.machineObj.machine_issues.map(issue => {
-                    return <MachineIssue key={issue.id} issueObj={issue} />;
+                      return <MachineIssue key={issue.id} issueObj={issue} />;
                   })}
             </Modal.Description>
             <Modal.Description>
@@ -53,7 +53,7 @@ const mapStateToProps = (state, propsFromParent) => {
   // machineObj is always selected location machine
   // updates to this state will re-render
   return {
-    machineObj: state.selectedLocMAc,
+    machineObj: state.selectedLocMAc
   };
 };
 

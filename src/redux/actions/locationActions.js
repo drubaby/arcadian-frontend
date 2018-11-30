@@ -114,6 +114,37 @@ function postIssue(payload) {
   };
 }
 
+function resolveIssue(payload) {
+  return dispatch => {
+    dispatch(markResolved(payload));
+    // debugger
+    fetch(POST_ISSUE_URL + `/${payload.id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(issueObj => {
+        console.log(issueObj);
+        fetch("http://localhost:3000/update_location_by_issue", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(issueObj)
+        })
+          .then(res => res.json())
+          .then(locationObj => {
+            // debugger
+            dispatch(showLocation(locationObj));
+          });
+      });
+  };
+}
+
+function markResolved(issueObj) {
+  return { type: "MARK_RESOLVED", issueObj };
+}
+
 function beginUpdatingLocationByIssue(issue) {
   return dispatch => {
     dispatch();
@@ -148,7 +179,7 @@ export {
   // findMachineName,
   addIssue,
   postIssue,
-  fetchedIssue
+  resolveIssue
 };
 
 // //First attempt, ignore
