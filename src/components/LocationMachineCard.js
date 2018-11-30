@@ -15,7 +15,6 @@ class LocationMachineCard extends Component {
           <Card.Description>
             {this.props.machine_issues.length} known issues
           </Card.Description>
-
           {this.props.is_working ? "Working" : "Out of Order"}
         </Card.Content>
         <Card.Content extra>
@@ -36,6 +35,7 @@ class LocationMachineCard extends Component {
                   : this.props.machine_issues.map(issue => {
                       return <MachineIssue key={issue.id} issueObj={issue} />;
                     })}
+
               </Modal.Description>
               <Modal.Description>
                 <IssueForm locMacId={this.props.locMacId} />

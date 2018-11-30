@@ -1,6 +1,6 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
-const LOC_MAC_URL = "http://localhost:3000/location_machines";
-const MACHINES_URL = "http://localhost:3000/machines";
+// const LOC_MAC_URL = "http://localhost:3000/location_machines";
+// const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/"
 
@@ -49,8 +49,6 @@ function fetchingLocation(id){
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
-
-
 
 // not currently used
 function loadingLocationMachines() {

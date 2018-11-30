@@ -3,71 +3,71 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationMachinesContainer from "./LocationMachinesContainer";
-import { fetchLocationMachines, fetchingLocation } from "../redux/actions/locationActions";
+import {
+  fetchLocationMachines,
+  fetchingLocation
+} from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {
-    // debugger
-    console.log("Location mounted; this.props.location: ", this.props.location);
+    console.log("Location mounted ", this.props.currentLocation);
+    console.log("Location loading status: ", this.props.locationLoading);
     // consider dispatching action to fetch location details from DB
-
-    //step 1: set to loading via this.props.fetchingLocation();
-    //step 2: fetch
-
     //
-     // this.props.fetchLocationMachines(parseInt(this.props.locationId))
-    // or something
-    // debugger
-    this.props.fetchingLocation(parseInt(this.props.locationId))
+    // this.props.fetchLocationMachines(parseInt(this.props.locationId))
 
+    this.props.fetchingLocation(parseInt(this.props.locationId));
   }
 
-  // style guide:
-  // 2 columns
-  // left column display location name, address, and operator
-  // right column display card grid with location machiness
   render() {
+    // shows 'Loading' while async call is made
+    if (this.props.locationLoading) {
+      console.log(
+        "Loading status: ",
+        this.props.locationLoading,
+        "display 'Loading'"
+      );
+      return <div>Loading...</div>;
+    }
+
     return (
       <Grid>
         <Grid.Row>
-          {this.props.location ? (
-            <LocationCard
-              location={this.props.location}
-              machines={this.props.location.location_machines}
-            />
-          ) : null}
+          <LocationCard
+            location={this.props.currentLocation}
+            machines={this.props.currentLocation.location_machines}
+          />
         </Grid.Row>
         <Grid.Row>
-          {this.props.location ? (
-            <LocationMachinesContainer
-              location={this.props.location}
-              machines={this.props.location.location_machines}
-            />
-          ) : null}
+          <LocationMachinesContainer
+            location={this.props.currentLocation}
+            machines={this.props.currentLocation.location_machines}
+          />
         </Grid.Row>
       </Grid>
     );
   }
 }
 
+
 const mapStateToProps = (state, propsFromParent) => {
   return {
     location: state.allLocations.find(
       loc => loc.id === parseInt(propsFromParent.locationId)
     ),
-    currentLocation: state.currentLocation
+    currentLocation: state.currentLocation,
+    locationLoading: state.locationLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-  //   fetchLocationMachines: id => {
-  //     dispatch(fetchLocationMachines(id));
-  //   }
-  fetchingLocation: (placeId) => {
-    dispatch(fetchingLocation(placeId))
-  }
-
+    //   fetchLocationMachines: id => {
+    //     dispatch(fetchLocationMachines(id));
+    //   }
+    fetchingLocation: placeId => {
+      dispatch(fetchingLocation(placeId));
+    }
   };
 };
 
