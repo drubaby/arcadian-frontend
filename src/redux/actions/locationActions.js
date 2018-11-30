@@ -3,18 +3,11 @@ const All_LOCATIONS_URL = "http://localhost:3000/locations";
 // const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/"
+const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/"
 
+/////////// ALL LOCATIONS
 function loadingLocations() {
   return { type: "LOADING_LOCATIONS" };
-}
-
-function loadingLocation() {
-  return { type: "LOADING_LOCATION"}
-}
-
-// Sets Current Location in store
-function fetchedLocation(locationObj) {
-  return { type: "FETCHED_LOCATIONS", locationObj };
 }
 
 // Sets allLocations in store
@@ -33,6 +26,16 @@ function fetchingLocations() {
       });
   };
 }
+
+////////////// SINGLE LOCATION //////////
+function loadingLocation() {
+  return { type: "LOADING_LOCATION"}
+}
+
+// Sets Current Location in store
+function fetchedLocation(locationObj) {
+  return { type: "FETCHED_LOCATIONS", locationObj };
+}
 // fetch SINGLE location
 function fetchingLocation(id){
   return dispatch => {
@@ -43,25 +46,31 @@ function fetchingLocation(id){
       dispatch(showLocation(locationObj))
     })
   }
-
 }
 //Set store status for "Current Location"
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
 
-// not currently used
-function loadingLocationMachines() {
-  return { type: "LOADING_LOCATION_MACHINES" };
-}
-// not currently used
-function fetchedLocationMachines(locationID) {
-  return { type: "FETCHED_LOCATION_MACHINES", locationID };
+////////// LOCATION MACHINES
+function fetchingLocationMachines(id){
+  return dispatch => {
+    dispatch(loadingLocationMachines())
+    // debugger
+    fetch(CURRENT_LOCATION_MACHINES + `${id}`)
+    .then(res => res.json())
+    .then(machineArray => {
+      dispatch(showLocMacs(machineArray))
+    })
+  }
 }
 
-// not currently used
-function fetchLocationMachines(locationID) {
-  return { type: "FETCH_LOCATION_MACHINES", locationID };
+function loadingLocationMachines() {
+  return { type: "LOADING_LOCATION_MAC_CONTAINER" };
+}
+
+function showLocMacs(machines) {
+  return { type: "SHOW_LOC_MACS", machines };
 }
 
 // function fetchAllMachines() {
@@ -104,15 +113,18 @@ function fetchedIssue(issue) {
 //POST requires location_machine_id: nil, description: nil
 
 export {
+  //ALL LOCATIONS
   fetchedLocations,
   fetchingLocations,
   loadingLocations,
+  //SINGLE LOCATION
   fetchedLocation,
   fetchingLocation,
   loadingLocation,
-
   showLocation,
-  fetchLocationMachines,
+  //LOCATION MACHINES
+  fetchingLocationMachines,
+  loadingLocationMachines,
   // fetchAllMachines,
   // fetchedMachines,
   // findMachineName,

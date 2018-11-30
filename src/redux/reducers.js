@@ -130,11 +130,35 @@ const currentLocationReducer = (oldState = [], action) => {
   }
 };
 
+const locMacContainerReducer = (oldState=true, action) => {
+  switch (action.type){
+    case "LOADING_LOC_MAC_CONTAINER":
+    return true
+    case "SHOW_LOC_MACS":
+    console.log("Loc Mac Container filled.")
+    return false
+    default:
+    return oldState
+  }
+}
+
+const currentLocMacReducer = (oldState = [], action) => {
+  switch (action.type) {
+    case "SHOW_LOC_MACS":
+    console.log('Showing location machines', action.machines)
+    return action.machines
+    default:
+    return oldState
+  }
+}
+
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
   allLocationsLoading: loadingReducer,
   locationLoading: locationLoadingReducer,
+  locMacContainerLoading: locMacContainerReducer,
   currentLocation: currentLocationReducer,
+  currentLocMachines: currentLocMacReducer,
   // allMachines: machineReducer,
   issue: issueReducer
 });

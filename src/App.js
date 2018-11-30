@@ -20,6 +20,7 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
+    //should fetchingLocation() move to sidebar?
   }
 
   render() {

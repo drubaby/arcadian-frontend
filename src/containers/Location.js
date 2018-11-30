@@ -10,7 +10,6 @@ import {
 
 class Location extends Component {
   componentDidMount() {
-    console.log("Location mounted ", this.props.currentLocation);
     console.log("Location loading status: ", this.props.locationLoading);
     // consider dispatching action to fetch location details from DB
     //
@@ -22,11 +21,6 @@ class Location extends Component {
   render() {
     // shows 'Loading' while async call is made
     if (this.props.locationLoading) {
-      console.log(
-        "Loading status: ",
-        this.props.locationLoading,
-        "display 'Loading'"
-      );
       return <div>Loading...</div>;
     }
 
@@ -50,11 +44,11 @@ class Location extends Component {
 }
 
 
-const mapStateToProps = (state, propsFromParent) => {
+const mapStateToProps = (state) => {
   return {
-    location: state.allLocations.find(
-      loc => loc.id === parseInt(propsFromParent.locationId)
-    ),
+    // location: state.allLocations.find(
+    //   loc => loc.id === parseInt(propsFromParent.locationId)
+    // ),
     currentLocation: state.currentLocation,
     locationLoading: state.locationLoading
   };

@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Location from "../containers/Location";
 import LocationsContainer from "../containers/LocationsContainer";
 
+
+//should routes be defined here or in router? probably in App.js.
 const SidebarExample = () => (
   <Router>
     <Sidebar.Pushable as={Segment}>

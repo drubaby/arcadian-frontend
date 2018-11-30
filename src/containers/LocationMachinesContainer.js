@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationMachineCard from "../components/LocationMachineCard";
+import {
+  fetchingLocationMachines,
+  loadingLocationMachines
+} from "../redux/actions/locationActions";
 
 class LocationMachinesContainer extends Component {
   componentDidMount() {
-    console.log("Mounted location machines container.");
-    //
+    // this container should fetch location machine data on mount.
+    console.log("LocationMachinesContainer mounts, content loading?", this.props.locMacContainerLoading)
+    // Location machine card will fetch issues?
+    this.props.fetchingLocationMachines(parseInt(this.props.location.id))
   }
 
   render() {
@@ -29,21 +35,24 @@ class LocationMachinesContainer extends Component {
   }
 }
 //
-// const mapStateToProps = (state, propsFromParent) => {
-//   // set current location which fetches location machines
-    
+const mapStateToProps = (state, propsFromParent) => {
+  // set current location which fetches location machines
+return {
+  locMacContainerLoading: state.locMacContainerLoading,
+  locationMachines: state.currentLocMachines
+}
 
-// };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     findMachineName: machine => {
-//       dispatch(findMachineName(machine));
-//     }
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchingLocationMachines: id => {
+      dispatch(fetchingLocationMachines(id));
+    }
+  };
+};
 
 export default connect(
-  null,
-  null
+  mapStateToProps,
+  mapDispatchToProps
 )(LocationMachinesContainer);
