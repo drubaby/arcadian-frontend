@@ -35,7 +35,6 @@ class Location extends Component {
         <Grid.Row>
           <LocationMachinesContainer
             location={this.props.currentLocation}
-            machines={this.props.currentLocation.location_machines}
           />
         </Grid.Row>
       </Grid>

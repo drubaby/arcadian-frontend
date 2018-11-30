@@ -16,9 +16,13 @@ class LocationMachinesContainer extends Component {
   }
 
   render() {
+    if (this.props.locMacContainerLoading){
+      return <div>Loading :) :) :) :) </div>
+    }
+
     return (
       <Card.Group itemsPerRow={3} stackable={true}>
-          {this.props.machines.map(loc_machine => {
+          {this.props.locationMachines.map(loc_machine => {
             return (
               <LocationMachineCard
                 key={loc_machine.id}
