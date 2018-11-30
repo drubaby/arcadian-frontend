@@ -73,6 +73,11 @@ function showLocMacs(machines) {
   return { type: "SHOW_LOC_MACS", machines };
 }
 
+function selectLocationMachine(machine){
+  return { type: "SELECT_LOC_MAC", machine}
+}
+
+
 // function fetchAllMachines() {
 //   return dispatch => {
 //     fetch(MACHINES_URL)
@@ -125,6 +130,7 @@ export {
   //LOCATION MACHINES
   fetchingLocationMachines,
   loadingLocationMachines,
+  selectLocationMachine,
   // fetchAllMachines,
   // fetchedMachines,
   // findMachineName,

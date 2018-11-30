@@ -152,6 +152,15 @@ const currentLocMacReducer = (oldState = [], action) => {
   }
 }
 
+const selectedLocMacReducer = (oldState = [], action) => {
+  switch (action.type){
+    case "SELECT_LOC_MAC":
+    return action.machine
+    default:
+    return oldState
+  }
+}
+
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
   allLocationsLoading: loadingReducer,
@@ -159,6 +168,7 @@ const rootReducer = combineReducers({
   locMacContainerLoading: locMacContainerReducer,
   currentLocation: currentLocationReducer,
   currentLocMachines: currentLocMacReducer,
+  selectedLocMac: selectedLocMacReducer,
   // allMachines: machineReducer,
   issue: issueReducer
 });

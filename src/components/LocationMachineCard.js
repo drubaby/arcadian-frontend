@@ -3,6 +3,7 @@ import { Card, Button, Modal, Header } from "semantic-ui-react";
 import MachineIssue from "./MachineIssue";
 import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
+import { selectLocationMachine } from "../redux/actions/locationActions";
 
 // rendered by LocationMachinesContainer
 class LocationMachineCard extends Component {
@@ -18,7 +19,18 @@ class LocationMachineCard extends Component {
           {this.props.is_working ? "Working" : "Out of Order"}
         </Card.Content>
         <Card.Content extra>
-          <Modal trigger={<Button basic>Manage Machine</Button>}>
+          <Modal
+            trigger={
+              <Button
+                basic
+                onClick={() =>
+                  this.props.selectLocationMachine(this.props.locMacObj)
+                }
+              >
+                Manage Machine
+              </Button>
+            }
+          >
             <Modal.Header>
               {this.props.machine_info.name}
               <Button floated="right">Mark Broken</Button>
@@ -35,7 +47,6 @@ class LocationMachineCard extends Component {
                   : this.props.machine_issues.map(issue => {
                       return <MachineIssue key={issue.id} issueObj={issue} />;
                     })}
-
               </Modal.Description>
               <Modal.Description>
                 <IssueForm locMacId={this.props.locMacId} />
@@ -51,12 +62,18 @@ class LocationMachineCard extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     newIssue: state.issue
-  }
-  debugger
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    selectLocationMachine: id => {
+      dispatch(selectLocationMachine(id));
+    }
+  };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(LocationMachineCard);
