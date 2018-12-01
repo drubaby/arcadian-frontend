@@ -77,8 +77,8 @@ function selectLocationMachine(machine) {
 }
 
 function toggleMachineWorking(machine) {
-  // return { type: "TOGGLE_WORKING", machine}
-  // debugger;
+  console.log("dispatching machine obj: ", machine);
+  // sends updated MachineObj as patch request to DB
   return dispatch => {
     fetch(LOC_MAC_URL + `/${machine.id}`, {
       method: "PATCH",
@@ -88,8 +88,22 @@ function toggleMachineWorking(machine) {
       },
       body: JSON.stringify(machine)
     })
+      // Response obj is updated Obj in DB, sends to custom route to find Loc
       .then(res => res.json())
-      .then(obj => console.log(obj));
+      .then(obj => {
+        fetch("http://localhost:3000/update_location_by_machine", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(obj)
+        })
+          .then(res => res.json())
+          .then(locationObj => {
+            dispatch(showLocation(locationObj));
+          });
+      });
   };
 }
 // patch to DB
@@ -135,7 +149,7 @@ function resolveIssue(payload) {
   return dispatch => {
     dispatch(markResolved(payload));
     fetch(POST_ISSUE_URL + `/${payload.id}`, {
-      method: "DELETE",
+      method: "DELETE"
     })
       .then(res => res.json())
       .then(issueObj => {
