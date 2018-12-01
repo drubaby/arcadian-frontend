@@ -6,7 +6,7 @@ import { selectLocationMachine } from "../redux/actions/locationActions";
 
 // rendered by LocationMachinesContainer
 class LocationMachineCard extends Component {
-
+// renders MachineModal
   render() {
     let { machine, machine_issues} = this.props.locMacObj;
 

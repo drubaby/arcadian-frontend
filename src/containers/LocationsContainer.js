@@ -8,9 +8,9 @@ import {
   showLocation
 } from "../redux/actions/locationActions";
 
+// Rendered by??
 class LocationsContainer extends React.Component {
   componentDidMount() {
-    // console.log("Locations Container mounted");
   }
 
   render() {

@@ -7,8 +7,10 @@ import { fetchingLocation } from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {
-    console.log("Location loading status: ", this.props.locationLoading);
+    // fetch location info from DB
+    // dispatches loadingLocaton and then showLocation in Actions
     this.props.fetchingLocation(parseInt(this.props.locationId));
+    //updates Store => currentLocation: {locationObj}
   }
 
   render() {

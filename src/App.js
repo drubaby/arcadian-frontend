@@ -36,6 +36,10 @@ class App extends Component {
   }
 }
 
+
+
+
+
 //define router on this level
 //display sidebar with routes underneath
 // ex <route path = "/location/:id" render = <Component>

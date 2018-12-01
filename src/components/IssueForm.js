@@ -21,6 +21,8 @@ class IssueForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.postIssue(this.state)
+    // debugger
+    event.currentTarget.reset()
     // this.props.updateLocationByIssue()
 
   };
