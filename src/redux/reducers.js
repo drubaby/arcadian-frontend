@@ -64,6 +64,7 @@ const allLocationsReducer = (oldState = [], action) => {
   }
 };
 
+
 const issueReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ISSUE":
@@ -82,17 +83,17 @@ const issueReducer = (state = [], action) => {
   }
 };
 
-// const machineReducer = (state = [], action) => {
-//   switch (action.type) {
-//     case "FETCH_ALL_MACHINES":
-//       console.log("fetching all machines");
-//       return action.machines;
-//     case "FETCHED_MACHINES":
-//       return action.machines;
-//     default:
-//       return state;
-//   }
-// };
+const machineReducer = (state = [], action) => {
+  switch (action.type) {
+    case "FETCH_ALL_MACHINES":
+      console.log("fetching all machines");
+      return action.machines;
+    case "FETCHED_MACHINES":
+      return action.machines;
+    default:
+      return state;
+  }
+};
 
 // handles conditional rendering for displaying locations
 const loadingReducer = (oldState = false, action) => {
@@ -157,6 +158,16 @@ const selectedLocMacReducer = (oldState = [], action) => {
   }
 };
 
+const searchTextReducer = (state = '', action) => {
+  switch (action.type) {
+    case 'CHANGE_SEARCH_TEXT':
+    // debugger
+      return action.input
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
   allLocationsLoading: loadingReducer,
@@ -164,7 +175,8 @@ const rootReducer = combineReducers({
   locMacContainerLoading: locMacContainerReducer,
   currentLocation: currentLocationReducer,
   // selectedLocationMachine: selectedLocMacReducer,
-  // allMachines: machineReducer,
-  issue: issueReducer
+  allMachines: machineReducer,
+  issue: issueReducer,
+  searchText: searchTextReducer
 });
 export default rootReducer;

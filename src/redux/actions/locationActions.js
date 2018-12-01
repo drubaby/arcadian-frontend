@@ -1,9 +1,23 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
 const LOC_MAC_URL = "http://localhost:3000/location_machines";
-// const MACHINES_URL = "http://localhost:3000/machines";
+const MACHINES_URL = "http://localhost:3000/machines";
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/";
 const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/";
+
+function fetchAllMachines(machines) {
+  return dispatch => {
+    fetch(MACHINES_URL)
+      .then(res => res.json())
+      .then(machines => {
+        dispatch(fetchedMachines(machines));
+      });
+  };
+}
+
+function fetchedMachines(machines) {
+  return { type: "FETCHED_MACHINES", machines };
+}
 
 /////////// ALL LOCATIONS
 function loadingLocations() {
@@ -175,14 +189,9 @@ function markResolved(issueObj) {
   return { type: "MARK_RESOLVED", issueObj };
 }
 
-// function updateLocationByIssue(issue) {
-//   return { type: "UPDATE_LOCATION_BY_ISSUE", issue };
-// }
-
-// function fetchedIssue(issue) {
-//   return { type: "FETCHED_ISSUE", issue };
-// }
-//POST requires location_machine_id: nil, description: nil
+function changeSearchText(input) {
+  return { type: "CHANGE_SEARCH_TEXT", input };
+}
 
 export {
   //ALL LOCATIONS
@@ -199,7 +208,12 @@ export {
   loadingLocationMachines,
   selectLocationMachine,
   toggleMachineWorking,
+  // MACHINE ISSUES
   addIssue,
   postIssue,
-  resolveIssue
+  resolveIssue,
+  //ALL MACHINES
+  fetchAllMachines,
+  //SEARCH FUNCTION
+  changeSearchText
 };

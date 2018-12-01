@@ -3,13 +3,15 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationMachinesContainer from "./LocationMachinesContainer";
-import { fetchingLocation } from "../redux/actions/locationActions";
+import MachineSearch from '../components/MachineSearch'
+import { fetchingLocation, fetchAllMachines } from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {
     // fetch location info from DB
     // dispatches loadingLocaton and then showLocation in Actions
     this.props.fetchingLocation(parseInt(this.props.locationId));
+    this.props.fetchAllMachines()
     //updates Store => currentLocation: {locationObj}
   }
 
@@ -26,6 +28,7 @@ class Location extends Component {
             location={this.props.currentLocation}
             machines={this.props.currentLocation.location_machines}
           />
+          <MachineSearch />
         </Grid.Row>
         <Grid.Row>
           <LocationMachinesContainer location={this.props.currentLocation} />
@@ -41,14 +44,18 @@ const mapStateToProps = state => {
     //   loc => loc.id === parseInt(propsFromParent.locationId)
     // ),
     currentLocation: state.currentLocation,
-    locationLoading: state.locationLoading
+    locationLoading: state.locationLoading,
+    allMachines: state.allMachines
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchingLocation: placeId => {
-      dispatch(fetchingLocation(placeId));
+      dispatch(fetchingLocation(placeId))
+    },
+    fetchAllMachines: () => {
+      dispatch(fetchAllMachines())
     }
   };
 };
