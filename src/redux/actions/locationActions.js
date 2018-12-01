@@ -126,7 +126,6 @@ function postIssue(payload) {
           .then(res => res.json())
           .then(locationObj => {
             dispatch(showLocation(locationObj));
-            //may need to return location_machines for this location instead
           });
       });
   };
@@ -135,9 +134,8 @@ function postIssue(payload) {
 function resolveIssue(payload) {
   return dispatch => {
     dispatch(markResolved(payload));
-    // debugger
     fetch(POST_ISSUE_URL + `/${payload.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     })
       .then(res => res.json())
       .then(issueObj => {

@@ -21,9 +21,8 @@ class IssueForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.postIssue(this.state)
-    // debugger
+    // reset form after dispatch
     event.currentTarget.reset()
-    // this.props.updateLocationByIssue()
 
   };
 
@@ -52,9 +51,6 @@ const mapDispatchToProps = dispatch => {
   // Payload looks like {issueDescription: "some text", LocMacId: #"}
   return {
     postIssue: formData => dispatch(postIssue(formData)),
-    // fetchLocation: locationId => {
-    //   dispatch(fetchingLocation)
-    // }
   };
 };
 
