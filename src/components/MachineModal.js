@@ -13,7 +13,7 @@ class MachineModal extends Component {
   // }
 
   render() {
-    console.log(this.props); // logs 4 different machineObjs
+    // console.log(this.props); // logs 4 different machineObjs
     if (this.props) {
       let { machine } = this.props.machineObj;
       selectLocationMachine(this.props.id)

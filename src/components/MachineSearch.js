@@ -1,26 +1,69 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input } from "semantic-ui-react";
+import { Search, Grid, Segment, Header, Label } from "semantic-ui-react";
 import { changeSearchText } from "../redux/actions/locationActions";
 // import { mapSearchTextToProps } from '../../redux/mapStateToProps'
 
-const MachineSearch = props => (
-  <div className="ui container">
-    <div className="ui very large fluid input">
-      <Input
-        type="text"
-        placeholder="Find Pinball Machine"
-        value={props.searchText}
-        onChange={e => props.changeSearchText(e.target.value)}
-      />
-    </div>
-    <div className="ui clearing section divider" />
-  </div>
-);
+class MachineSearch extends Component {
+  componentWillMount() {
+    this.resetComponent();
+  }
+  resetComponent = () =>
+    this.setState({ isLoading: false, results: [], value: "" });
+
+  //if successfully selected will set search bar value to machine
+  // handleResultSelect = (e, { result }) =>
+  //   this.setState({ value: result.name });
+
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.resetComponent()
+
+
+      this.setState({
+        isLoading: false
+      })
+    }, 300)
+  }
+// if the search results are too slow/anoying just use an input and a pop-up
+
+  render() {
+
+    const resultRenderer = ({ name, id }) => (
+      <Label key={id} content={name} />
+    )
+
+
+    return (
+      <Grid className="ui container">
+        <Grid.Column className="ui very large fluid input">
+          <Search
+            type="text"
+            placeholder="Find Pinball Machine"
+            value={this.props.searchText}
+            onSearchChange={e => this.props.changeSearchText(e.target.value)}
+            minCharacters={2}
+            {...this.props}
+            resultRenderer={resultRenderer}
+          />
+        </Grid.Column>
+      </Grid>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
-    searchText: state.searchText
+    // allMachines: state.allMachines,
+    // searchText: state.searchText,
+    // works! returns array of machines that match search text
+    results: state.allMachines.filter(function(machine) {
+      return machine.name
+        .toLowerCase()
+        .includes(state.searchText.toLowerCase());
+    })
   };
 };
 
