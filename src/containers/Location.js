@@ -3,7 +3,7 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationMachinesContainer from "./LocationMachinesContainer";
-import MachineSearch from '../components/MachineSearch'
+import SearchBar from '../components/SearchBar'
 import { fetchingLocation, fetchAllMachines } from "../redux/actions/locationActions";
 
 class Location extends Component {
@@ -21,6 +21,10 @@ class Location extends Component {
       return <div>Loading...</div>;
     }
 
+    // too annyoing:
+    // <MachineSearch />
+
+
     return (
       <Grid>
         <Grid.Row>
@@ -28,7 +32,7 @@ class Location extends Component {
             location={this.props.currentLocation}
             machines={this.props.currentLocation.location_machines}
           />
-          <MachineSearch />
+          <SearchBar />
         </Grid.Row>
         <Grid.Row>
           <LocationMachinesContainer location={this.props.currentLocation} />

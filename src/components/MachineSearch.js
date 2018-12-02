@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Search, Grid, Segment, Header, Label } from "semantic-ui-react";
+import { Search, Grid, Segment, Header, Label, Item } from "semantic-ui-react";
 import { changeSearchText } from "../redux/actions/locationActions";
 // import { mapSearchTextToProps } from '../../redux/mapStateToProps'
 
@@ -9,7 +9,7 @@ class MachineSearch extends Component {
     this.resetComponent();
   }
   resetComponent = () =>
-    this.setState({ isLoading: false, results: [], value: "" });
+    this.setState({ isLoading: false, results: [], value: "" , selectedMachine: []});
 
   //if successfully selected will set search bar value to machine
   // handleResultSelect = (e, { result }) =>
@@ -20,21 +20,21 @@ class MachineSearch extends Component {
 
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent()
-
-
       this.setState({
         isLoading: false
       })
     }, 300)
   }
+
+  handleResultSelect = (e, { result }) => this.setState({ selectedMachine: result })
+
 // if the search results are too slow/anoying just use an input and a pop-up
 
   render() {
 
     const resultRenderer = ({ name, id }) => (
-      <Label key={id} content={name} />
+      <Item key={id} content={name} />
     )
-
 
     return (
       <Grid className="ui container">
@@ -43,6 +43,7 @@ class MachineSearch extends Component {
             type="text"
             placeholder="Find Pinball Machine"
             value={this.props.searchText}
+            onResultSelect={this.handleResultSelect}
             onSearchChange={e => this.props.changeSearchText(e.target.value)}
             minCharacters={2}
             {...this.props}

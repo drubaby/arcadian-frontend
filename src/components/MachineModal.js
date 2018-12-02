@@ -5,13 +5,8 @@ import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
 import { selectLocationMachine, toggleMachineWorking } from "../redux/actions/locationActions";
 
-
+// rendered by LocMacCard
 class MachineModal extends Component {
-
-  // componentDidMount(){
-  //   selectLocationMachine(this.props.machineObj.id)
-  // }
-
   render() {
     // console.log(this.props); // logs 4 different machineObjs
     if (this.props) {

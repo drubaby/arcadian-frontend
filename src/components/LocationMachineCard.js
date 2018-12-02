@@ -11,7 +11,7 @@ class LocationMachineCard extends Component {
     let { machine, machine_issues} = this.props.locMacObj;
 
     return (
-      <Card>
+      <Card fluid>
         <Card.Content>
           <Card.Header>{machine.name}</Card.Header>
           <Card.Meta>({machine.manufacture_date})</Card.Meta>
