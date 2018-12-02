@@ -11,7 +11,7 @@ import {
   fetchingLocations,
   // loadingLocations,
   showLocation,
-  // fetchAllMachines
+  fetchAllMachines
 } from "./redux/actions/locationActions";
 
 class App extends Component {
@@ -20,6 +20,8 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
+    this.props.fetchAllMachines()
+
     //should fetchingLocation() move to sidebar?
   }
 
@@ -54,10 +56,10 @@ const mapDispatchToProps = dispatch => {
     showLocation: () => {
       dispatch(showLocation());
     }
-    // ,
-    // fetchAllMachines: () => {
-    //   dispatch(fetchAllMachines());
-    // }
+    ,
+    fetchAllMachines: () => {
+      dispatch(fetchAllMachines());
+    }
   };
 };
 

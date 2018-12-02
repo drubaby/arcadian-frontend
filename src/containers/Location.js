@@ -11,7 +11,7 @@ class Location extends Component {
     // fetch location info from DB
     // dispatches loadingLocaton and then showLocation in Actions
     this.props.fetchingLocation(parseInt(this.props.locationId));
-    this.props.fetchAllMachines()
+    // this.props.fetchAllMachines()
     //updates Store => currentLocation: {locationObj}
   }
 
@@ -44,8 +44,9 @@ const mapStateToProps = state => {
     //   loc => loc.id === parseInt(propsFromParent.locationId)
     // ),
     currentLocation: state.currentLocation,
-    locationLoading: state.locationLoading,
-    allMachines: state.allMachines
+    locationLoading: state.locationLoading
+    // ,
+    // allMachines: state.allMachines
   };
 };
 
@@ -53,10 +54,11 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchingLocation: placeId => {
       dispatch(fetchingLocation(placeId))
-    },
-    fetchAllMachines: () => {
-      dispatch(fetchAllMachines())
     }
+    // ,
+    // fetchAllMachines: () => {
+    //   dispatch(fetchAllMachines())
+    // }
   };
 };
 
