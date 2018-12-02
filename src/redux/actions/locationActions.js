@@ -94,6 +94,30 @@ function addLocationMachine(payload) {
   };
 }
 
+function removeLocationMachine(machineObj) {
+  return dispatch => {
+    const locationId = machineObj.location_id;
+    fetch(LOC_MAC_URL + `/${machineObj.id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(obj => {
+        fetch("http://localhost:3000/update_location_by_machine", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(obj)
+        })
+          .then(res => res.json())
+          .then(locationObj => {
+            dispatch(showLocation(locationObj));
+          });
+      });
+  };
+}
+
 ////////// LOCATION MACHINES
 function fetchingLocationMachines(id) {
   return dispatch => {
@@ -246,6 +270,7 @@ export {
   selectLocationMachine,
   toggleMachineWorking,
   addLocationMachine,
+  removeLocationMachine,
   // MACHINE ISSUES
   addIssue,
   postIssue,

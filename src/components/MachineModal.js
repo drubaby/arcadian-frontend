@@ -1,17 +1,25 @@
 import React, { Component } from "react";
-import { Button, Modal, Header } from "semantic-ui-react";
+import { Button, Modal, Header, Confirm } from "semantic-ui-react";
 import MachineIssue from "./MachineIssue";
 import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
-import { selectLocationMachine, toggleMachineWorking } from "../redux/actions/locationActions";
+import {
+  selectLocationMachine,
+  toggleMachineWorking,
+  removeLocationMachine
+} from "../redux/actions/locationActions";
 
 // rendered by LocMacCard
 class MachineModal extends Component {
+  state = { confirmOpen: false };
+
+  openConfirm = () => this.setState({ open: true });
+  closeConfirm = () => this.setState({ open: false });
   render() {
     // console.log(this.props); // logs 4 different machineObjs
     if (this.props) {
       let { machine } = this.props.machineObj;
-      selectLocationMachine(this.props.id)
+      selectLocationMachine(this.props.id);
 
       return (
         <Modal
@@ -28,13 +36,36 @@ class MachineModal extends Component {
           <Modal.Header>
             {machine.name}
             <Button
+              size="small"
+              negative
+              floated="right"
+              onClick={() => {
+                this.openConfirm();
+              }}
+            >
+              Remove Machine
+            </Button>
+            <Confirm
+              header="Remove Machine from Arcade"
+              content="This cannot be undone, are you quite certain?"
+              open={this.state.open}
+              cancelButton="Never mind"
+              onCancel={this.closeConfirm}
+              confirmButton="Make it so"
+              onConfirm={() => {
+                this.closeConfirm();
+                this.props.removeLocationMachine(this.props.machineObj);
+              }}
+            />
+            <Button
+              size="small"
               floated="right"
               onClick={() => {
                 this.props.toggleMachineWorking(this.props.machineObj);
               }}
             >
               {this.props.machineObj.is_working
-                ? "Mark Broken"
+                ? "Mark Out Of Order"
                 : "Mark Working"}
             </Button>
           </Modal.Header>
@@ -71,9 +102,11 @@ const mapDispatchToProps = dispatch => {
     },
     toggleMachineWorking: machineObj => {
       // debugger
-      machineObj.is_working = !machineObj.is_working
-      console.log(machineObj.machine.name, " working status now: ", machineObj.is_working)
+      machineObj.is_working = !machineObj.is_working;
       dispatch(toggleMachineWorking(machineObj));
+    },
+    removeLocationMachine: machineObj => {
+      dispatch(removeLocationMachine(machineObj));
     }
   };
 };
