@@ -77,14 +77,22 @@ function addLocationMachine(payload) {
       body: JSON.stringify(payload)
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(obj => {
+        fetch("http://localhost:3000/update_location_by_machine", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(obj)
+        })
+          .then(res => res.json())
+          .then(locationObj => {
+            dispatch(showLocation(locationObj));
+          });
+      });
   };
 }
-
-// /??
-// function makingNewLocationMachine{
-//   return {type: "MAKE_NEW_LOC_MAC" }
-// }
 
 ////////// LOCATION MACHINES
 function fetchingLocationMachines(id) {
