@@ -89,7 +89,6 @@ const machineReducer = (state = [], action) => {
       return action.machines;
     case "FETCHED_MACHINES":
       return action.machines;
-
     default:
       return state;
   }
@@ -167,14 +166,24 @@ const searchTextReducer = (state = "", action) => {
   }
 };
 
-// const searchResultsReducer = (state = [], action) => {
-//   switch (action.type) {
-//     case "CHANGE_SEARCH_TEXT":
-//       return action.input;
-//     default:
-//       return state;
-//   }
-// };
+const searchResultsReducer = (state = [], action) => {
+  switch (action.type) {
+    case "REFRESH_SEARCH_OPTIONS":
+      return action.machines;
+    case "CHANGE_SEARCH_TEXT":
+      // state does not refresh if you hit backspace.
+      return state.filter(function(machine) {
+        return machine.name.toLowerCase().includes(action.input.toLowerCase());
+      });
+    case "FETCHED_MACHINES":
+      return action.machines;
+    case "UPDATE_SEARCH_RESULTS":
+      debugger;
+      return action.results;
+    default:
+      return state;
+  }
+};
 
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
@@ -184,8 +193,8 @@ const rootReducer = combineReducers({
   currentLocation: currentLocationReducer,
   // selectedLocationMachine: selectedLocMacReducer,
   allMachines: machineReducer,
-  issue: issueReducer,
-  searchText: searchTextReducer
-  // searchResults: machineReducer
+  // issue: issueReducer,
+  searchText: searchTextReducer,
+  searchResults: searchResultsReducer
 });
 export default rootReducer;

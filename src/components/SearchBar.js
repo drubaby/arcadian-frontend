@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Search, Grid, Segment, Header, Label, Item, Input, Popup } from "semantic-ui-react";
-import { changeSearchText } from "../redux/actions/locationActions";
+import {
+  Search,
+  Grid,
+  Segment,
+  Header,
+  Label,
+  Item,
+  Input,
+  Popup
+} from "semantic-ui-react";
+import {
+  changeSearchText,
+  updateSearchResults,
+  refreshSearchOptions
+} from "../redux/actions/locationActions";
 
 class SearchBar extends Component {
   componentWillMount() {
@@ -14,6 +27,7 @@ class SearchBar extends Component {
       value: "",
       selectedMachine: []
     });
+
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
 
@@ -27,31 +41,30 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="ui container">
-        <div className="ui very large fluid input">
-          <Input
-            type="text"
-            placeholder="Search"
-            value={this.props.searchText}
-            onChange={e => this.props.changeSearchText(e.target.value)}
-          />
-        </div>
-        <div className="ui clearing section divider" />
-      </div>
+      <Input
+        type="text"
+        placeholder="Search"
+        value={this.props.searchText}
+        onChange={e => {
+          this.props.refreshSearchOptions(this.props.allMachines)
+          this.props.changeSearchText(e.target.value)
+        }}
+      />
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    // allMachines: state.allMachines,
+    allMachines: state.allMachines
+    // ,
     // searchText: state.searchText,
     // works! returns array of machines that match search text
-    results: state.allMachines.filter(function(machine) {
-      return machine.name
-        .toLowerCase()
-        .includes(state.searchText.toLowerCase());
-    })
+    // results: state.allMachines.filter(function(machine) {
+    //   return machine.name
+    //     .toLowerCase()
+    //     .includes(state.searchText.toLowerCase());
+    // })
   };
 };
 
@@ -59,7 +72,18 @@ const mapDispatchToProps = dispatch => {
   return {
     changeSearchText: input => {
       dispatch(changeSearchText(input));
+    },
+    refreshSearchOptions: machines => {
+      dispatch(refreshSearchOptions(machines))
     }
+    // ,
+    // searchResults: input => {
+    //   const results = this.props.allMachines.filter(function(machine) {
+    //     return machine.name.toLowerCase().includes(input).toLowercase()
+    //   })
+    //   debugger
+    //   dispatch(updateSearchResults(results))
+    // }
   };
 };
 

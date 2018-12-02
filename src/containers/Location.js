@@ -32,7 +32,6 @@ class Location extends Component {
             location={this.props.currentLocation}
             machines={this.props.currentLocation.location_machines}
           />
-          <SearchBar />
         </Grid.Row>
         <Grid.Row>
           <LocationMachinesContainer location={this.props.currentLocation} />

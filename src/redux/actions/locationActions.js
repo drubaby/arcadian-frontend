@@ -65,6 +65,27 @@ function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
 
+function addLocationMachine(payload) {
+  return dispatch => {
+    // dispatch(makingNewLocationMachine())
+    fetch(LOC_MAC_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+}
+
+// /??
+// function makingNewLocationMachine{
+//   return {type: "MAKE_NEW_LOC_MAC" }
+// }
+
 ////////// LOCATION MACHINES
 function fetchingLocationMachines(id) {
   return dispatch => {
@@ -193,6 +214,14 @@ function changeSearchText(input) {
   return { type: "CHANGE_SEARCH_TEXT", input };
 }
 
+function updateSearchResults(results) {
+  return { type: "UPDATE_SEARCH_RESULTS", results };
+}
+
+function refreshSearchOptions(machines) {
+  return { type: "REFRESH_SEARCH_OPTIONS", machines };
+}
+
 export {
   //ALL LOCATIONS
   fetchedLocations,
@@ -208,6 +237,7 @@ export {
   loadingLocationMachines,
   selectLocationMachine,
   toggleMachineWorking,
+  addLocationMachine,
   // MACHINE ISSUES
   addIssue,
   postIssue,
@@ -215,5 +245,7 @@ export {
   //ALL MACHINES
   fetchAllMachines,
   //SEARCH FUNCTION
-  changeSearchText
+  changeSearchText,
+  updateSearchResults,
+  refreshSearchOptions
 };

@@ -1,12 +1,22 @@
 import React, { Component } from "react";
-import { Button, Modal, Header } from "semantic-ui-react";
+import { Button, Modal, Header, Item, List } from "semantic-ui-react";
 import { connect } from "react-redux";
+import SearchBar from "./SearchBar";
+import { addLocationMachine } from "../redux/actions/locationActions";
 
 // rendered on LocationCard
 class SearchModal extends Component {
+  state = { open: false };
+  open = () => this.setState({ open: true });
+  close = () => this.setState({ open: false });
+
+  // onClick={() => {
+  //   this.props.selectLocationMachine(this.props.machineObj);
+  // }}
 
   render() {
-    let {location} = this.props
+    let { location, searchResults } = this.props;
+
     return (
       <Modal
         trigger={
@@ -15,13 +25,32 @@ class SearchModal extends Component {
           </Button>
         }
       >
-        <Modal.Header>{location.name}</Modal.Header>
+        <Modal.Header>Add Machine to {location.name}</Modal.Header>
 
         <Modal.Content image>
           <Modal.Description>
             <Header>SEARCH RESULTS</Header>
+            <List selection divided relaxed>
+              {searchResults.length < 1000
+                ? searchResults.map(machine => {
+                    return (
+                      <List.Item
+                        key={machine.id}
+                        onClick={() => {
+                          let payload = {location_id: location.id, machine_id: machine.id}
+                          this.props.addLocationMachine(payload)
+                        }}
+                      >
+                        {machine.name}
+                      </List.Item>
+                    );
+                  })
+                : null}
+            </List>
           </Modal.Description>
-          <Modal.Description>Search Input here</Modal.Description>
+          <Modal.Description>
+            <SearchBar />
+          </Modal.Description>
         </Modal.Content>
       </Modal>
     );
@@ -30,12 +59,21 @@ class SearchModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    location: state.currentLocation
-  }
-}
+    location: state.currentLocation,
+    searchResults: state.searchResults
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    addLocationMachine: payload => {
+
+      dispatch(addLocationMachine(payload));
+    }
+  };
+};
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(SearchModal);
