@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SearchModal from "./SearchModal";
-import { Card, Icon, Image, Button } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 import location_pic from "../img/location.svg";
 
 class LocationCard extends Component {

@@ -96,7 +96,6 @@ function addLocationMachine(payload) {
 
 function removeLocationMachine(machineObj) {
   return dispatch => {
-    const locationId = machineObj.location_id;
     fetch(LOC_MAC_URL + `/${machineObj.id}`, {
       method: "DELETE"
     })

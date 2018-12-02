@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  Search,
-  Grid,
-  Segment,
-  Header,
-  Label,
-  Item,
-  Input,
-  Popup
-} from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import {
   changeSearchText,
-  updateSearchResults,
   refreshSearchOptions
 } from "../redux/actions/locationActions";
 
@@ -46,8 +36,8 @@ class SearchBar extends Component {
         placeholder="Search"
         value={this.props.searchText}
         onChange={e => {
-          this.props.refreshSearchOptions(this.props.allMachines)
-          this.props.changeSearchText(e.target.value)
+          this.props.refreshSearchOptions(this.props.allMachines);
+          this.props.changeSearchText(e.target.value);
         }}
       />
     );
@@ -74,7 +64,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(changeSearchText(input));
     },
     refreshSearchOptions: machines => {
-      dispatch(refreshSearchOptions(machines))
+      dispatch(refreshSearchOptions(machines));
     }
     // ,
     // searchResults: input => {

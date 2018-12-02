@@ -3,8 +3,7 @@ import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationMachinesContainer from "./LocationMachinesContainer";
-import SearchBar from '../components/SearchBar'
-import { fetchingLocation, fetchAllMachines } from "../redux/actions/locationActions";
+import { fetchingLocation} from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {

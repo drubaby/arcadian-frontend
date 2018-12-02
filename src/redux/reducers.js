@@ -63,24 +63,24 @@ const allLocationsReducer = (oldState = [], action) => {
       return oldState;
   }
 };
-
-const issueReducer = (state = [], action) => {
-  switch (action.type) {
-    case "ADD_ISSUE":
-      console.log("Adding issue: ", action.payload);
-      return action.payload;
-    case "POST_ISSUE":
-      console.log("[in issueReducer] dispatch payload: ", action.payload);
-      return action.payload;
-    case "MARK_RESOLVED":
-      action.issueObj.resolved = true;
-      // debugger
-      return action;
-
-    default:
-      return state;
-  }
-};
+//
+// const issueReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case "ADD_ISSUE":
+//       console.log("Adding issue: ", action.payload);
+//       return action.payload;
+//     case "POST_ISSUE":
+//       console.log("[in issueReducer] dispatch payload: ", action.payload);
+//       return action.payload;
+//     case "MARK_RESOLVED":
+//       action.issueObj.resolved = true;
+//       // debugger
+//       return action;
+//
+//     default:
+//       return state;
+//   }
+// };
 
 const machineReducer = (state = [], action) => {
   switch (action.type) {
@@ -111,7 +111,6 @@ const locationLoadingReducer = (oldState = true, action) => {
     case "LOADING_LOCATION":
       return true;
     case "SHOW_LOCATION":
-      console.log("[loading reducer] Location has been loaded.");
       return false;
     default:
       return oldState;
@@ -146,16 +145,16 @@ const locMacContainerReducer = (oldState = true, action) => {
 };
 
 //
-const selectedLocMacReducer = (oldState = [], action) => {
-  switch (action.type) {
-    case "SELECT_LOC_MAC":
-      debugger;
-      return action.machine;
-
-    default:
-      return oldState;
-  }
-};
+// const selectedLocMacReducer = (oldState = [], action) => {
+//   switch (action.type) {
+//     case "SELECT_LOC_MAC":
+//       debugger;
+//       return action.machine;
+//
+//     default:
+//       return oldState;
+//   }
+// };
 
 const searchTextReducer = (state = "", action) => {
   switch (action.type) {

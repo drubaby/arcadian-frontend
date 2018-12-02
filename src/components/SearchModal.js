@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, Header, Item, List } from "semantic-ui-react";
+import { Button, Modal, Header, List } from "semantic-ui-react";
 import { connect } from "react-redux";
 import SearchBar from "./SearchBar";
 import { addLocationMachine } from "../redux/actions/locationActions";
@@ -10,9 +10,7 @@ class SearchModal extends Component {
   open = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
 
-  // onClick={() => {
-  //   this.props.selectLocationMachine(this.props.machineObj);
-  // }}
+  // Modal does not dismiss on click of item
 
   render() {
     let { location, searchResults } = this.props;
@@ -37,8 +35,12 @@ class SearchModal extends Component {
                       <List.Item
                         key={machine.id}
                         onClick={() => {
-                          let payload = {location_id: location.id, machine_id: machine.id}
-                          this.props.addLocationMachine(payload)
+                          this.close();
+                          let payload = {
+                            location_id: location.id,
+                            machine_id: machine.id
+                          };
+                          this.props.addLocationMachine(payload);
                         }}
                       >
                         {machine.name}
@@ -67,7 +69,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addLocationMachine: payload => {
-
       dispatch(addLocationMachine(payload));
     }
   };
