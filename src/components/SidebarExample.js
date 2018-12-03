@@ -1,9 +1,9 @@
 import React from "react";
-import { Header, Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
+import { Icon, Menu, Sidebar } from "semantic-ui-react";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Location from "../containers/Location";
-import About from "./About";
+// import Location from "../containers/Location";
+// import About from "./About";
 import LocationsContainer from "../containers/LocationsContainer";
 import Login from "./Login";
 
@@ -11,7 +11,7 @@ import Login from "./Login";
 const SidebarExample = () => (
   <Sidebar
     as={Menu}
-    animation="push"
+    // animation="push"
     icon="labeled"
     inverted
     vertical

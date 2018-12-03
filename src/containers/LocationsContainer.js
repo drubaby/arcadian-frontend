@@ -8,7 +8,7 @@ import {
   showLocation
 } from "../redux/actions/locationActions";
 
-// Rendered by??
+// Rendered by App
 class LocationsContainer extends React.Component {
   componentDidMount() {
   }

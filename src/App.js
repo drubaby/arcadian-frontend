@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Header, Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Menu, Segment, Header, Sidebar } from "semantic-ui-react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SidebarExample from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
@@ -26,30 +26,29 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-      <Grid columns={2}>
-        <Grid.Column width={3}>
-          <SidebarExample className="Sidebar" id="sidebarthing" />
-        </Grid.Column>
-        <Grid.Column width={13}>
-          <Header>Arcadian</Header>
+      <Router>
+        <Grid columns={2}>
+          <Grid.Column width={3}>
+            <SidebarExample className="Sidebar" id="sidebarthing" />
+          </Grid.Column>
+          <Grid.Column width={13}>
+            <Header align="center">Arcadian</Header>
 
-          <Route exact path="/about" component={() => <About />} />
-          <Route path="/login" component={Login} />
-          <Route
-            exact
-            path="/location/:id"
-            render={data => <Location locationId={data.match.params.id} />}
-          />
-          <Route
-            exact
-            path="/locations"
-            component={() => <LocationsContainer />}
-          />
-
-        </Grid.Column>
-      </Grid>
-      </Switch>
+            <Route exact path="/about" component={() => <About />} />
+            <Route path="/login" component={Login} />
+            <Route
+              exact
+              path="/location/:id"
+              render={data => <Location locationId={data.match.params.id} />}
+            />
+            <Route
+              exact
+              path="/locations"
+              component={() => <LocationsContainer />}
+            />
+          </Grid.Column>
+        </Grid>
+      </Router>
     );
   }
 }

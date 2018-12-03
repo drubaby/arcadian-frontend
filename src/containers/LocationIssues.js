@@ -11,7 +11,7 @@ class LocationIssues extends Component {
     return (
       <Segment>
         <List divided>
-          <Header>Pending repairs</Header>
+          <Header align="center">{this.props.locationIssues.length === 0 ? "No Repairs Needed" : "Pending Repairs"}</Header>
           {this.props.locationIssues.map(issue => {
             return (
               <List.Item key={issue.id}>
