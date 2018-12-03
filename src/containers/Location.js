@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
+import LocationIssues from "./LocationIssues";
 import LocationMachinesContainer from "./LocationMachinesContainer";
-import { fetchingLocation} from "../redux/actions/locationActions";
+import { fetchingLocation } from "../redux/actions/locationActions";
 
 class Location extends Component {
   componentDidMount() {
@@ -22,11 +23,16 @@ class Location extends Component {
 
     return (
       <Grid>
-        <Grid.Row>
-          <LocationCard
-            location={this.props.currentLocation}
-            machines={this.props.currentLocation.location_machines}
-          />
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            <LocationCard
+              location={this.props.currentLocation}
+              machines={this.props.currentLocation.location_machines}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <LocationIssues />
+          </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <LocationMachinesContainer location={this.props.currentLocation} />
@@ -51,7 +57,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchingLocation: placeId => {
-      dispatch(fetchingLocation(placeId))
+      dispatch(fetchingLocation(placeId));
     }
     // ,
     // fetchAllMachines: () => {

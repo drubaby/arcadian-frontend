@@ -33,8 +33,9 @@ class App extends Component {
         </Grid.Column>
         <Grid.Column width={13}>
           <Header>Arcadian</Header>
+
           <Route exact path="/about" component={() => <About />} />
-          <Route exact path="/login" component={() => <Login />} />
+          <Route path="/login" component={Login} />
           <Route
             exact
             path="/location/:id"
@@ -45,6 +46,7 @@ class App extends Component {
             path="/locations"
             component={() => <LocationsContainer />}
           />
+
         </Grid.Column>
       </Grid>
       </Switch>

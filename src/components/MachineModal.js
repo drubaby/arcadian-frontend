@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, Header, Confirm } from "semantic-ui-react";
+import { Button, Modal, Header, Confirm, Item } from "semantic-ui-react";
 import MachineIssue from "./MachineIssue";
 import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
@@ -77,11 +77,14 @@ class MachineModal extends Component {
                   ? "No known issues"
                   : "Known Issues"}
               </Header>
+              <Item.Group divided relaxed>
               {this.props.machineObj.machine_issues.length === 0
                 ? null
-                : this.props.machineObj.machine_issues.map(issue => {
+                :  this.props.machineObj.machine_issues.map(issue => {
                     return <MachineIssue key={issue.id} issueObj={issue} />;
-                  })}
+                  })
+                }
+                </Item.Group>
             </Modal.Description>
             <Modal.Description>
               <IssueForm locMacId={this.props.machineObj.id} />

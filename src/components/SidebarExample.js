@@ -22,11 +22,12 @@ const SidebarExample = () => (
       <Icon name="home" />
       About
     </Menu.Item>
-    <Menu.Item as={NavLink} to="/login">
+    <Menu.Item as={Link} to="/login">
       <Icon name="user" />
       Login
     </Menu.Item>
-    <Menu.Item as={NavLink} to="/locations">
+    <Menu.Item
+    as={NavLink} to="/locations">
       <Icon name="building" />
       Locations
     </Menu.Item>
