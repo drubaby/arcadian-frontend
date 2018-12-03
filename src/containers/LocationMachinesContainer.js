@@ -6,20 +6,23 @@ import LocationMachineCard from "../components/LocationMachineCard";
 // rendered by Location
 class LocationMachinesContainer extends Component {
 
+
+
   render() {
     return (
       <Container>
-      <Card.Group itemsPerRow={3} stackable={true}>
-        {this.props.locationMachines.map(loc_machine => {
-          return (
-            <LocationMachineCard
-              key={loc_machine.id}
-              locMacObj={loc_machine}
-              is_working={loc_machine.is_working}
-            />
-          );
-        })}
-      </Card.Group>
+        <Card.Group itemsPerRow={3} stackable={true}>
+          {this.props.locationMachines.map(loc_machine => {
+            console.log(loc_machine);
+            return (
+              <LocationMachineCard
+                key={loc_machine.id}
+                locMacObj={loc_machine}
+                is_working={loc_machine.is_working}
+              />
+            );
+          })}
+        </Card.Group>
       </Container>
     );
   }
@@ -27,10 +30,10 @@ class LocationMachinesContainer extends Component {
 //
 const mapStateToProps = (state, propsFromParent) => {
   // set current location which fetches location machines
-  return {
-    // locMacContainerLoading: state.locMacContainerLoading,
-    locationMachines: state.currentLocation.location_machines
-  };
+  let orderedMachines = state.currentLocation.location_machines.sort((a, b) =>
+    a.updated_at < b.updated_at ? 1 : b.updated_at < a.updated_at ? -1 : 0
+  );
+  return { locationMachines: orderedMachines };
 };
 
 // const mapDispatchToProps = dispatch => {

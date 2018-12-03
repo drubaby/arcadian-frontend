@@ -11,6 +11,7 @@ class SearchModal extends Component {
   close = () => this.setState({ open: false });
 
   // Modal does not dismiss on click of item
+  // state not currently wired to component
 
   render() {
     let { location, searchResults } = this.props;
