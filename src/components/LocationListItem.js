@@ -9,7 +9,7 @@ import { showLocation } from '../redux/actions/locationActions'
 class LocationListItem extends Component {
   render() {
     return (
-      <Item className="item" location={this.props.location} >
+      <Item className="item locationCard" location={this.props.location} >
         <Link to={`/location/${this.props.location.id}`}>
           <Item.Header>{this.props.location.name}</Item.Header>
           <Item.Description>{this.props.location.street}</Item.Description>

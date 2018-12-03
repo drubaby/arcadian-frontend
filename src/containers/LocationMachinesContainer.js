@@ -13,7 +13,6 @@ class LocationMachinesContainer extends Component {
       <Container>
         <Card.Group itemsPerRow={3} stackable={true}>
           {this.props.locationMachines.map(loc_machine => {
-            console.log(loc_machine);
             return (
               <LocationMachineCard
                 key={loc_machine.id}

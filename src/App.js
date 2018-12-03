@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-// import LocationsContainer from "./containers/LocationsContainer";
+import { Header, Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import SidebarExample from "./components/SidebarExample.js";
-// import Location from "./containers/Location";
 import { connect } from "react-redux";
 import "./App.css";
+import Location from "./containers/Location";
 import About from "./components/About";
-import { Container } from "semantic-ui-react";
+import LocationsContainer from "./containers/LocationsContainer";
+import Login from "./components/Login";
+import { Container, Grid } from "semantic-ui-react";
 import {
   fetchingLocations,
-  // loadingLocations,
   showLocation,
   fetchAllMachines
 } from "./redux/actions/locationActions";
@@ -20,27 +21,36 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
-    this.props.fetchAllMachines()
-
-    //should fetchingLocation() move to sidebar?
+    this.props.fetchAllMachines();
   }
 
   render() {
     return (
-      <Router>
-        <Container className="App">
-          <SidebarExample />
-
-          <Route path="/" exact render={About} />
-        </Container>
-      </Router>
+      <Switch>
+      <Grid columns={2}>
+        <Grid.Column width={3}>
+          <SidebarExample className="Sidebar" id="sidebarthing" />
+        </Grid.Column>
+        <Grid.Column width={13}>
+          <Header>Arcadian</Header>
+          <Route exact path="/about" component={() => <About />} />
+          <Route exact path="/login" component={() => <Login />} />
+          <Route
+            exact
+            path="/location/:id"
+            render={data => <Location locationId={data.match.params.id} />}
+          />
+          <Route
+            exact
+            path="/locations"
+            component={() => <LocationsContainer />}
+          />
+        </Grid.Column>
+      </Grid>
+      </Switch>
     );
   }
 }
-
-
-
-
 
 //define router on this level
 //display sidebar with routes underneath
@@ -55,8 +65,7 @@ const mapDispatchToProps = dispatch => {
     },
     showLocation: () => {
       dispatch(showLocation());
-    }
-    ,
+    },
     fetchAllMachines: () => {
       dispatch(fetchAllMachines());
     }

@@ -1,6 +1,11 @@
+/* Define styling here, text-align changed from center to left */
 .App {
   text-align: center;
   height:100%
+}
+
+.locationCard {
+  text-align: left;
 }
 
 .App-logo {
@@ -19,10 +24,14 @@
   color: white;
 }
 
-.sidebar {
+.Sidebar {
   text-align: right;
+  height: 100vw;
 }
 
+/* #sidebarthing {
+  height: 650px;
+} */
 .App-link {
   color: #61dafb;
 }
