@@ -20,10 +20,6 @@ class Location extends Component {
       return <div>Loading...</div>;
     }
 
-    // too annyoing:
-    // <MachineSearch />
-
-
     return (
       <Grid>
         <Grid.Row>

@@ -4,7 +4,7 @@ import { Route, withRouter }  from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { Button, Form, Header } from "semantic-ui-react";
 import {connect} from 'react-redux'
-
+// import { postUser } from "../redux/actions/locationActions";
 class Login extends Component {
   constructor() {
     super();
@@ -15,7 +15,15 @@ class Login extends Component {
     };
   }
   handleChange = event => {
-    this.setState({ [event.target.placeholder]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.postUser(this.state)
+    // reset form after dispatch
+    event.currentTarget.reset()
+
   };
 
   render() {
@@ -23,22 +31,34 @@ class Login extends Component {
       <Form>
         <Form.Field>
           <label>Username </label>
-          <input placeholder="username" onChange={this.setChange} />
+          <Form.Input placeholder="Username" name="username" onChange={this.handleChange} />
+        </Form.Field>
+        <Form.Field>
+          <label>3-letter Initials</label>
+          <Form.Input placeholder="ex. INI" name="initials" onChange={this.handleChange} />
         </Form.Field>
         <Form.Field>
           <label>Password </label>
-          <input
+          <Form.Input
             placeholder="password"
             type="password"
-            onChange={this.setChange}
+            name="password"
+            onChange={this.handleChange}
           />
         </Form.Field>
-        <Button type="submit" onClick={this.submitForm}>
+        <Button type="submit">
           Submit
         </Button>
       </Form>
     );
   }
 }
+//
+// const mapDispatchToProps = dispatch => {
+//   // Payload looks like {issueDescription: "some text", LocMacId: #"}
+//   return {
+//     postUser: formData => dispatch(postUser(formData)),
+//   };
+// };
 
 export default withRouter(connect(null, null)(Login))
