@@ -28,12 +28,6 @@ const MachineIssue = props => (
   </Item>
 );
 
-const today = new Date().toLocaleDateString("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric"
-});
-
 const mapDispatchToProps = dispatch => {
   return {
     resolveIssue: issueObj => {
@@ -47,11 +41,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(MachineIssue);
-
-new Date().toLocaleDateString("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "numeric"
-});

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Route, withRouter }  from 'react-router-dom'
-
-import { Link } from "react-router-dom";
-import { Button, Form, Header } from "semantic-ui-react";
+import { withRouter }  from 'react-router-dom'
+import { Button, Form } from "semantic-ui-react";
 import {connect} from 'react-redux'
 // import { postUser } from "../redux/actions/locationActions";
 class Login extends Component {

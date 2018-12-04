@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Menu, Segment, Header, Sidebar } from "semantic-ui-react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Header } from "semantic-ui-react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import SidebarExample from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
@@ -8,7 +8,7 @@ import Location from "./containers/Location";
 import About from "./components/About";
 import LocationsContainer from "./containers/LocationsContainer";
 import Login from "./components/Login";
-import { Container, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import {
   fetchingLocations,
   showLocation,
@@ -31,7 +31,7 @@ class App extends Component {
           <Grid.Column width={3}>
             <SidebarExample className="Sidebar" id="sidebarthing" />
           </Grid.Column>
-          <Grid.Column width={13}>
+          <Grid.Column width={12}>
             <Header align="center">Arcadian</Header>
 
             <Route exact path="/about" component={() => <About />} />

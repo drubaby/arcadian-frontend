@@ -2,12 +2,8 @@ import React from "react";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import Location from "../containers/Location";
-// import About from "./About";
-import LocationsContainer from "../containers/LocationsContainer";
-import Login from "./Login";
 
-//should routes be defined here or in router? probably in App.js.
+// Client-side routes defined in App.js
 const SidebarExample = () => (
   <Sidebar
     as={Menu}
@@ -26,8 +22,7 @@ const SidebarExample = () => (
       <Icon name="user" />
       Login
     </Menu.Item>
-    <Menu.Item
-    as={NavLink} to="/locations">
+    <Menu.Item as={NavLink} to="/locations">
       <Icon name="building" />
       Locations
     </Menu.Item>
