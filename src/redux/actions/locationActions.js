@@ -70,6 +70,19 @@ function fetchingLocation(id) {
       });
   };
 }
+// POST NEW LOCATION
+function postLocation(payload) {
+  return dispatch => {
+    fetch(All_LOCATIONS_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  };
+}
 
 function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
@@ -203,15 +216,14 @@ function fetchedLocMacs(machines) {
   return { type: "FETCHED_LOC_MACS", machines };
 }
 
-function refreshMachineFinderOptions(machines){
+function refreshMachineFinderOptions(machines) {
   // debugger
-  return {type: "REFRESH_MACHINE_FINDER_OPTIONS", machines}
+  return { type: "REFRESH_MACHINE_FINDER_OPTIONS", machines };
 }
 
-function changeMachineFinderText(input){
-  return {type: "CHANGE_MACHINE_FINDER_TEXT", input}
+function changeMachineFinderText(input) {
+  return { type: "CHANGE_MACHINE_FINDER_TEXT", input };
 }
-
 
 /////////// Machine Issues
 function addIssue(payload) {
@@ -299,7 +311,9 @@ export {
   //LOCATION SEARCH
   changeLocSearchText,
   refreshLocSearchOptions,
-  //SINGLE LOCATION
+  //NEW LOCATION
+  postLocation,
+  //SHOW LOCATION
   fetchedLocation,
   fetchingLocation,
   loadingLocation,

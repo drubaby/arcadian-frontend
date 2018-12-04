@@ -1,5 +1,6 @@
 import React from "react";
 import LocationSearchBar from './LocationSearchBar'
+import { NavLink, Link } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -28,7 +29,7 @@ const SearchOrCreate = () => (
             <Icon name="world" />
             Add New Arcade
           </Header>
-          <Button primary>Create</Button>
+          <Button as={Link} to='/new_location'  primary>Create Arcade</Button>
         </Grid.Column>
       </Grid.Row>
     </Grid>

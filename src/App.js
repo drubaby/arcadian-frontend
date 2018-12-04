@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import SidebarNav from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
-import Location from "./containers/Location";
 import About from "./components/About";
+import Location from "./containers/Location";
 import LocationsContainer from "./containers/LocationsContainer";
 import Login from "./components/Login";
 import MachineFinder from './containers/MachineFinder'
+import NewLocationForm from './components/NewLocationForm'
 import { Grid } from "semantic-ui-react";
 import {
   fetchingLocations,
@@ -52,6 +53,11 @@ class App extends Component {
               exact
               path="/machine_finder"
               component={() => <MachineFinder />}
+            />
+            <Route
+            exact
+            path="/new_location"
+            component={()=> <NewLocationForm />}
             />
           </Grid.Column>
         </Grid>
