@@ -7,6 +7,10 @@ const allLocationsReducer = (oldState = [], action) => {
   switch (action.type) {
     case "FETCHED_LOCATIONS":
       console.log("[allLocationsReducer] returning all Locations");
+      // Sort by name :)
+      action.locations.sort((a, b) =>
+        a.name < b.name ? 1 : b.name < a.name ? -1 : 0
+      );
       return action.locations;
     // // case "FETCHED_ISSUE":
     // let loc_mac_id = action.issue.location_machine_id;
@@ -143,18 +147,6 @@ const locMacContainerReducer = (oldState = true, action) => {
       return oldState;
   }
 };
-
-//
-// const selectedLocMacReducer = (oldState = [], action) => {
-//   switch (action.type) {
-//     case "SELECT_LOC_MAC":
-//       debugger;
-//       return action.machine;
-//
-//     default:
-//       return oldState;
-//   }
-// };
 
 // Changes search text in state for both search functions
 const searchTextReducer = (state = "", action) => {
