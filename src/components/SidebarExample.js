@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Client-side routes defined in App.js
-const SidebarExample = () => (
+const SidebarNav = () => (
   <Sidebar
     as={Menu}
     // animation="push"
@@ -20,7 +20,7 @@ const SidebarExample = () => (
     </Menu.Item>
     <Menu.Item as={Link} to="/login">
       <Icon name="user" />
-      Login
+      My Favorites
     </Menu.Item>
     <Menu.Item as={NavLink} to="/locations">
       <Icon name="building" />
@@ -38,4 +38,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(SidebarExample);
+)(SidebarNav);

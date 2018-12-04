@@ -1,7 +1,12 @@
 import React from "react";
-import { List } from "semantic-ui-react";
+import {
+  List,
+  Header,
+  Grid
+} from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
 import { BrowserRouter as Link } from "react-router-dom";
+import SearchOrCreate from '../components/SearchOrCreate'
 import { connect } from "react-redux";
 import {
   fetchingLocations,
@@ -10,8 +15,7 @@ import {
 
 // Rendered by App
 class LocationsContainer extends React.Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     // shows 'Loading' while async call is made
@@ -26,15 +30,23 @@ class LocationsContainer extends React.Component {
 
     // wrap each location in a Link to that location's show page
     return (
-      <List className="ui relaxed items">
-        {this.props.allLocations.map(location => {
-          return (
-            <div className="item" key={location.id}>
-              <LocationListItem location={location} as={Link} />
-            </div>
-          );
-        })}
-      </List>
+      <Grid columns={2}>
+        <Grid.Column>
+          <List scrollable="true" className="ui relaxed items">
+            <Header>Arcade Locations</Header>
+            {this.props.locationSearchResults.map(location => {
+              return (
+                <div className="item" key={location.id}>
+                  <LocationListItem location={location} as={Link} />
+                </div>
+              );
+            })}
+          </List>
+        </Grid.Column>
+        <Grid.Column>
+        <SearchOrCreate />
+        </Grid.Column>
+      </Grid>
     );
   }
 }
@@ -52,7 +64,8 @@ const mapDispatchToProps = dispatch => {
 function mapStateToProps(state) {
   return {
     loadingStatus: state.loading,
-    allLocations: state.allLocations
+    allLocations: state.allLocations,
+    locationSearchResults: state.locationSearchResults
   };
 }
 

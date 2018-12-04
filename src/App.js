@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "semantic-ui-react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SidebarExample from "./components/SidebarExample.js";
+import SidebarNav from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
 import Location from "./containers/Location";
@@ -29,7 +29,7 @@ class App extends Component {
       <Router>
         <Grid columns={2}>
           <Grid.Column width={3}>
-            <SidebarExample className="Sidebar" id="sidebarthing" />
+            <SidebarNav className="Sidebar" id="sidebarthing" />
           </Grid.Column>
           <Grid.Column width={12}>
             <Header align="center">Arcadian</Header>

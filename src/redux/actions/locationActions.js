@@ -40,6 +40,22 @@ function fetchingLocations() {
       });
   };
 }
+
+// Location Search Bar
+
+
+function changeLocSearchText(input) {
+  return { type: "CHANGE_LOC_SEARCH_TEXT", input };
+}
+
+// function updateSearchResults(results) {
+//   return { type: "UPDATE_SEARCH_RESULTS", results };
+// }
+//
+function refreshLocSearchOptions(locations) {
+  return { type: "REFRESH_LOC_SEARCH_OPTIONS", locations };
+}
+
 ////////////// SINGLE LOCATION //////////
 function loadingLocation() {
   return { type: "LOADING_LOCATION" };
@@ -242,7 +258,7 @@ function markResolved(issueObj) {
 }
 
 function changeSearchText(input) {
-  return { type: "CHANGE_SEARCH_TEXT", input };
+  return { type: "CHANGE_MAC_SEARCH_TEXT", input };
 }
 
 function updateSearchResults(results) {
@@ -258,6 +274,9 @@ export {
   fetchedLocations,
   fetchingLocations,
   loadingLocations,
+  //LOCATION SEARCH
+  changeLocSearchText,
+  refreshLocSearchOptions,
   //SINGLE LOCATION
   fetchedLocation,
   fetchingLocation,

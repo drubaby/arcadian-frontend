@@ -156,26 +156,30 @@ const locMacContainerReducer = (oldState = true, action) => {
 //   }
 // };
 
+// Changes search text in state for both search functions
 const searchTextReducer = (state = "", action) => {
   switch (action.type) {
     case "CHANGE_SEARCH_TEXT":
+      return action.input;
+    case "CHANGE_LOC_SEARCH_TEXT":
       return action.input;
     default:
       return state;
   }
 };
-
+// MACHINE SEARCH
 const searchResultsReducer = (state = [], action) => {
   switch (action.type) {
     case "REFRESH_SEARCH_OPTIONS":
       return action.machines;
-    case "CHANGE_SEARCH_TEXT":
+    case "CHANGE_MAC_SEARCH_TEXT":
       // state does not refresh if you hit backspace.
       return state.filter(function(machine) {
         return machine.name.toLowerCase().includes(action.input.toLowerCase());
       });
     case "FETCHED_MACHINES":
       return action.machines;
+    // Is this being used?
     case "UPDATE_SEARCH_RESULTS":
       debugger;
       return action.results;
@@ -184,16 +188,35 @@ const searchResultsReducer = (state = [], action) => {
   }
 };
 
+// LOCATION SEARCH
+const locationSearchReducer = (state = [], action) => {
+  switch (action.type) {
+    //default result is all locations
+    case "FETCHED_LOCATIONS":
+    return action.locations
+    case "REFRESH_LOC_SEARCH_OPTIONS":
+      return action.locations;
+    case "CHANGE_LOC_SEARCH_TEXT":
+      //filter function
+      return state.filter(function(location) {
+        return location.name.toLowerCase().includes(action.input.toLowerCase());
+      });
+      return action.locations;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
+  allMachines: machineReducer,
   allLocationsLoading: loadingReducer,
   locationLoading: locationLoadingReducer,
   locMacContainerLoading: locMacContainerReducer,
+  locationSearchResults: locationSearchReducer,
   currentLocation: currentLocationReducer,
-  // selectedLocationMachine: selectedLocMacReducer,
-  allMachines: machineReducer,
-  // issue: issueReducer,
   searchText: searchTextReducer,
-  searchResults: searchResultsReducer
+  //Machine Search
+  searchResults: searchResultsReducer,
 });
 export default rootReducer;
