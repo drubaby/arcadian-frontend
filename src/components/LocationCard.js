@@ -6,6 +6,7 @@ import location_pic from "../img/location.svg";
 class LocationCard extends Component {
   render() {
     let {location} = this.props
+    console.log("Rending location card")
     return (
       <Card>
         <Image src={location_pic} />

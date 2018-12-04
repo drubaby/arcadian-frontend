@@ -163,6 +163,8 @@ const searchTextReducer = (state = "", action) => {
       return action.input;
     case "CHANGE_LOC_SEARCH_TEXT":
       return action.input;
+    case "CHANGE_MACHINE_FINDER_TEXT":
+      return action.input;
     default:
       return state;
   }
@@ -193,7 +195,7 @@ const locationSearchReducer = (state = [], action) => {
   switch (action.type) {
     //default result is all locations
     case "FETCHED_LOCATIONS":
-    return action.locations
+      return action.locations;
     case "REFRESH_LOC_SEARCH_OPTIONS":
       return action.locations;
     case "CHANGE_LOC_SEARCH_TEXT":
@@ -206,17 +208,46 @@ const locationSearchReducer = (state = [], action) => {
       return state;
   }
 };
+const allLocationMachineReducer = (state = [], action) => {
+  switch (action.type) {
+    case "FETCHED_LOC_MACS":
+      return action.machines;
+    default:
+      return state;
+  }
+};
+
+// MACHINE FINDER
+const machineFinderReducer = (state = [], action) => {
+  switch (action.type) {
+    case "REFRESH_MACHINE_FINDER_OPTIONS":
+      return action.machines;
+    case "CHANGE_MACHINE_FINDER_TEXT":
+      //filter function
+      return state.filter(function(loc_mac) {
+        return loc_mac.machine.name
+          .toLowerCase()
+          .includes(action.input.toLowerCase());
+      });
+      debugger;
+      return action.machines;
+    default:
+      return state;
+  }
+};
 
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
+  allLocationMachines: allLocationMachineReducer,
   allMachines: machineReducer,
   allLocationsLoading: loadingReducer,
   locationLoading: locationLoadingReducer,
   locMacContainerLoading: locMacContainerReducer,
   locationSearchResults: locationSearchReducer,
+  machineFinderResults: machineFinderReducer,
   currentLocation: currentLocationReducer,
   searchText: searchTextReducer,
   //Machine Search
-  searchResults: searchResultsReducer,
+  searchResults: searchResultsReducer
 });
 export default rootReducer;

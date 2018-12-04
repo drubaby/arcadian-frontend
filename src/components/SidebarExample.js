@@ -26,16 +26,20 @@ const SidebarNav = () => (
       <Icon name="building" />
       Locations
     </Menu.Item>
+    <Menu.Item as={NavLink} to="/machine_finder">
+      <Icon name="settings" />
+      Machine Finder
+    </Menu.Item>
   </Sidebar>
 );
 
-function mapStateToProps(state) {
-  return {
-    allLocations: state.allLocations
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     allLocations: state.allLocations
+//   };
+// }
 
 export default connect(
-  mapStateToProps,
+  null,
   null
 )(SidebarNav);

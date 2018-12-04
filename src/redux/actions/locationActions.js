@@ -41,17 +41,11 @@ function fetchingLocations() {
   };
 }
 
-// Location Search Bar
-
-
+///////// Location Search Bar /////////////
 function changeLocSearchText(input) {
   return { type: "CHANGE_LOC_SEARCH_TEXT", input };
 }
 
-// function updateSearchResults(results) {
-//   return { type: "UPDATE_SEARCH_RESULTS", results };
-// }
-//
 function refreshLocSearchOptions(locations) {
   return { type: "REFRESH_LOC_SEARCH_OPTIONS", locations };
 }
@@ -81,6 +75,7 @@ function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
 
+// Add new LocMac instance to a Location
 function addLocationMachine(payload) {
   return dispatch => {
     // dispatch(makingNewLocationMachine())
@@ -110,6 +105,7 @@ function addLocationMachine(payload) {
   };
 }
 
+// Remove Loc Mac instance from Location
 function removeLocationMachine(machineObj) {
   return dispatch => {
     fetch(LOC_MAC_URL + `/${machineObj.id}`, {
@@ -132,8 +128,9 @@ function removeLocationMachine(machineObj) {
       });
   };
 }
+////////// END SINGLE LOCATION FUNCTIONS ///////////
 
-////////// LOCATION MACHINES
+////////// LOCATION MACHINES/////////
 function fetchingLocationMachines(id) {
   return dispatch => {
     dispatch(loadingLocationMachines());
@@ -188,8 +185,33 @@ function toggleMachineWorking(machine) {
       });
   };
 }
-// patch to DB
-//after response, call SHOW LOCATION to rerender
+/////////// END LOCATION MACHINE ACTIONS////////////
+
+/////////// MACHINE FINDER ACTIONS /////////////////
+/////////// All Location Machines => Machine Finder
+function fetchingAllLocationMachines() {
+  return dispatch => {
+    fetch(LOC_MAC_URL)
+      .then(r => r.json())
+      .then(machines => {
+        dispatch(fetchedLocMacs(machines));
+      });
+  };
+}
+
+function fetchedLocMacs(machines) {
+  return { type: "FETCHED_LOC_MACS", machines };
+}
+
+function refreshMachineFinderOptions(machines){
+  // debugger
+  return {type: "REFRESH_MACHINE_FINDER_OPTIONS", machines}
+}
+
+function changeMachineFinderText(input){
+  return {type: "CHANGE_MACHINE_FINDER_TEXT", input}
+}
+
 
 /////////// Machine Issues
 function addIssue(payload) {
@@ -289,6 +311,10 @@ export {
   toggleMachineWorking,
   addLocationMachine,
   removeLocationMachine,
+  // MACHINE FINDER
+  fetchingAllLocationMachines,
+  refreshMachineFinderOptions,
+  changeMachineFinderText,
   // MACHINE ISSUES
   addIssue,
   postIssue,

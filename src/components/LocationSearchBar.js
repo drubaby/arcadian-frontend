@@ -34,6 +34,7 @@ class LocationSearchBar extends Component {
         type="text"
         placeholder="Search Locations"
         value={this.props.searchText}
+        // action={{ icon: 'search' }}
         onChange={e => {
           this.props.refreshSearchOptions(this.props.locations);
           this.props.changeLocSearchText(e.target.value);

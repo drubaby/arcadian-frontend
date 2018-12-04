@@ -8,6 +8,7 @@ import Location from "./containers/Location";
 import About from "./components/About";
 import LocationsContainer from "./containers/LocationsContainer";
 import Login from "./components/Login";
+import MachineFinder from './containers/MachineFinder'
 import { Grid } from "semantic-ui-react";
 import {
   fetchingLocations,
@@ -21,6 +22,7 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
+    console.log("App now fetching all machines...")
     this.props.fetchAllMachines();
   }
 
@@ -45,6 +47,11 @@ class App extends Component {
               exact
               path="/locations"
               component={() => <LocationsContainer />}
+            />
+            <Route
+              exact
+              path="/machine_finder"
+              component={() => <MachineFinder />}
             />
           </Grid.Column>
         </Grid>
