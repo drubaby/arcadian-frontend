@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Button, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { postLocation } from "../redux/actions/locationActions";
-import { Redirect, push, withRouter } from 'react-router-dom'
 
 class NewLocationForm extends Component {
   constructor() {
@@ -25,14 +24,14 @@ class NewLocationForm extends Component {
       alert("Please enter a name");
       return false;
     } else if (this.state.street === "") {
-      alert("Please enter a street address")
-      return false
+      alert("Please enter a street address");
+      return false;
     } else if (this.state.city === "") {
-      alert("Please enter a city")
-      return false
+      alert("Please enter a city");
+      return false;
     } else if (this.state.street === "") {
-      alert("Please enter a state")
-      return false
+      alert("Please enter a state");
+      return false;
     }
     return true;
   };
@@ -42,9 +41,9 @@ class NewLocationForm extends Component {
     if (this.checkFields()) {
       this.props.postLocation(this.state);
       event.currentTarget.reset();
-      alert("Location successfully created!")
+      alert("Location successfully created!");
       // return <Redirect to='/locations' />
-      window.location.href = 'http://localhost:3001/locations'
+      window.location.href = "http://localhost:3001/locations";
     } else {
       return;
     }

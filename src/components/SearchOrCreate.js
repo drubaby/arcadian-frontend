@@ -1,6 +1,6 @@
 import React from "react";
 import LocationSearchBar from './LocationSearchBar'
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Button,
   Divider,

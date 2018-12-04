@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Segment, Item } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import LocationListItem from "../components/LocationCard";
+import { Header, Segment, Item } from "semantic-ui-react";
 import MachineFinderResultItem from "../components/MachineFinderResultItem";
 import { connect } from "react-redux";
 
@@ -25,9 +23,11 @@ class MachineFinderResults extends Component {
       <Segment>
         <Header>Search Results</Header>
         <Item.Group divided>
-        {this.props.machineFinderResults.map(loc_mac => {
-          return <MachineFinderResultItem key={loc_mac.id} locMac={loc_mac} />;
-        })}
+          {this.props.machineFinderResults.map(loc_mac => {
+            return (
+              <MachineFinderResultItem key={loc_mac.id} locMac={loc_mac} />
+            );
+          })}
         </Item.Group>
       </Segment>
     );
