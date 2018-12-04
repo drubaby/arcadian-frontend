@@ -118,7 +118,6 @@ const locationSearchReducer = (state = [], action) => {
       return state.filter(function(location) {
         return location.name.toLowerCase().includes(action.input.toLowerCase());
       });
-      return action.locations;
     default:
       return state;
   }
@@ -144,7 +143,6 @@ const machineFinderReducer = (state = [], action) => {
           .toLowerCase()
           .includes(action.input.toLowerCase());
       });
-      return action.machines;
     default:
       return state;
   }
