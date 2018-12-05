@@ -5,7 +5,6 @@ import SidebarNav from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
 import About from "./components/About";
-import Favorites from "./containers/Favorites"
 import Location from "./containers/Location";
 import LocationsContainer from "./containers/LocationsContainer";
 import Login from "./components/Login";
@@ -19,7 +18,6 @@ import {
 } from "./redux/actions/locationActions";
 
 class App extends Component {
-  // consider putting *grid* container in return to lay out sidebar with content
 
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
@@ -31,16 +29,15 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Grid columns={2}>
+        <Grid columns={2} className='body'>
           <Grid.Column width={3}>
             <SidebarNav className="Sidebar" id="sidebarthing" />
           </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column width={12} >
             <Header align="center">Arcadian</Header>
             <Route exact path="/" component={() => <About />} />
             <Route exact path="/about" component={() => <About />} />
             <Route path="/login" component={Login} />
-            <Route path="/favorites" component={Favorites} />
             <Route
               exact
               path="/location/:id"

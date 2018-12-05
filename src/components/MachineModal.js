@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Button, Modal, Header, Confirm, Item } from "semantic-ui-react";
+import {
+  Button,
+  Modal,
+  Header,
+  Confirm,
+  Item,
+  Grid,
+  Segment
+} from "semantic-ui-react";
 import MachineIssue from "./MachineIssue";
 import IssueForm from "./IssueForm";
 import { connect } from "react-redux";
@@ -24,9 +32,8 @@ class MachineModal extends Component {
         <Modal
           trigger={
             <Button
-            fluid
-            compact
-            standard
+              fluid
+              compact
               onClick={() => {
                 this.props.selectLocationMachine(this.props.machineObj);
               }}
@@ -72,25 +79,34 @@ class MachineModal extends Component {
             </Button>
           </Modal.Header>
 
-          <Modal.Content image>
-            <Modal.Description>
-              <Header>
-                {this.props.machineObj.machine_issues.length === 0
-                  ? "No known issues"
-                  : "Known Issues"}
-              </Header>
-              <Item.Group divided relaxed>
-              {this.props.machineObj.machine_issues.length === 0
-                ? null
-                :  this.props.machineObj.machine_issues.map(issue => {
-                    return <MachineIssue key={issue.id} issueObj={issue} />;
-                  })
-                }
-                </Item.Group>
-            </Modal.Description>
-            <Modal.Description>
-              <IssueForm locMacId={this.props.machineObj.id} />
-            </Modal.Description>
+          <Modal.Content>
+            <Grid columns={2}>
+              <Grid.Column>
+                <Modal.Description>
+                  <Header>
+                    {this.props.machineObj.machine_issues.length === 0
+                      ? "No known issues"
+                      : "Known Issues"}
+                  </Header>
+                  <Item.Group divided relaxed>
+                    {this.props.machineObj.machine_issues.length === 0
+                      ? null
+                      : this.props.machineObj.machine_issues.map(issue => {
+                          return (
+                            <Segment key={issue.id}>
+                              <MachineIssue issueObj={issue} />
+                            </Segment>
+                          );
+                        })}
+                  </Item.Group>
+                </Modal.Description>
+              </Grid.Column>
+              <Grid.Column>
+                <Modal.Description>
+                  <IssueForm locMacId={this.props.machineObj.id} />
+                </Modal.Description>
+              </Grid.Column>
+            </Grid>
           </Modal.Content>
         </Modal>
       );

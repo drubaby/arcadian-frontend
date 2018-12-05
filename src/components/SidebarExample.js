@@ -24,7 +24,7 @@ const SidebarNav = () => (
     </Menu.Item>
     <Menu.Item as={NavLink} to="/machine_finder">
       <Icon name="settings" />
-      Machine Finder
+      Pinball Finder
     </Menu.Item>
   </Sidebar>
 );

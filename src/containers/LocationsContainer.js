@@ -2,7 +2,8 @@ import React from "react";
 import {
   List,
   Header,
-  Grid
+  Grid,
+  Segment
 } from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
 import { BrowserRouter as Link } from "react-router-dom";
@@ -36,9 +37,9 @@ class LocationsContainer extends React.Component {
             <Header>Arcade Locations</Header>
             {this.props.locationSearchResults.map(location => {
               return (
-                <div className="item" key={location.id}>
+                <Segment className="item" key={location.id}>
                   <LocationListItem location={location} as={Link} />
-                </div>
+                </Segment>
               );
             })}
           </List>

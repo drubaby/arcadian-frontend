@@ -15,10 +15,10 @@ class LocationMachineCard extends Component {
         <Card.Content>
           <Card.Header>{machine.name}</Card.Header>
           <Card.Meta>({machine.manufacture_date})</Card.Meta>
+          {this.props.is_working ? "Working" : "Out of Order"}
           <Card.Description>
             {machine_issues.length} known issues
           </Card.Description>
-          {this.props.is_working ? "Working" : "Out of Order"}
         </Card.Content>
         <Card.Content extra>
             <MachineModal

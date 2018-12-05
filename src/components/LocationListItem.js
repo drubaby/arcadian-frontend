@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Item } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux"
-
-
+import { connect } from "react-redux";
 
 //onClick={() => this.props.showLocation(this.props.location)}
 class LocationListItem extends Component {
   render() {
     return (
-      <Item className="item" location={this.props.location} >
+      <Item className="item" location={this.props.location}>
         <Link to={`/location/${this.props.location.id}`}>
           <Item.Header>{this.props.location.name}</Item.Header>
           <Item.Description>{this.props.location.street}</Item.Description>
@@ -27,4 +25,7 @@ class LocationListItem extends Component {
 //   }
 // }
 
-export default connect(null, null)(LocationListItem)
+export default connect(
+  null,
+  null
+)(LocationListItem);

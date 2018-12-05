@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Header, Segment } from "semantic-ui-react";
+import { List, Header, Segment, Label, Icon } from "semantic-ui-react";
 import MachineIssue from "../components/MachineIssue";
 import { connect } from "react-redux";
 
@@ -20,7 +20,7 @@ class LocationIssues extends Component {
           {this.props.locationIssues.map(issue => {
             return (
               <List.Item key={issue.id}>
-                <Header>{issue.machine_name}</Header>
+                <Label size="tiny"><Icon name="settings"/>{issue.machine_name}</Label>
                 <MachineIssue issueObj={issue} />
               </List.Item>
             );

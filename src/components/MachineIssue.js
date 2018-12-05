@@ -1,15 +1,18 @@
 import React from "react";
-import { Button, Item } from "semantic-ui-react";
+import { Button, Item, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { resolveIssue } from "../redux/actions/locationActions";
 
 // Rendered by MachineModal and LocationIssues
 const MachineIssue = props => (
+
   <Item>
     <Item.Content verticalAlign="middle">
-      <Item.Header>{props.issueObj.description}</Item.Header>
+      <Item.Header><strong>{props.issueObj.description}</strong></Item.Header>
       <Button
         size="mini"
+        compact
+        positive
         floated="right"
         onClick={() => props.resolveIssue(props.issueObj)}
       >
@@ -26,6 +29,7 @@ const MachineIssue = props => (
       </Item.Description>
     </Item.Content>
   </Item>
+
 );
 
 const mapDispatchToProps = dispatch => {
