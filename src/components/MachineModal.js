@@ -12,7 +12,6 @@ import {
 // rendered by LocMacCard
 class MachineModal extends Component {
   state = { confirmOpen: false };
-
   openConfirm = () => this.setState({ open: true });
   closeConfirm = () => this.setState({ open: false });
   render() {
@@ -25,6 +24,9 @@ class MachineModal extends Component {
         <Modal
           trigger={
             <Button
+            fluid
+            compact
+            standard
               onClick={() => {
                 this.props.selectLocationMachine(this.props.machineObj);
               }}
