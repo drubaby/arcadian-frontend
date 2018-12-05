@@ -8,8 +8,9 @@ class Login extends Component {
     super();
     this.state = {
       username: "",
-      password: "",
-      initials: ""
+      password: ""
+      // ,
+      // initials: ""
     };
   }
   handleChange = event => {
@@ -31,10 +32,7 @@ class Login extends Component {
           <label>Username </label>
           <Form.Input placeholder="Username" name="username" onChange={this.handleChange} />
         </Form.Field>
-        <Form.Field>
-          <label>3-letter Initials</label>
-          <Form.Input placeholder="ex. INI" name="initials" onChange={this.handleChange} />
-        </Form.Field>
+
         <Form.Field>
           <label>Password </label>
           <Form.Input
@@ -51,6 +49,11 @@ class Login extends Component {
     );
   }
 }
+// Dont need to log in with initials
+// <Form.Field>
+//   <label>3-letter Initials</label>
+//   <Form.Input placeholder="ex. INI" name="initials" onChange={this.handleChange} />
+// </Form.Field>
 //
 // const mapDispatchToProps = dispatch => {
 //   // Payload looks like {issueDescription: "some text", LocMacId: #"}

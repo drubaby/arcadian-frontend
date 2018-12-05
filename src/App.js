@@ -36,7 +36,7 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={12}>
             <Header align="center">Arcadian</Header>
-
+            <Route exact path ="/" component={() => <About />} />
             <Route exact path="/about" component={() => <About />} />
             <Route path="/login" component={Login} />
             <Route
