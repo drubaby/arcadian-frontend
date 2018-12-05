@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Segment, Item } from "semantic-ui-react";
+import { Header, Segment, Item, Loader } from "semantic-ui-react";
 import MachineFinderResultItem from "../components/MachineFinderResultItem";
 import { connect } from "react-redux";
 
@@ -14,10 +14,10 @@ class MachineFinderResults extends Component {
 
   render() {
     // shows 'Loading' while async call is made to all Locations
-    // NOT WORKING
+    // WORKS
     if (this.props.loading) {
       console.log("Loading status: ", this.props.loading, "display 'Loading'");
-      return <div>Loading...</div>;
+      return <Loader active inline='centered'/>;
     }
     return (
       <Segment>

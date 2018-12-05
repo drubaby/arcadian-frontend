@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  List,
-  Header,
-  Grid,
-  Segment
-} from "semantic-ui-react";
+import { List, Header, Grid, Segment, Loader } from "semantic-ui-react";
 import LocationListItem from "../components/LocationListItem";
 import { BrowserRouter as Link } from "react-router-dom";
-import SearchOrCreate from '../components/SearchOrCreate'
+
+import SearchOrCreate from "../components/SearchOrCreate";
 import { connect } from "react-redux";
 import {
   fetchingLocations,
@@ -16,36 +12,42 @@ import {
 
 // Rendered by App
 class LocationsContainer extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.loadingStatus);
+  }
 
   render() {
     // shows 'Loading' while async call is made
-    if (this.props.loadingStatus) {
+    if (this.props.loadingStatus === undefined) {
       console.log(
         "Loading status: ",
         this.props.loadingStatus,
         "display 'Loading'"
       );
-      return <div>Loading...</div>;
+      // return (<Loader active inline='centered' />);
     }
-
+    // debugger
     // wrap each location in a Link to that location's show page
     return (
       <Grid columns={2}>
         <Grid.Column>
           <List scrollable="true" className="ui relaxed items">
             <Header>Arcade Locations</Header>
-            {this.props.locationSearchResults.map(location => {
-              return (
-                <Segment className="item" key={location.id}>
-                  <LocationListItem location={location} as={Link} />
-                </Segment>
-              );
-            })}
+            {this.props.locationSearchResults.length === 0 ? (
+              <Loader active />
+            ) : (
+              this.props.locationSearchResults.map(location => {
+                return (
+                  <Segment className="item" key={location.id}>
+                    <LocationListItem location={location} as={Link} />
+                  </Segment>
+                );
+              })
+            )}
           </List>
         </Grid.Column>
         <Grid.Column>
-        <SearchOrCreate />
+          <SearchOrCreate />
         </Grid.Column>
       </Grid>
     );
@@ -64,7 +66,7 @@ const mapDispatchToProps = dispatch => {
 
 function mapStateToProps(state) {
   return {
-    loadingStatus: state.loading,
+    loadingStatus: state.allLocationsloading,
     allLocations: state.allLocations,
     locationSearchResults: state.locationSearchResults
   };

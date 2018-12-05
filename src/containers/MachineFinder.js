@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Input, Segment } from "semantic-ui-react";
+import { Input, Segment, Loader, Message } from "semantic-ui-react";
 // import { BrowserRouter } from "react-router-dom";
 import MachineFinderResults from "./MachineFinderResults";
 import { connect } from "react-redux";
@@ -41,15 +41,13 @@ class MachineFinder extends Component {
         this.props.loadingStatus,
         "display 'Loading'"
       );
-      return <div>Loading...</div>;
     }
     return (
       <Fragment>
-        <Segment placeholder compact circular size="small">
-          Looking to play something in particular?
-          <br />
-          The machine finder searches for machines currently in our arcades.
-        </Segment>
+        <Message
+          header="Looking to play something in particular?"
+          content="The machine finder searches for machines currently in our arcades."
+        />
         <Segment>
           <Input
             fluid

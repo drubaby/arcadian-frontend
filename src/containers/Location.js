@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Loader } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LocationCard from "../components/LocationCard";
 import LocationIssues from "./LocationIssues";
@@ -18,7 +18,7 @@ class Location extends Component {
   render() {
     // shows 'Loading' while async call is made
     if (this.props.locationLoading) {
-      return <div>Loading...</div>;
+      return <Loader active size='large'inline='centered'/>;
     }
 
     return (
