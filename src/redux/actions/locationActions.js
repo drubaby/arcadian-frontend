@@ -63,7 +63,12 @@ function fetchedLocation(locationObj) {
 function fetchingLocation(id) {
   return dispatch => {
     dispatch(loadingLocation());
-    fetch(SINGLE_LOCATION_URL + `${id}`)
+    fetch(SINGLE_LOCATION_URL + `${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
       .then(res => res.json())
       .then(locationObj => {
         dispatch(showLocation(locationObj));
@@ -148,7 +153,13 @@ function fetchingLocationMachines(id) {
   return dispatch => {
     dispatch(loadingLocationMachines());
     // debugger
-    fetch(CURRENT_LOCATION_MACHINES + `${id}`)
+    fetch(CURRENT_LOCATION_MACHINES + `${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
       .then(res => res.json())
       .then(machineArray => {
         dispatch(showLocMacs(machineArray));
@@ -340,3 +351,16 @@ export {
   updateSearchResults,
   refreshSearchOptions
 };
+//
+// fetch("http://localhost:3000/locations/4", {
+//   method: "GET",
+//   headers: {
+//     Authorization: window.sessionStorage.getItem("jwt"),
+//     "Content-Type": "application/json",
+//     Accept: "application/json"
+//   }
+// })
+//   .then(res => res.json())
+//   .then(json => {
+//     console.log(json);
+//   });

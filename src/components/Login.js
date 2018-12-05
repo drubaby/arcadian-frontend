@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { withRouter }  from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 // import { postUser } from "../redux/actions/locationActions";
 class Login extends Component {
   constructor() {
@@ -19,18 +19,38 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.postUser(this.state)
-    // reset form after dispatch
-    event.currentTarget.reset()
-
+    console.log("submitted form")
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          username: this.state.username,
+          password: this.state.password
+        }
+      })
+    })
+      .then(r => r.json())
+      .then(json => {
+        console.log(json)
+        window.sessionStorage.setItem("jwt", json["jwt"]);
+        window.sessionStorage.setItem('username', json.user.username)
+      });
   };
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Username </label>
-          <Form.Input placeholder="Username" name="username" onChange={this.handleChange} />
+          <Form.Input
+            placeholder="Username"
+            name="username"
+            onChange={this.handleChange}
+          />
         </Form.Field>
 
         <Form.Field>
@@ -42,9 +62,7 @@ class Login extends Component {
             onChange={this.handleChange}
           />
         </Form.Field>
-        <Button type="submit">
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
@@ -62,4 +80,9 @@ class Login extends Component {
 //   };
 // };
 
-export default withRouter(connect(null, null)(Login))
+export default withRouter(
+  connect(
+    null,
+    null
+  )(Login)
+);
