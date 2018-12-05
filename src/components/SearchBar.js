@@ -32,6 +32,7 @@ class SearchBar extends Component {
   render() {
     return (
       <Input
+        fluid
         type="text"
         placeholder="Search"
         value={this.props.searchText}
