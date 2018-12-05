@@ -9,7 +9,7 @@ const allLocationsReducer = (oldState = [], action) => {
       console.log("[allLocationsReducer] returning all Locations");
       // Sort by name :)
       action.locations.sort((a, b) =>
-        a.name < b.name ? 1 : b.name < a.name ? -1 : 0
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
       );
       return action.locations;
     default:
@@ -52,6 +52,7 @@ const locationLoadingReducer = (oldState = true, action) => {
       return oldState;
   }
 };
+
 
 const currentLocationReducer = (oldState = [], action) => {
   switch (action.type) {
@@ -148,18 +149,31 @@ const machineFinderReducer = (state = [], action) => {
   }
 };
 
+// Discontinue for science fair
+// // Favorites
+// const favoriteLocationsReducer = (state =[], action) => {
+//   switch (action.type) {
+//     case "ADD_FAVORITE":
+//     let newState = [...state, action.location]
+//     return newState
+//     default:
+//     return state
+//   }
+// }
 const rootReducer = combineReducers({
   allLocations: allLocationsReducer,
   allLocationMachines: allLocationMachineReducer,
   allMachines: machineReducer,
   allLocationsLoading: loadingReducer,
+  currentLocation: currentLocationReducer,
+  // favoriteLocations: favoriteLocationsReducer,
   locationLoading: locationLoadingReducer,
   locMacContainerLoading: locMacContainerReducer,
   locationSearchResults: locationSearchReducer,
   machineFinderResults: machineFinderReducer,
-  currentLocation: currentLocationReducer,
   searchText: searchTextReducer,
   //Machine Search Results
-  searchResults: searchResultsReducer
+  searchResults: searchResultsReducer,
+
 });
 export default rootReducer;

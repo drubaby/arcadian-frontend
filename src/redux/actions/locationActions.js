@@ -313,6 +313,14 @@ function updateSearchResults(results) {
 function refreshSearchOptions(machines) {
   return { type: "REFRESH_SEARCH_OPTIONS", machines };
 }
+////////// end Machine search
+////////// FAVORITOS
+
+function addToFavorites(location) {
+  return { type: "ADD_FAVORITE", location}
+}
+
+
 
 export {
   //ALL LOCATIONS
@@ -349,8 +357,12 @@ export {
   //SEARCH FUNCTION
   changeSearchText,
   updateSearchResults,
-  refreshSearchOptions
+  refreshSearchOptions,
+  //FAVORITE FUNCTIONS
+  addToFavorites
 };
+
+
 //
 // fetch("http://localhost:3000/locations/4", {
 //   method: "GET",

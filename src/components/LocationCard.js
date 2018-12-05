@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import SearchModal from "./SearchModal";
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Card, Icon, Image, Button } from "semantic-ui-react";
 import location_pic from "../img/location.svg";
+import { connect } from "react-redux";
+import { addToFavorites } from "../redux/actions/locationActions";
 
 class LocationCard extends Component {
+  handleFavorite = location => {
+    this.props.addToFavorites(location);
+  };
+
   render() {
-    let {location} = this.props
-    console.log("Rending location card")
+    let { location } = this.props;
+    console.log("Rending location card");
     return (
       <Card>
         <Image src={location_pic} />
         <Card.Content>
           <Card.Header>{location.name}</Card.Header>
-          <Card.Meta>
-            <span className="date">Operator: </span>
-          </Card.Meta>
+
           <Card.Description>{location.street}</Card.Description>
           <Card.Description>
             {location.city}, {location.state} {location.zip}
@@ -29,4 +33,17 @@ class LocationCard extends Component {
     );
   }
 }
-export default LocationCard;
+
+// Discontinued for science fair
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addToFavorites: locationObj => {
+//       dispatch(addToFavorites(locationObj));
+//     }
+//   };
+// };
+
+export default connect(
+  null,
+  null
+)(LocationCard);

@@ -5,11 +5,12 @@ import SidebarNav from "./components/SidebarExample.js";
 import { connect } from "react-redux";
 import "./App.css";
 import About from "./components/About";
+import Favorites from "./containers/Favorites"
 import Location from "./containers/Location";
 import LocationsContainer from "./containers/LocationsContainer";
 import Login from "./components/Login";
-import MachineFinder from './containers/MachineFinder'
-import NewLocationForm from './components/NewLocationForm'
+import MachineFinder from "./containers/MachineFinder";
+import NewLocationForm from "./components/NewLocationForm";
 import { Grid } from "semantic-ui-react";
 import {
   fetchingLocations,
@@ -23,7 +24,7 @@ class App extends Component {
   componentDidMount() {
     console.log("App mounted, now fetching all locations for store...");
     this.props.fetchingLocations();
-    console.log("App now fetching all machines...")
+    console.log("App now fetching all machines...");
     this.props.fetchAllMachines();
   }
 
@@ -36,9 +37,10 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={12}>
             <Header align="center">Arcadian</Header>
-            <Route exact path ="/" component={() => <About />} />
+            <Route exact path="/" component={() => <About />} />
             <Route exact path="/about" component={() => <About />} />
             <Route path="/login" component={Login} />
+            <Route path="/favorites" component={Favorites} />
             <Route
               exact
               path="/location/:id"
@@ -55,9 +57,9 @@ class App extends Component {
               component={() => <MachineFinder />}
             />
             <Route
-            exact
-            path="/new_location"
-            component={()=> <NewLocationForm />}
+              exact
+              path="/new_location"
+              component={() => <NewLocationForm />}
             />
           </Grid.Column>
         </Grid>

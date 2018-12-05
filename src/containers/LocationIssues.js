@@ -3,6 +3,7 @@ import { List, Header, Segment } from "semantic-ui-react";
 import MachineIssue from "../components/MachineIssue";
 import { connect } from "react-redux";
 
+//Rendered on Location.js
 class LocationIssues extends Component {
   render() {
     if (this.props.locationLoading) {
