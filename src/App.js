@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "semantic-ui-react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SidebarNav from "./components/SidebarExample.js";
+import SidebarNav from "./components/SidebarNav.js";
 import { connect } from "react-redux";
 import "./App.css";
 import About from "./components/About";

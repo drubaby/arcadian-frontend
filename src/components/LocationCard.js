@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import SearchModal from "./SearchModal";
-import { Card, Icon, Image, Button } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 import location_pic from "../img/location.svg";
 import { connect } from "react-redux";
-import { addToFavorites } from "../redux/actions/locationActions";
+// import { addToFavorites } from "../redux/actions/locationActions";
 
 class LocationCard extends Component {
-  handleFavorite = location => {
-    this.props.addToFavorites(location);
-  };
+  // handleFavorite = location => {
+  //   this.props.addToFavorites(location);
+  // };
 
   render() {
     let { location } = this.props;

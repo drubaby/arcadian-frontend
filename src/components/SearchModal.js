@@ -12,13 +12,13 @@ class SearchModal extends Component {
 
   render() {
     let { location, searchResults } = this.props;
-    const { open, closeOnEscape, closeOnDimmerClick } = this.state;
+    // const { closeOnEscape, closeOnDimmerClick } = this.state;
     return (
       <Fragment>
         <Button floated="right" size="mini" onClick={this.open}>
           Add Machine
         </Button>
-        <Modal open={this.state.open} closeIcon={true}>
+        <Modal open={this.state.open} onClose={this.close} >
           <Modal.Header>Add Machine to {location.name}</Modal.Header>
 
           <Modal.Content image>

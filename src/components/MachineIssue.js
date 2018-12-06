@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Item, Segment } from "semantic-ui-react";
+import { Button, Item } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { resolveIssue } from "../redux/actions/locationActions";
 

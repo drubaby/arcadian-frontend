@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 // Client-side routes defined in App.js

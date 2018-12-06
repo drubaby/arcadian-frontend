@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Input, Segment, Loader, Message } from "semantic-ui-react";
+import { Input, Segment, Message } from "semantic-ui-react";
 // import { BrowserRouter } from "react-router-dom";
 import MachineFinderResults from "./MachineFinderResults";
 import { connect } from "react-redux";

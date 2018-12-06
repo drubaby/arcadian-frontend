@@ -37,7 +37,8 @@ class MachineFinderResults extends Component {
 const mapStateToProps = state => {
   return {
     machineFinderResults: state.machineFinderResults,
-    allLocations: state.allLocations,
+    allLocations: state.allLocations
+    ,
     loading: state.allLocationsLoading
   };
 };
