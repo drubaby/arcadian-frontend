@@ -21,6 +21,7 @@ const SearchOrCreate = () => (
             <Icon name="search" />
             Find Arcade
           </Header>
+          <br />
           <LocationSearchBar />
         </Grid.Column>
 

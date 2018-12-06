@@ -9,6 +9,7 @@ import {
 class LocationSearchBar extends Component {
   componentWillMount() {
     this.resetComponent();
+    // this.fetchingLocations()
   }
   resetComponent = () =>
     this.setState({
@@ -68,6 +69,7 @@ const mapDispatchToProps = dispatch => {
     refreshSearchOptions: locations => {
       dispatch(refreshLocSearchOptions(locations));
     }
+
     // ,
     // searchResults: input => {
     //   const results = this.props.allMachines.filter(function(machine) {
