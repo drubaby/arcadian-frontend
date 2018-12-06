@@ -26,6 +26,10 @@ class App extends Component {
     this.props.fetchAllMachines();
   }
 
+  // Taken out because styling is a pain
+  // <Header align="center" className='App-header'>Arcadian</Header>
+
+
   render() {
     return (
       <Router>
@@ -34,7 +38,7 @@ class App extends Component {
             <SidebarNav className="Sidebar" id="sidebarthing" />
           </Grid.Column>
           <Grid.Column width={12} >
-            <Header align="center">Arcadian</Header>
+          <Header align="center" className='App-header'> </Header>
             <Route exact path="/" component={() => <About />} />
             <Route exact path="/about" component={() => <About />} />
             <Route path="/login" component={Login} />

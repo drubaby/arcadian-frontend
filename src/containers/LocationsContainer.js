@@ -32,9 +32,9 @@ class LocationsContainer extends React.Component {
       <Grid columns={2} className="locationsPage" >
         <Grid.Column className="ui relaxed items locationList" >
           <List  >
-            <Header>Arcade Locations</Header>
+            <Header textAlign='center' className="ui segment item">Arcade Locations</Header>
             {this.props.locationSearchResults.length === 0 ? (
-              <Loader active />
+              <Loader active inverted></Loader>
             ) : (
               this.props.locationSearchResults.map(location => {
                 return (
