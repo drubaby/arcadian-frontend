@@ -1,17 +1,27 @@
 /* Define styling here, text-align changed from center to left */
 .App {
   text-align: center;
-  height:100%;
-  background: url("./img/playfield.jpg") !important;
-  background-size: cover !important;
-background-attachment: fixed !important;
-}
-
-.body {
+  height: 100%;
   /* background: url("./img/playfield.jpg") !important;
   background-size: cover !important; */
   /* background-attachment: fixed !important; */
 }
+
+.locationPage {
+  background-color: white;
+  height: 100vx;
+  padding-left: 10px;
+  overflow: scroll;
+}
+
+.locationList {
+  height: 600px;
+  overflow: scroll;
+}
+
+/* .ui relaxed items {
+
+} */
 
 .locationCard {
   text-align: left;
@@ -38,9 +48,7 @@ background-attachment: fixed !important;
   height: 100vw;
 }
 
-/* #sidebarthing {
-  height: 650px;
-} */
+
 .App-link {
   color: #61dafb;
 }

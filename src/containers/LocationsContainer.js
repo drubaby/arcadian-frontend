@@ -29,9 +29,9 @@ class LocationsContainer extends React.Component {
     // debugger
     // wrap each location in a Link to that location's show page
     return (
-      <Grid columns={2}>
-        <Grid.Column>
-          <List scrollable="true" className="ui relaxed items">
+      <Grid columns={2} className="locationsPage" >
+        <Grid.Column className="ui relaxed items locationList" >
+          <List  >
             <Header>Arcade Locations</Header>
             {this.props.locationSearchResults.length === 0 ? (
               <Loader active />
@@ -46,7 +46,7 @@ class LocationsContainer extends React.Component {
             )}
           </List>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column >
           <SearchOrCreate />
         </Grid.Column>
       </Grid>

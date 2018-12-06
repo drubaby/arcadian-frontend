@@ -22,7 +22,7 @@ class Location extends Component {
     }
 
     return (
-      <Grid>
+      <Grid className="locationPage">
         <Grid.Row columns={2}>
           <Grid.Column>
             <LocationCard
