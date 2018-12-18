@@ -1,44 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Arcadian
 
-## Available Scripts
+Arcadian is a pinball arcade management app made to:
 
-In the project directory, you can run:
+* Help arcades show off their current machine line-ups
+* Allow players to report mechanical issues that arise during play
+* Give owners a to-do list of needed repairs based on crowdsourced reports
 
-### `npm start`
+### Motivation
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+As an active member of the DD Pinball League I wanted to build a practical solution for a frequent problem.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Arcade owner-operators are generally responsible for the upkeep of their machines, but tend to rely on word of mouth to find out what's not working on their admittedly complex games! Why not allow player to report these directly, in real time?
 
-### `npm test`
+This project is currently proof-of-concept for an idea I'd like to develop further, get in touch if you have feature ideas or want to collaborate!
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Demo Video
 
-### `npm run build`
+On YouTube: https://youtu.be/Jb8wXfcI_Go
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installing Locally
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+You will need to clone both the front and back end to your local machine.
+[Front End] : https://github.com/drubaby/arcadian-frontend/
+[Back End] : https://github.com/drubaby/arcadian-backend/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+With Postgres running, navigate to the back end directory and run `rake db:seed` to populate the app with locations and a few random machines in each arcade. Next, run `rails s` to start the rails server.
 
-### `npm run eject`
+From the front end directory run `npm install` to load all dependencies and then `npm start` to start the local server. This should automatically open the project in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Credits
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+DC Pinball Locations seeded from the Pinball Map API: http://pinballmap.com/api/v1/docs
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pinball Machine data seeded from the Open Pinball Database API: https://opdb.org/api
