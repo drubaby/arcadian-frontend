@@ -5,12 +5,11 @@ import location_pic from "../img/location.svg";
 import { connect } from "react-redux";
 // import { addToFavorites } from "../redux/actions/locationActions";
 
+// Rendered on Location container
 class LocationCard extends Component {
-  // handleFavorite = location => {
-  //   this.props.addToFavorites(location);
-  // };
 
   render() {
+    debugger
     let { location } = this.props;
     console.log("Rending location card");
     return (
@@ -26,22 +25,13 @@ class LocationCard extends Component {
         </Card.Content>
         <Card.Content extra textAlign="left">
           <Icon name="gamepad" />
-          {location.location_machines.length} machines
+          {location.machines.length} machines
           <SearchModal />
         </Card.Content>
       </Card>
     );
   }
 }
-
-// Discontinued for science fair
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addToFavorites: locationObj => {
-//       dispatch(addToFavorites(locationObj));
-//     }
-//   };
-// };
 
 export default connect(
   null,
