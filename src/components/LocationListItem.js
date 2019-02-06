@@ -7,12 +7,14 @@ import { connect } from "react-redux";
 class LocationListItem extends Component {
   render() {
     return (
+
       <Item className="item" location={this.props.location}>
         <Link to={`/location/${this.props.location.id}`}>
           <Item.Header>{this.props.location.name}</Item.Header>
           <Item.Description>{this.props.location.street}</Item.Description>
         </Link>
       </Item>
+
     );
   }
 }

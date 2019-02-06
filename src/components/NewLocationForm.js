@@ -54,7 +54,7 @@ class NewLocationForm extends Component {
   }
   render() {
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={event => this.handleSubmit(event)} className="newLocation">
         <Header>Create New Location</Header>
         <Form.Field required>
           <label>Arcade Name</label>

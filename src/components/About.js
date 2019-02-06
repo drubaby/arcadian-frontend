@@ -9,11 +9,11 @@ const About = () => (
       <br/>
       <h4>With Arcadian:</h4>
 
+      <h4>>Arcades advertise their line-ups to the
+      world</h4>
       <h4>> Players report mechanical issues as they arise</h4>
       <h4>> Owners log
       repairs in real time</h4>
-      <h4>>Arcades advertise their line-ups to the
-      world</h4>
       <br />
       <br />
       To get started gently cram a quarter in your device's charging port and

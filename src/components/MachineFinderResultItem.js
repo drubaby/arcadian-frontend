@@ -7,7 +7,7 @@ class MachineFinderResultItem extends Component {
   render() {
     // console.log("machine finder result item: ", this.props.locMac);
     return (
-      <Item>
+      <Item >
       <Link to={`/location/${this.props.locMac.location_id}`}>
         <Item.Header>
           <Icon fitted name="gamepad" />

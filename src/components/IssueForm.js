@@ -19,11 +19,13 @@ class IssueForm extends Component {
   };
 
   handleSubmit = event => {
+    if (this.state.description !== "")
+    {
     event.preventDefault();
     this.props.postIssue(this.state)
     // reset form after dispatch
     event.currentTarget.reset()
-
+}
   };
 
   componentDidMount() {

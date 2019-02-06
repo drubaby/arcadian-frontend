@@ -25,7 +25,7 @@ class MachineFinderResults extends Component {
         <Item.Group divided>
           {this.props.machineFinderResults.map(loc_mac => {
             return (
-              <MachineFinderResultItem key={loc_mac.id} locMac={loc_mac} />
+              <MachineFinderResultItem  key={loc_mac.id} locMac={loc_mac} />
             );
           })}
         </Item.Group>
