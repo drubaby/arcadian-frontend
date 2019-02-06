@@ -17,6 +17,7 @@ const allLocationsReducer = (oldState = [], action) => {
   }
 };
 
+// Fetches list of Machine Types
 const machineReducer = (state = [], action) => {
   switch (action.type) {
     case "FETCH_ALL_MACHINES":

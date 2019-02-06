@@ -9,9 +9,10 @@ import { connect } from "react-redux";
 class LocationCard extends Component {
 
   render() {
-    debugger
+    // debugger
     let { location } = this.props;
-    console.log("Rending location card");
+    // props => location: {}, machines: {}
+    console.log("Rendering location card");
     return (
       <Card>
         <Image src={location_pic} />

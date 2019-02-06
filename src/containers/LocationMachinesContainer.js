@@ -29,7 +29,7 @@ class LocationMachinesContainer extends Component {
 //
 const mapStateToProps = (state, propsFromParent) => {
   // set current location which fetches location machines
-  let orderedMachines = state.currentLocation.location_machines.sort((a, b) =>
+  let orderedMachines = state.currentLocation.machines.sort((a, b) =>
     a.updated_at < b.updated_at ? 1 : b.updated_at < a.updated_at ? -1 : 0
   );
   return { locationMachines: orderedMachines };
