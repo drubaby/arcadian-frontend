@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { selectLocationMachine } from "../redux/actions/locationActions";
 
 // rendered by LocationMachinesContainer
-class LocationMachineCard extends Component {
+class MachineCard extends Component {
 // renders MachineModal
   render() {
     let { machine, machine_issues} = this.props.locMacObj;
@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LocationMachineCard);
+)(MachineCard);

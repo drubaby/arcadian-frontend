@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
-import LocationMachineCard from "../components/LocationMachineCard";
+import MachineCard from "../components/MachineCard";
 
 // rendered by Location
 class LocationMachinesContainer extends Component {
@@ -14,7 +14,7 @@ class LocationMachinesContainer extends Component {
         <Card.Group itemsPerRow={3} stackable={true}>
           {this.props.locationMachines.map(loc_machine => {
             return (
-              <LocationMachineCard
+              <MachineCard
                 key={loc_machine.id}
                 locMacObj={loc_machine}
                 is_working={loc_machine.is_working}
