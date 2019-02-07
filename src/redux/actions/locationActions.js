@@ -94,12 +94,11 @@ function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
 
-// Add new LocMac instance to a Location
+// Add new Machine instance to a Location
 function addLocationMachine(payload) {
-  debugger
   return dispatch => {
     // dispatch(makingNewLocationMachine())
-    fetch(LOC_MAC_URL, {
+    fetch(MACHINES_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

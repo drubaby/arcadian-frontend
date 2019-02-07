@@ -34,7 +34,7 @@ class SearchModal extends Component {
                             this.close();
                             let payload = {
                               location_id: location.id,
-                              machine_id: machine.id
+                              machine_type_id: machine.id
                             };
                             this.props.addLocationMachine(payload);
                           }}
