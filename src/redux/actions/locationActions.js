@@ -184,7 +184,7 @@ function toggleMachineWorking(machine) {
   console.log("dispatching machine obj: ", machine);
   // sends updated MachineObj as patch request to DB
   return dispatch => {
-    fetch(LOC_MAC_URL + `/${machine.id}`, {
+    fetch(MACHINES_URL + `/${machine.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -216,7 +216,7 @@ function toggleMachineWorking(machine) {
 /////////// All Location Machines => Machine Finder
 function fetchingAllLocationMachines() {
   return dispatch => {
-    fetch(LOC_MAC_URL)
+    fetch(MACHINES_URL)
       .then(r => r.json())
       .then(machines => {
         dispatch(fetchedLocMacs(machines));
@@ -238,14 +238,16 @@ function changeMachineFinderText(input) {
 }
 
 /////////// Machine Issues
+
+// does this do anything?
 function addIssue(payload) {
   return { type: "ADD_ISSUE", payload };
 }
 
 function postIssue(payload) {
   return dispatch => {
-    dispatch(addIssue(payload));
-    console.log("posting issue");
+    // dispatch(addIssue(payload)); TEMP
+    console.log("posting issue: ", payload);
     // debugger
     fetch(POST_ISSUE_URL, {
       method: "POST",
@@ -257,6 +259,7 @@ function postIssue(payload) {
     })
       .then(res => res.json())
       .then(issue => {
+        // debugger
         fetch("http://localhost:3000/update_location_by_issue", {
           method: "POST",
           headers: {

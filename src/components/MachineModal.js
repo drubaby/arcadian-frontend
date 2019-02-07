@@ -105,7 +105,7 @@ class MachineModal extends Component {
               </Grid.Column>
               <Grid.Column>
                 <Modal.Description>
-                  <IssueForm locMacId={this.props.machineObj.id} />
+                  <IssueForm MacId={this.props.machineObj.id} />
                 </Modal.Description>
               </Grid.Column>
             </Grid>
