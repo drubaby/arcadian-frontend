@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import SearchBar from "./SearchBar";
 import { addLocationMachine } from "../redux/actions/locationActions";
 
-// rendered on LocationCard
+// rendered on LocationCard || Search All Machines to add to location
 class SearchModal extends Component {
   state = { open: false };
   open = () => this.setState({ open: true });

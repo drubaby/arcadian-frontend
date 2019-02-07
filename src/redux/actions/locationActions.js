@@ -1,13 +1,14 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
 const LOC_MAC_URL = "http://localhost:3000/location_machines";
 const MACHINES_URL = "http://localhost:3000/machines";
+const MACHINE_TYPES_URL = "http://localhost:3000/machine_types"
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/";
 const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/";
 
 function fetchAllMachines(machines) {
   return dispatch => {
-    fetch(MACHINES_URL)
+    fetch(MACHINE_TYPES_URL)
       .then(res => res.json())
       .then(machines => {
         dispatch(fetchedMachines(machines));
@@ -95,6 +96,7 @@ function showLocation(location) {
 
 // Add new LocMac instance to a Location
 function addLocationMachine(payload) {
+  debugger
   return dispatch => {
     // dispatch(makingNewLocationMachine())
     fetch(LOC_MAC_URL, {
