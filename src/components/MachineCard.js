@@ -8,13 +8,11 @@ import { selectLocationMachine } from "../redux/actions/locationActions";
 class MachineCard extends Component {
   // renders MachineModal
   render() {
-    //below is currently undefined -- Why is this destructuring not working?
     let machine = this.props.locMacObj;
     let ipdbBase = "https://www.ipdb.org/machine.cgi?id=";
-    // debugger
     let machineIPDB = machine.machine_type.ipdb_id;
     let newLink = ipdbBase + machineIPDB;
-    // let link_text = "https://www.ipdb.org/machine.cgi?id=" + `${machine.ipdb_id}`
+
     return (
       <Card fluid>
         <Card.Content>
