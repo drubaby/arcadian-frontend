@@ -12,7 +12,7 @@ import {
 class MachineFinder extends Component {
   componentDidMount() {
     this.resetComponent();
-    console.log("Machine finder will mount, fetching loc macs");
+    console.log("Machine finder mounted, fetching all loc macs");
     this.props.fetchingAllLocationMachines();
   }
 
@@ -37,7 +37,7 @@ class MachineFinder extends Component {
   render() {
     if (this.props.loadingStatus) {
       console.log(
-        "Loading status: ",
+        "Machine Finder loading status: ",
         this.props.loadingStatus,
         "display 'Loading'"
       );

@@ -141,7 +141,7 @@ const machineFinderReducer = (state = [], action) => {
     case "CHANGE_MACHINE_FINDER_TEXT":
       //filter function
       return state.filter(function(loc_mac) {
-        return loc_mac.machine.name
+        return loc_mac.name
           .toLowerCase()
           .includes(action.input.toLowerCase());
       });

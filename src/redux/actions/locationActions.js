@@ -1,5 +1,4 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
-const LOC_MAC_URL = "http://localhost:3000/location_machines";
 const MACHINES_URL = "http://localhost:3000/machines";
 const MACHINE_TYPES_URL = "http://localhost:3000/machine_types"
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";

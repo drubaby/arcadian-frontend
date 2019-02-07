@@ -6,12 +6,13 @@ import { connect } from "react-redux";
 class MachineFinderResultItem extends Component {
   render() {
     // console.log("machine finder result item: ", this.props.locMac);
+    // debugger
     return (
       <Item >
       <Link to={`/location/${this.props.locMac.location_id}`}>
         <Item.Header>
           <Icon fitted name="gamepad" />
-          <strong>{this.props.locMac.machine.name}</strong> @ <strong>{this.props.locMac.location_name}</strong>
+          <strong>{this.props.locMac.name}</strong> @ <strong>{this.props.locMac.location_name}</strong>
         </Item.Header>
         <Item.Description>{this.props.locMac.is_working ? "Working" : "Out of Order"} | {this.props.locMac.machine_issues.length} Issues </Item.Description>
         </Link>
