@@ -17,15 +17,17 @@ import {
   removeLocationMachine
 } from "../redux/actions/locationActions";
 
-// rendered by LocMacCard
+// rendered by LocMacCard when user clicks "Manage Machine"
 class MachineModal extends Component {
   state = { confirmOpen: false };
   openConfirm = () => this.setState({ open: true });
   closeConfirm = () => this.setState({ open: false });
+
   render() {
     // console.log(this.props); // logs 4 different machineObjs
     if (this.props) {
-      let { machine } = this.props.machineObj;
+
+      // let { machine } = this.props.machineObj;
       selectLocationMachine(this.props.id);
 
       return (
@@ -43,7 +45,7 @@ class MachineModal extends Component {
           }
         >
           <Modal.Header>
-            {machine.name}
+            {this.props.machineObj.name}
             <Button
               size="small"
               negative
@@ -103,7 +105,7 @@ class MachineModal extends Component {
               </Grid.Column>
               <Grid.Column>
                 <Modal.Description>
-                  <IssueForm locMacId={this.props.machineObj.id} />
+                  <IssueForm MacId={this.props.machineObj.id} />
                 </Modal.Description>
               </Grid.Column>
             </Grid>

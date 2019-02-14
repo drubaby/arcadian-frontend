@@ -1,13 +1,13 @@
 const All_LOCATIONS_URL = "http://localhost:3000/locations";
-const LOC_MAC_URL = "http://localhost:3000/location_machines";
 const MACHINES_URL = "http://localhost:3000/machines";
+const MACHINE_TYPES_URL = "http://localhost:3000/machine_types"
 const POST_ISSUE_URL = "http://localhost:3000/machine_issues";
 const SINGLE_LOCATION_URL = "http://localhost:3000/locations/";
 const CURRENT_LOCATION_MACHINES = "http://localhost:3000/machines_at_location/";
 
 function fetchAllMachines(machines) {
   return dispatch => {
-    fetch(MACHINES_URL)
+    fetch(MACHINE_TYPES_URL)
       .then(res => res.json())
       .then(machines => {
         dispatch(fetchedMachines(machines));
@@ -93,11 +93,11 @@ function showLocation(location) {
   return { type: "SHOW_LOCATION", location };
 }
 
-// Add new LocMac instance to a Location
+// Add new Machine instance to a Location
 function addLocationMachine(payload) {
   return dispatch => {
     // dispatch(makingNewLocationMachine())
-    fetch(LOC_MAC_URL, {
+    fetch(MACHINES_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ function addLocationMachine(payload) {
 // Remove Loc Mac instance from Location
 function removeLocationMachine(machineObj) {
   return dispatch => {
-    fetch(LOC_MAC_URL + `/${machineObj.id}`, {
+    fetch(MACHINES_URL + `/${machineObj.id}`, {
       method: "DELETE"
     })
       .then(res => res.json())
@@ -183,7 +183,7 @@ function toggleMachineWorking(machine) {
   console.log("dispatching machine obj: ", machine);
   // sends updated MachineObj as patch request to DB
   return dispatch => {
-    fetch(LOC_MAC_URL + `/${machine.id}`, {
+    fetch(MACHINES_URL + `/${machine.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +215,7 @@ function toggleMachineWorking(machine) {
 /////////// All Location Machines => Machine Finder
 function fetchingAllLocationMachines() {
   return dispatch => {
-    fetch(LOC_MAC_URL)
+    fetch(MACHINES_URL)
       .then(r => r.json())
       .then(machines => {
         dispatch(fetchedLocMacs(machines));
@@ -237,14 +237,16 @@ function changeMachineFinderText(input) {
 }
 
 /////////// Machine Issues
+
+// does this do anything?
 function addIssue(payload) {
   return { type: "ADD_ISSUE", payload };
 }
 
 function postIssue(payload) {
   return dispatch => {
-    dispatch(addIssue(payload));
-    console.log("posting issue");
+    // dispatch(addIssue(payload)); TEMP
+    console.log("posting issue: ", payload);
     // debugger
     fetch(POST_ISSUE_URL, {
       method: "POST",
@@ -256,6 +258,7 @@ function postIssue(payload) {
     })
       .then(res => res.json())
       .then(issue => {
+        // debugger
         fetch("http://localhost:3000/update_location_by_issue", {
           method: "POST",
           headers: {

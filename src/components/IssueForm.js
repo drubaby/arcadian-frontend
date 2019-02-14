@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { postIssue } from "../redux/actions/locationActions";
-// Rendered by LocationMachineCard
+
+// Rendered by MachineModal
 class IssueForm extends Component {
   constructor() {
     super();
     this.state = {
       description: "",
-      location_machine_id: 0
+      machine_id: 0
     };
   }
 
@@ -29,7 +30,7 @@ class IssueForm extends Component {
   };
 
   componentDidMount() {
-    this.setState({ location_machine_id: this.props.locMacId });
+    this.setState({ machine_id: this.props.MacId });
   }
   render() {
     return (
@@ -50,7 +51,7 @@ class IssueForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  // Payload looks like {issueDescription: "some text", LocMacId: #"}
+  // Payload looks like {issueDescription: "some text", MacId: #"}
   return {
     postIssue: formData => dispatch(postIssue(formData)),
   };

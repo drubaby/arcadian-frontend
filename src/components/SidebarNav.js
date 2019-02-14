@@ -18,6 +18,10 @@ const SidebarNav = () => (
       <Icon name="home" />
       About
     </Menu.Item>
+    <Menu.Item as={NavLink} to="/login">
+      <Icon name="user" />
+      Login
+    </Menu.Item>
     <Menu.Item as={NavLink} to="/locations">
       <Icon name="building" />
       Locations

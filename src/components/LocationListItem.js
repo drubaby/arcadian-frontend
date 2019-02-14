@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 //onClick={() => this.props.showLocation(this.props.location)}
+// Rendered in LocationsContainer as 'locationsSearchResults'
 class LocationListItem extends Component {
   render() {
     return (

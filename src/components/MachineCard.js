@@ -5,29 +5,31 @@ import { connect } from "react-redux";
 import { selectLocationMachine } from "../redux/actions/locationActions";
 
 // rendered by LocationMachinesContainer
-class LocationMachineCard extends Component {
-// renders MachineModal
+class MachineCard extends Component {
+  // renders MachineModal
   render() {
-    let { machine, machine_issues} = this.props.locMacObj;
-    let ipdbBase = "https://www.ipdb.org/machine.cgi?id="
-    let machineID = machine.ipdb_id
-    let newLink = ipdbBase + machineID
-    // let link_text = "https://www.ipdb.org/machine.cgi?id=" + `${machine.ipdb_id}`
+    let machine = this.props.locMacObj;
+    let ipdbBase = "https://www.ipdb.org/machine.cgi?id=";
+    let machineIPDB = machine.machine_type.ipdb_id;
+    let newLink = ipdbBase + machineIPDB;
+
     return (
       <Card fluid>
         <Card.Content>
           <Card.Header>{machine.name}</Card.Header>
-          <Card.Meta>({machine.manufacture_date})</Card.Meta>
-          <Card.Description><a href={newLink} target='_blank' rel="noopener noreferrer">IPDB Entry</a></Card.Description>
+          <Card.Meta>({machine.machine_type.manufacture_date})</Card.Meta>
+          <Card.Description>
+            <a href={newLink} target="_blank" rel="noopener noreferrer">
+              IPDB Entry
+            </a>
+          </Card.Description>
           {this.props.is_working ? "Working" : "Out of Order"}
           <Card.Description>
-            {machine_issues.length} known issues
+            {machine.machine_issues.length} known issues
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <MachineModal
-              machineObj={this.props.locMacObj}
-            />
+          <MachineModal machineObj={machine} />
         </Card.Content>
       </Card>
     );
@@ -52,4 +54,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LocationMachineCard);
+)(MachineCard);
